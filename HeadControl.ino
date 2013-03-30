@@ -84,9 +84,18 @@ static const unsigned char SERVO4 = 3;
 static const unsigned char SERVO5 = 4;
 static const unsigned char SERVO6 = 5;
 
+//! the head directions
+static const unsigned char UP         = 0;
+static const unsigned char UPLEFT     = 1;
+static const unsigned char UPRIGHT    = 2;
+static const unsigned char DOWN       = 3;
+static const unsigned char DOWNLEFT   = 4;
+static const unsigned char DOWNRIGHT  = 5;
+static const unsigned char LEFT       = 6;
+static const unsigned char RIGHT      = 7;
+static const unsigned char FORWARD    = 8;
 
 
- 
 void setup() 
 { 
   myservo1.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
@@ -104,35 +113,76 @@ void setup()
   myservo5.write(servo5default); 
   myservo6.write(servo6default); 
 } 
- 
+
 
 void loop() 
 { 
-/*
+  eye(LEFTEYE, FORWARD);
+  
+  /*
   for(s1 = servo1start; s1 < servo1end; s1 += 1)
-  {
-    moveServo(SERVO1, s1);
-    delay(15);            // waits 15ms for the servo to reach the position 
-  } 
-
-  for(s1 = servo1end; s1 > servo1start; s1 -= 1)
-  {
-    moveServo(SERVO1, s1);
-    delay(15);            // waits 15ms for the servo to reach the position 
-  } 
-*/
+   {
+   moveServo(SERVO1, s1);
+   delay(15);            // waits 15ms for the servo to reach the position 
+   } 
+   
+   for(s1 = servo1end; s1 > servo1start; s1 -= 1)
+   {
+   moveServo(SERVO1, s1);
+   delay(15);            // waits 15ms for the servo to reach the position 
+   } 
+   */
 } 
 
 
+void eye(unsigned char whichEye, unsigned char direction)
+{
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == UP)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // up
+      moveServo(SERVO2, servo2end);
+      // default
+//      moveServo(SERVO1, getServoPosition(SERVO1, SVDEFAULT));
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // up
+      moveServo(SERVO5, servo5start);
+      // default
+//      moveServo( SERVO4, getServoPosition(SERVO4, SVDEFAULT) );
+      return;
+    }
+    return;
+  }
+/*
+  if (direction == "UPLEFT")
+  {
+
+
+  if (direction == FORWARD)
+  {
+    moveServo(SERVO1, servo1default);
+    moveServo(SERVO2, servo2default);
+
+    moveServo(SERVO4, servo4default);
+    moveServo(SERVO5, servo5default);
+    return;
+  }
+}
 
 
 void moveServo(unsigned char servo, unsigned char position)
 {
   switch (servo)
   {
-    case SERVO1:
-      myservo1.write(position);
-      break; 
+  case SERVO1:
+    myservo1.write(position);
+    break; 
   }
 }
 

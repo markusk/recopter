@@ -16,7 +16,7 @@ int s1 = 0;    // variable to store the servo position
 // right eye
 // left/right (looking _to_ head head)
 static const int servo1pin      =   3;
-static const int servo1start    =  40;    // left     40
+static const int servo1start    =  42;    // left     42
 static const int servo1default  =  74;    // neutral  74
 static const int servo1end      = 110;    // right   110
 

@@ -119,7 +119,34 @@ void setup()
 
 
 void loop() 
-{ 
+{
+  look(NORMAL);
+  delay(250);
+  
+  look(UPLEFT);
+  delay(250);
+  
+  look(UP);
+  delay(250);
+  
+  look(UPRIGHT);
+  delay(250);
+  
+  look(RIGHT);
+  delay(250);
+  
+  look(DOWNRIGHT);
+  delay(250);
+  
+  look(DOWN);
+  delay(250);
+  
+  look(DOWNLEFT);
+  delay(250);
+  
+  look(LEFT);
+  delay(250);
+  
 /*
   eye(LEFTEYE, FORWARD);
   delay(1000);

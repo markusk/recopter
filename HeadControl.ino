@@ -85,16 +85,18 @@ static const unsigned char SERVO5 = 4;
 static const unsigned char SERVO6 = 5;
 
 //! the head directions
-static const unsigned char UP         = 0;
-static const unsigned char UPLEFT     = 1;
-static const unsigned char UPRIGHT    = 2;
-static const unsigned char DOWN       = 3;
-static const unsigned char DOWNLEFT   = 4;
-static const unsigned char DOWNRIGHT  = 5;
-static const unsigned char LEFT       = 6;
-static const unsigned char RIGHT      = 7;
-static const unsigned char FORWARD    = 8;
-static const unsigned char NORMAL     = 9; // eyebrow
+static const unsigned char UP         =  0;
+static const unsigned char UPLEFT     =  1;
+static const unsigned char UPRIGHT    =  2;
+static const unsigned char DOWN       =  3;
+static const unsigned char DOWNLEFT   =  4;
+static const unsigned char DOWNRIGHT  =  5;
+static const unsigned char LEFT       =  6;
+static const unsigned char RIGHT      =  7;
+static const unsigned char FORWARD    =  8;
+static const unsigned char NORMAL     =  9; // eyebrow
+static const unsigned char CURIOUS    = 10;
+static const unsigned char ANGRY      = 11;
 
 
 void setup()
@@ -162,6 +164,96 @@ void loop()
    } 
 */  
 } 
+
+
+void look(unsigned char direction)
+{
+  	if (direction == UP)
+	{
+		
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == UPLEFT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == UPRIGHT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+		
+	if (direction == DOWN)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == DOWNLEFT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == DOWNRIGHT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == LEFT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == RIGHT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == FORWARD)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == NORMAL)
+	{
+		eyebrow(LEFTBROW, direction);
+		eyebrow(RIGHTBROW, direction);
+		return;
+	}
+	
+	if (direction == CURIOUS)
+	{
+		eyebrow(LEFTBROW, UP);
+		eyebrow(RIGHTBROW, UP);
+		return;
+	}
+	
+	if (direction == ANGRY)
+	{
+		eyebrow(LEFTBROW, DOWN);
+		eyebrow(RIGHTBROW, DOWN);
+		return;
+	}
+}
+
 
 
 void eye(unsigned char whichEye, unsigned char direction)

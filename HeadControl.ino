@@ -15,50 +15,50 @@ int s1 = 0;    // variable to store the servo position
 // servo 1
 // right eye
 // left/right (looking _to_ head head)
-const int servo1pin      =   3;
-const int servo1start    =  40;    // left     40
-const int servo1default  =  74;    // neutral  74
-const int servo1end      = 110;    // right   110
+static const int servo1pin      =   3;
+static const int servo1start    =  40;    // left     40
+static const int servo1default  =  74;    // neutral  74
+static const int servo1end      = 110;    // right   110
 
 // servo 2
 // right eye
 // up/down
-const int servo2pin      =   5;
-const int servo2start    =  36;    // up       36
-const int servo2default  =  70;    // neutral  70
-const int servo2end      = 124;    // down    124
+static const int servo2pin      =   5;
+static const int servo2start    =  36;    // up       36
+static const int servo2default  =  70;    // neutral  70
+static const int servo2end      = 124;    // down    124
 
 // servo 3
 // right eyebrow
 // left/right
-const int servo3pin      =   6;
-const int servo3start    =  50;    // right    50
-const int servo3default  = 100;    // neutral 100
-const int servo3end      = 136;    // left    136
+static const int servo3pin      =   6;
+static const int servo3start    =  50;    // right    50
+static const int servo3default  = 100;    // neutral 100
+static const int servo3end      = 136;    // left    136
 
 // servo 4
 // left eye
 // left/right (looking _to_ head head)
-const int servo4pin      =   9;
-const int servo4start    =  30;    // left     30
-const int servo4default  =  74;    // neutral  74
-const int servo4end      = 110;    // right   110
+static const int servo4pin      =   9;
+static const int servo4start    =  30;    // left     30
+static const int servo4default  =  74;    // neutral  74
+static const int servo4end      = 110;    // right   110
 
 // servo 5
 // left eye
 // up/down
-const int servo5pin      =  10;
-const int servo5start    =  36;    // up       36
-const int servo5default  =  66;    // neutral  66
-const int servo5end      = 124;    // down    124
+static const int servo5pin      =  10;
+static const int servo5start    =  36;    // up       36
+static const int servo5default  =  66;    // neutral  66
+static const int servo5end      = 124;    // down    124
 
 // servo 6
 // left eyebrow
 // left/right
-const int servo6pin      =  11;
-const int servo6start    =  42;    // right    42
-const int servo6default  =  87;    // neutral  87
-const int servo6end      = 132;    // left    132
+static const int servo6pin      =  11;
+static const int servo6start    =  42;    // right    42
+static const int servo6default  =  87;    // neutral  87
+static const int servo6end      = 132;    // left    132
 
  
 void setup() 

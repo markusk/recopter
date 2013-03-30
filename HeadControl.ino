@@ -28,13 +28,13 @@ const int servo2start    =  36;    // up       36
 const int servo2default  =  66;    // neutral  66
 const int servo2end      = 124;    // down    124
 
-// servo 3
+// servo 3    okay
 // right eyebrow
 // left/right
 const int servo3pin      =   6;
-const int servo3start    =  36;    // left       36
-const int servo3default  =  66;    // neutral  66
-const int servo3end      = 124;    // right    124
+const int servo3start    =  50;    // right    50
+const int servo3default  = 100;    // neutral 100
+const int servo3end      = 136;    // left    136
 
 // servo 4    okay
 // left eye

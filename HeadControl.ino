@@ -117,7 +117,6 @@ void setup()
 
 void loop() 
 { 
-
   eye(LEFTEYE, FORWARD);
   delay(1000);
 
@@ -125,10 +124,26 @@ void loop()
   eye(RIGHTEYE, UP);
   delay(1000);
 
+  eye(LEFTEYE, FORWARD);
+  delay(1000);
+
   eye(LEFTEYE, DOWN);
   eye(RIGHTEYE, DOWN);
   delay(1000);
+  
+  eye(LEFTEYE, FORWARD);
+  delay(1000);
 
+  eye(LEFTEYE, LEFT);
+  eye(RIGHTEYE, LEFT);
+  delay(1000);
+  
+  eye(LEFTEYE, FORWARD);
+  delay(1000);
+
+  eye(LEFTEYE, RIGHT);
+  eye(RIGHTEYE, RIGHT);
+  delay(1000);
 /*  
   for(s1 = servo1start; s1 < servo1end; s1 += 1)
    {

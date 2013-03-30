@@ -11,6 +11,7 @@ Servo myservo5;  // create servo object to control a servo
 Servo myservo6;  // create servo object to control a servo 
 
 int s1 = 0;    // variable to store the servo position 
+int pause = 250;  // for delay in ms
 
 // servo 1
 // right eye
@@ -120,33 +121,51 @@ void setup()
 
 void loop() 
 {
+  look(FORWARD);
   look(NORMAL);
-  delay(250);
+  delay(500);
+
   
   look(UPLEFT);
-  delay(250);
+  delay(pause);
   
   look(UP);
-  delay(250);
+  delay(pause);
   
   look(UPRIGHT);
-  delay(250);
+  delay(pause);
   
   look(RIGHT);
-  delay(250);
+  delay(pause);
   
   look(DOWNRIGHT);
-  delay(250);
+  delay(pause);
   
   look(DOWN);
-  delay(250);
+  delay(pause);
   
   look(DOWNLEFT);
-  delay(250);
+  delay(pause);
   
   look(LEFT);
-  delay(250);
+  delay(pause);
+
+
+  look(FORWARD);
+  look(NORMAL);
+  delay(500);
   
+  look(CURIOUS);
+  delay(2000);
+
+  look(FORWARD);
+  look(NORMAL);
+  delay(1000);
+
+  look(ANGRY);
+  delay(2000);
+
+
 /*
   eye(LEFTEYE, FORWARD);
   delay(1000);

@@ -9,7 +9,7 @@ Servo myservo3;  // create servo object to control a servo
 Servo myservo4;  // create servo object to control a servo 
 Servo myservo5;  // create servo object to control a servo 
 Servo myservo6;  // create servo object to control a servo 
- 
+
 int s1 = 0;    // variable to store the servo position 
 
 // servo 1
@@ -96,7 +96,7 @@ static const unsigned char RIGHT      = 7;
 static const unsigned char FORWARD    = 8;
 
 
-void setup() 
+void setup()
 { 
   myservo1.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
   myservo2.attach(servo2pin);  // attaches the servo on pin 9 to the servo object 
@@ -117,19 +117,30 @@ void setup()
 
 void loop() 
 { 
+      moveServo(SERVO2, servo2end);
+      moveServo(SERVO5, servo5start);
+
+/*
   eye(LEFTEYE, FORWARD);
-  
-  /*
+  delay(5000);
+
+  eye(LEFTEYE, UP);
+  eye(RIGHTEYE, UP);
+  delay(500);
+*/  
+/*  
   for(s1 = servo1start; s1 < servo1end; s1 += 1)
    {
    moveServo(SERVO1, s1);
-   delay(15);            // waits 15ms for the servo to reach the position 
+   delay(5);            // waits 15ms for the servo to reach the position 
    } 
    
    for(s1 = servo1end; s1 > servo1start; s1 -= 1)
    {
    moveServo(SERVO1, s1);
-   delay(15);            // waits 15ms for the servo to reach the position 
+   delay(5);            // waits 15ms for the servo to reach the position 
+   } 
+*/  
    } 
    */
 } 
@@ -183,6 +194,22 @@ void moveServo(unsigned char servo, unsigned char position)
   case SERVO1:
     myservo1.write(position);
     break; 
+  case SERVO2:
+    myservo2.write(position);
+    break; 
+  case SERVO3:
+    myservo3.write(position);
+    break; 
+  case SERVO4:
+    myservo4.write(position);
+    break; 
+  case SERVO5:
+    myservo5.write(position);
+    break; 
+  case SERVO6:
+    myservo6.write(position);
+    break; 
   }
 }
+
 

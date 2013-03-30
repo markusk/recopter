@@ -12,13 +12,13 @@ Servo myservo6;  // create servo object to control a servo
  
 int pos = 0;    // variable to store the servo position 
 
-// servo 1
+// servo 1    okay
 // right eye
-// left/right
+// left/right (looking _to_ head head)
 const int servo1pin      =   3;
-const int servo1start    =  36;    // down     36
-const int servo1default  =  81;    // neutral  81
-const int servo1end      = 134;   // up       134
+const int servo1start    =  40;    // left     40
+const int servo1default  =  74;    // neutral  74
+const int servo1end      = 110;    // right   110
 
 // servo 2    okay
 // right eye

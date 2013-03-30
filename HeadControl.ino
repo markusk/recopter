@@ -293,7 +293,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // up
       moveServo(SERVO2, servo2end);
       // default
-//      moveServo(SERVO1, getServoPosition(SERVO1, SVDEFAULT));
+      moveServo(SERVO1, servo1default);
       return;
     }
 
@@ -302,7 +302,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // up
       moveServo(SERVO5, servo5start);
       // default
-//      moveServo( SERVO4, getServoPosition(SERVO4, SVDEFAULT) );
+      moveServo( SERVO4, servo4default);
       return;
     }
     return;
@@ -360,7 +360,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // down
       moveServo(SERVO2, servo2start);
       // default
-//      moveServo( SERVO1, getServoPosition(SERVO1, SVDEFAULT) );
+      moveServo( SERVO1, servo1default);
       return;
     }
 
@@ -369,7 +369,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // down
       moveServo(SERVO5, servo5end);
       // default
-//      moveServo(SERVO4, getServoPosition(SERVO4, SVDEFAULT));
+      moveServo(SERVO4, servo4default);
       return;
     }
     return;
@@ -427,7 +427,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // left
       moveServo(SERVO4, servo4start);
       // default
-//      moveServo(SERVO2, getServoPosition(SERVO2, SVDEFAULT));
+      moveServo(SERVO2, servo2default);
       return;
     }
 
@@ -436,7 +436,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // left
       moveServo(SERVO1, servo1start);
       // default
-//      moveServo(SERVO5, getServoPosition(SERVO5, SVDEFAULT));
+      moveServo(SERVO5, servo5default);
       return;
     }
     return;
@@ -472,7 +472,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // right
       moveServo(SERVO4, servo4end); // end
       // default
-//      moveServo(SERVO2, getServoPosition(SERVO2, SVDEFAULT));
+      moveServo(SERVO2, servo2default);
       return;
     }
 
@@ -481,7 +481,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // right
       moveServo(SERVO1, servo1end); // end
       // default
-//      moveServo(SERVO5, getServoPosition(SERVO5, SVDEFAULT));
+      moveServo(SERVO5, servo5default);
       return;
     }
     return;

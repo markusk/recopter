@@ -94,6 +94,7 @@ static const unsigned char DOWNRIGHT  = 5;
 static const unsigned char LEFT       = 6;
 static const unsigned char RIGHT      = 7;
 static const unsigned char FORWARD    = 8;
+static const unsigned char NORMAL     = 9; // eyebrow
 
 
 void setup()
@@ -117,6 +118,7 @@ void setup()
 
 void loop() 
 { 
+/*
   eye(LEFTEYE, FORWARD);
   delay(1000);
 
@@ -144,6 +146,8 @@ void loop()
   eye(LEFTEYE, RIGHT);
   eye(RIGHTEYE, RIGHT);
   delay(1000);
+ */
+ 
 /*  
   for(s1 = servo1start; s1 < servo1end; s1 += 1)
    {
@@ -393,6 +397,65 @@ void eye(unsigned char whichEye, unsigned char direction)
     return;
   }
 }
+
+
+void eyebrow(unsigned char whichBrow, unsigned char direction)
+{
+	if (direction == NORMAL)
+	{
+		if (whichBrow==LEFTBROW)
+		{
+			// default pos
+			moveServo(SERVO3, servo3default);
+			return;
+		}
+
+		if (whichBrow==RIGHTBROW)
+		{
+			// default pos
+			moveServo(SERVO6, servo6default);
+			return;
+		}
+		return;
+	}
+
+	if (direction == UP)
+	{
+		if (whichBrow==LEFTBROW)
+		{
+			// inside up
+			moveServo(SERVO3, servo3end);
+			return;
+		}
+
+		if (whichBrow==RIGHTBROW)
+		{
+			// inside up
+			moveServo(SERVO6, servo6start);
+			return;
+		}
+		return;
+	}
+	
+	if (direction == DOWN)
+	{
+		if (whichBrow==LEFTBROW)
+		{
+			// inside down
+			moveServo(SERVO3, servo3start);
+			return;
+		}
+
+		if (whichBrow==RIGHTBROW)
+		{
+			// inside down
+			moveServo(SERVO6, servo6end);
+			return;
+		}
+		return;
+	}
+}
+
 
 
 void moveServo(unsigned char servo, unsigned char position)

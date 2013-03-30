@@ -52,13 +52,13 @@ const int servo5start    =  36;    // up       36
 const int servo5default  =  66;    // neutral  66
 const int servo5end      = 124;    // down    124
 
-// servo 6
+// servo 6    okay
 // left eyebrow
 // left/right
 const int servo6pin      =  11;
-const int servo6start    =  36;    // left       36
-const int servo6default  =  66;    // neutral  66
-const int servo6end      = 124;    // right    124
+const int servo6start    =  42;    // right    42
+const int servo6default  =  87;    // neutral  87
+const int servo6end      = 132;    // left    132
 
  
 void setup() 

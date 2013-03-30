@@ -117,17 +117,13 @@ void setup()
 
 void loop() 
 { 
-      moveServo(SERVO2, servo2end);
-      moveServo(SERVO5, servo5start);
-
-/*
   eye(LEFTEYE, FORWARD);
-  delay(5000);
+  delay(1000);
 
   eye(LEFTEYE, UP);
   eye(RIGHTEYE, UP);
-  delay(500);
-*/  
+  delay(1000);
+  
 /*  
   for(s1 = servo1start; s1 < servo1end; s1 += 1)
    {
@@ -141,8 +137,6 @@ void loop()
    delay(5);            // waits 15ms for the servo to reach the position 
    } 
 */  
-   } 
-   */
 } 
 
 

@@ -60,6 +60,32 @@ static const int servo6start    =  42;    // right    42
 static const int servo6default  =  87;    // neutral  87
 static const int servo6end      = 132;    // left    132
 
+//! the possible eyes
+static const unsigned char LEFTEYE  = 1;
+static const unsigned char RIGHTEYE = 2;
+
+//! the possible eyebrows
+static const unsigned char LEFTBROW  = 1;
+static const unsigned char RIGHTBROW = 2;
+
+//! the possible servo data
+static const unsigned char SVSTART   = 0;
+static const unsigned char SVEND     = 1;
+static const unsigned char SVDEFAULT = 2;
+static const unsigned char SVCURRENT = 3;
+static const unsigned char SVMIN     = 4;
+static const unsigned char SVMAX     = 5;
+
+//! the servo numbers
+static const unsigned char SERVO1 = 0;
+static const unsigned char SERVO2 = 1;
+static const unsigned char SERVO3 = 2;
+static const unsigned char SERVO4 = 3;
+static const unsigned char SERVO5 = 4;
+static const unsigned char SERVO6 = 5;
+
+
+
  
 void setup() 
 { 
@@ -82,12 +108,31 @@ void setup()
 
 void loop() 
 { 
+/*
   for(s1 = servo1start; s1 < servo1end; s1 += 1)
   {
-    myservo1.write(s1); 
+    moveServo(SERVO1, s1);
     delay(15);            // waits 15ms for the servo to reach the position 
   } 
+
+  for(s1 = servo1end; s1 > servo1start; s1 -= 1)
+  {
+    moveServo(SERVO1, s1);
+    delay(15);            // waits 15ms for the servo to reach the position 
+  } 
+*/
 } 
 
 
+
+
+void moveServo(unsigned char servo, unsigned char position)
+{
+  switch (servo)
+  {
+    case SERVO1:
+      myservo1.write(position);
+      break; 
+  }
+}
 

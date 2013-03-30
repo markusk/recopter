@@ -10,7 +10,7 @@ Servo myservo4;  // create servo object to control a servo
 Servo myservo5;  // create servo object to control a servo 
 Servo myservo6;  // create servo object to control a servo 
  
-int pos = 0;    // variable to store the servo position 
+int s1 = 0;    // variable to store the servo position 
 
 // servo 1
 // right eye
@@ -82,29 +82,12 @@ void setup()
 
 void loop() 
 { 
-/*
-  for(pos = servo1start; pos < servo1end; pos += 1)  // goes from 0 degrees to 180 degrees 
-  {                                  // in steps of 1 degree 
-    myservo1.write(pos);              // tell servo to go to position in variable 'pos' 
-    delay(15);                       // waits 15ms for the servo to reach the position 
+  for(s1 = servo1start; s1 < servo1end; s1 += 1)
+  {
+    myservo1.write(s1); 
+    delay(15);            // waits 15ms for the servo to reach the position 
   } 
-  for(pos = servo1end; pos > servo1start; pos -= 1)     // goes from 180 degrees to 0 degrees 
-  {                                
-    myservo1.write(pos);              // tell servo to go to position in variable 'pos' 
-    delay(15);                       // waits 15ms for the servo to reach the position 
-  } 
-
-
-  for(pos = servo2start; pos < servo2end; pos += 1)  // goes from 0 degrees to 180 degrees 
-  {                                  // in steps of 1 degree 
-    myservo2.write(pos);              // tell servo to go to position in variable 'pos' 
-    delay(15);                       // waits 15ms for the servo to reach the position 
-  } 
-  for(pos = servo2end; pos > servo2start; pos -= 1)     // goes from 180 degrees to 0 degrees 
-  {                                
-    myservo2.write(pos);              // tell servo to go to position in variable 'pos' 
-    delay(15);                       // waits 15ms for the servo to reach the position 
-  }
- */
 } 
+
+
 

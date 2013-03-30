@@ -117,13 +117,18 @@ void setup()
 
 void loop() 
 { 
+
   eye(LEFTEYE, FORWARD);
   delay(1000);
 
   eye(LEFTEYE, UP);
   eye(RIGHTEYE, UP);
   delay(1000);
-  
+
+  eye(LEFTEYE, DOWN);
+  eye(RIGHTEYE, DOWN);
+  delay(1000);
+
 /*  
   for(s1 = servo1start; s1 < servo1end; s1 += 1)
    {
@@ -164,10 +169,204 @@ void eye(unsigned char whichEye, unsigned char direction)
     }
     return;
   }
-/*
-  if (direction == "UPLEFT")
-  {
 
+  if (direction == UPLEFT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // up
+      moveServo(SERVO2, servo2end);
+      //left
+      moveServo(SERVO4, servo4start);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // up
+      moveServo(SERVO5, servo5start);
+      // left
+      moveServo(SERVO1, servo1start);
+      return;
+    }
+    return;
+  }
+
+  if (direction == UPRIGHT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // right
+      moveServo(SERVO4, servo4end);
+      // up
+      moveServo(SERVO2, servo2end);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // up
+      moveServo(SERVO5, servo5start);
+      // right
+      moveServo(SERVO1, servo1end);
+      return;
+    }
+    return;
+  }
+
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == DOWN)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // down
+      moveServo(SERVO2, servo2start);
+      // default
+//      moveServo( SERVO1, getServoPosition(SERVO1, SVDEFAULT) );
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // down
+      moveServo(SERVO5, servo5end);
+      // default
+//      moveServo(SERVO4, getServoPosition(SERVO4, SVDEFAULT));
+      return;
+    }
+    return;
+  }
+
+  if (direction == DOWNLEFT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // down
+      moveServo(SERVO2, servo2start);
+      // left
+      moveServo(SERVO4, servo4start);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // down
+      moveServo(SERVO5, servo5end);
+      // left
+      moveServo(SERVO1, servo1start);
+      return;
+    }
+    return;
+  }
+
+  if (direction == DOWNRIGHT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // down
+      moveServo(SERVO2, servo2start);
+      // right
+      moveServo(SERVO4, servo4end);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // right
+      moveServo(SERVO1, servo1end);
+      // down
+      moveServo(SERVO5, servo5end);
+      return;
+    }
+    return;
+  }
+
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == LEFT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // left
+      moveServo(SERVO4, servo4start);
+      // default
+//      moveServo(SERVO2, getServoPosition(SERVO2, SVDEFAULT));
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // left
+      moveServo(SERVO1, servo1start);
+      // default
+//      moveServo(SERVO5, getServoPosition(SERVO5, SVDEFAULT));
+      return;
+    }
+    return;
+  }
+
+/*
+  // move servo to its maximum end position
+  if (direction == LEFTMAX)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // 
+      moveServo(SERVO4, servo4start); // min
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // 
+      moveServo(SERVO1, servo1start); // min
+      return;
+    }
+    return;
+  }
+*/
+
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == RIGHT)
+  {
+    //qDebug("right");
+    if (whichEye==LEFTEYE)
+    {
+      // right
+      moveServo(SERVO4, servo4end); // end
+      // default
+//      moveServo(SERVO2, getServoPosition(SERVO2, SVDEFAULT));
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // right
+      moveServo(SERVO1, servo1end); // end
+      // default
+//      moveServo(SERVO5, getServoPosition(SERVO5, SVDEFAULT));
+      return;
+    }
+    return;
+  }
+  
+/*
+  // move servo to its maximum end position
+  if (direction == RIGHTMAX)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      moveServo(SERVO4, servo4end); // max
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      moveServo(SERVO1, servo1end); // max
+      return;
+    }
+    return;
+  }
+*/
 
   if (direction == FORWARD)
   {

@@ -61,6 +61,10 @@ static const int servo6start    =  42;    // right    42
 static const int servo6default  =  87;    // neutral  87
 static const int servo6end      = 132;    // left    132
 
+unsigned char eyeRollPos[4][12];
+unsigned char faktor;
+
+
 //! the possible eyes
 static const unsigned char LEFTEYE  = 1;
 static const unsigned char RIGHTEYE = 2;
@@ -101,7 +105,73 @@ static const unsigned char ANGRY      = 11;
 
 
 void setup()
-{ 
+{
+  // init eye roll array
+  
+  // servo 1
+  // right eye
+  // left/right (looking _to_ head head)
+  faktor = (((servo1end - servo1default) / 3) + ((servo1default - servo1start) / 3) ) / 2;
+  // each "hour"
+  eyeRollPos[0][0]  =              servo1default;
+  eyeRollPos[0][1]  =     faktor + servo1default;
+  eyeRollPos[0][2]  = 2 * faktor + servo1default;
+  eyeRollPos[0][3]  =              servo1end;
+  eyeRollPos[0][4]  = eyeRollPos[0][2];
+  eyeRollPos[0][5]  = eyeRollPos[0][1];
+  eyeRollPos[0][6]  = eyeRollPos[0][0];
+  eyeRollPos[0][7]  = eyeRollPos[0][1];
+  eyeRollPos[0][8]  = eyeRollPos[0][2];
+  eyeRollPos[0][9]  =              servo1start;
+  eyeRollPos[0][10] = eyeRollPos[0][8];
+  eyeRollPos[0][11] = eyeRollPos[0][7];
+/*
+  // servo 4
+  faktor = (((servo4end - servo4default) / 3) + ((servo4default - servo4start) / 3) ) / 2;
+  eyeRollPos[2][0]  = ;
+  eyeRollPos[2][1]  = ;
+  eyeRollPos[2][2]  = ;
+  eyeRollPos[2][3]  = ;
+  eyeRollPos[2][4]  = ;
+  eyeRollPos[2][5]  = ;
+  eyeRollPos[2][6]  = ;
+  eyeRollPos[2][7]  = ;
+  eyeRollPos[2][8]  = ;
+  eyeRollPos[2][9]  = ;
+  eyeRollPos[2][10] = ;
+  eyeRollPos[2][11] = ;
+
+  // servo 2
+  faktor = (((servo2end - servo2default) / 3) + ((servo2default - servo2start) / 3) ) / 2;
+  eyeRollPos[3][0]  = ;
+  eyeRollPos[3][1]  = ;
+  eyeRollPos[3][2]  = ;
+  eyeRollPos[3][3]  = ;
+  eyeRollPos[3][4]  = ;
+  eyeRollPos[3][5]  = ;
+  eyeRollPos[3][6]  = ;
+  eyeRollPos[3][7]  = ;
+  eyeRollPos[3][8]  = ;
+  eyeRollPos[3][9]  = ;
+  eyeRollPos[3][10] = ;
+  eyeRollPos[3][11] = ;
+
+  // servo 5
+  faktor = (((servo5end - servo5default) / 3) + ((servo5default - servo5start) / 3) ) / 2;
+  eyeRollPos[4][0]  = ;
+  eyeRollPos[4][1]  = ;
+  eyeRollPos[4][2]  = ;
+  eyeRollPos[4][3]  = ;
+  eyeRollPos[4][4]  = ;
+  eyeRollPos[4][5]  = ;
+  eyeRollPos[4][6]  = ;
+  eyeRollPos[4][7]  = ;
+  eyeRollPos[4][8]  = ;
+  eyeRollPos[4][9]  = ;
+  eyeRollPos[4][10] = ;
+  eyeRollPos[4][11] = ;
+*/
+  
   myservo1.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
   myservo2.attach(servo2pin);  // attaches the servo on pin 9 to the servo object 
   myservo3.attach(servo3pin);  // attaches the servo on pin 9 to the servo object 
@@ -121,11 +191,12 @@ void setup()
 
 void loop() 
 {
+
   look(FORWARD);
   look(NORMAL);
   delay(500);
 
-  
+/*  
   look(UPLEFT);
   delay(pause);
   
@@ -164,7 +235,7 @@ void loop()
 
   look(ANGRY);
   delay(2000);
-
+*/
 
 /*
   eye(LEFTEYE, FORWARD);
@@ -594,6 +665,15 @@ void eyebrow(unsigned char whichBrow, unsigned char direction)
 	}
 }
 
+
+void rollEye(unsigned char servo, unsigned char hour)
+{
+  // temp action, array to be completely initialised...!!!      <  <  <  <  <  <  <  <  
+  if (servo > SERVO1)
+    return;
+
+  moveServo(servo, eyeRollPos[servo][hour]);
+}
 
 
 void moveServo(unsigned char servo, unsigned char position)

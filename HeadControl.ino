@@ -108,7 +108,7 @@ static const unsigned char ANGRY      = 11;
 void setup()
 {
   // for debugging
-  Serial.begin(9600);
+//  Serial.begin(9600);
 
 
   // init eye roll array
@@ -147,7 +147,10 @@ void setup()
   eyeRollPos[2][11] = ;
 */
   // servo 2
+  // right eye
+  // up/down
   faktor = (((servo2end - servo2default) / 3) + ((servo2default - servo2start) / 3) ) / 2;
+  // each "hour" from up to down (following the eye movement)
   eyeRollPos[SERVO2][0]  =                servo2start;
   eyeRollPos[SERVO2][1]  =       faktor + servo2start;
   eyeRollPos[SERVO2][2]  =   2 * faktor + servo2start;
@@ -202,68 +205,67 @@ void setup()
 
 void loop() 
 {
-pause = 1000;
+    pause = 80;
 
     i = 9;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 10;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 11;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 0;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 1;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 2;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 3;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 4;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 5;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 6;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 7;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
+
     i = 8;
     rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
+    rollEye(SERVO2, i);
     delay(pause);
-
-
-/*
-  // 11 to 0 o clock
-  for (i=11; i>0; i--)
-  {
-    rollEye(SERVO1, i);
-//    rollEye(SERVO2, i);
-    delay(pause);
-  }
-*/
-  delay(2000);
 
 /*  
   look(UPLEFT);
@@ -737,8 +739,8 @@ void eyebrow(unsigned char whichBrow, unsigned char direction)
 
 void rollEye(unsigned char servo, unsigned char hour)
 {
-  Serial.print("Moving to ");
-  Serial.println(hour);
+//  Serial.print("Moving to ");
+//  Serial.println(hour);
   
   moveServo(servo, eyeRollPos[servo][hour]);
 }

@@ -82,12 +82,12 @@ static const unsigned char SVMIN     = 4;
 static const unsigned char SVMAX     = 5;
 
 //! the servo numbers
-// do not play around carelessly with these numbers, since we use them later in the eyeRollPos array!
+// +++ do not play around carelessly with these numbers, since we use them later in the eyeRollPos array +++
 static const unsigned char SERVO1 = 0;
 static const unsigned char SERVO2 = 1;
-static const unsigned char SERVO3 = 2;
-static const unsigned char SERVO4 = 3;
-static const unsigned char SERVO5 = 4;
+static const unsigned char SERVO4 = 2;
+static const unsigned char SERVO5 = 3;
+static const unsigned char SERVO3 = 4;
 static const unsigned char SERVO6 = 5;
 
 //! the head directions
@@ -130,22 +130,25 @@ void setup()
   eyeRollPos[SERVO1][6]  =      eyeRollPos[SERVO1][0];
   eyeRollPos[SERVO1][7]  =      eyeRollPos[SERVO1][11];
   eyeRollPos[SERVO1][8]  =      eyeRollPos[SERVO1][10];
-/*
+
   // servo 4
+  // right eye
+  // left/right (looking _to_ head head)
   faktor = (((servo4end - servo4default) / 3) + ((servo4default - servo4start) / 3) ) / 2;
-  eyeRollPos[2][0]  = ;
-  eyeRollPos[2][1]  = ;
-  eyeRollPos[2][2]  = ;
-  eyeRollPos[2][3]  = ;
-  eyeRollPos[2][4]  = ;
-  eyeRollPos[2][5]  = ;
-  eyeRollPos[2][6]  = ;
-  eyeRollPos[2][7]  = ;
-  eyeRollPos[2][8]  = ;
-  eyeRollPos[2][9]  = ;
-  eyeRollPos[2][10] = ;
-  eyeRollPos[2][11] = ;
-*/
+  // each "hour" from left to right (following the eye movement)
+  eyeRollPos[SERVO4][9]  =                servo4start;
+  eyeRollPos[SERVO4][10] =       faktor + servo4start;
+  eyeRollPos[SERVO4][11] =   2 * faktor + servo4start;
+  eyeRollPos[SERVO4][0]  =              servo4default;
+  eyeRollPos[SERVO4][1]  =     faktor + servo4default;
+  eyeRollPos[SERVO4][2]  = 2 * faktor + servo4default;
+  eyeRollPos[SERVO4][3]  =                  servo4end;
+  eyeRollPos[SERVO4][4]  =      eyeRollPos[SERVO4][2];
+  eyeRollPos[SERVO4][5]  =      eyeRollPos[SERVO4][1];
+  eyeRollPos[SERVO4][6]  =      eyeRollPos[SERVO4][0];
+  eyeRollPos[SERVO4][7]  =      eyeRollPos[SERVO4][11];
+  eyeRollPos[SERVO4][8]  =      eyeRollPos[SERVO4][10];
+
   // servo 2
   // right eye
   // up/down
@@ -163,22 +166,25 @@ void setup()
   eyeRollPos[SERVO2][9]  =      eyeRollPos[SERVO2][3];
   eyeRollPos[SERVO2][10] =      eyeRollPos[SERVO2][2];
   eyeRollPos[SERVO2][11] =      eyeRollPos[SERVO2][1];
-/*
+
   // servo 5
+  // left eye
+  // up/down
   faktor = (((servo5end - servo5default) / 3) + ((servo5default - servo5start) / 3) ) / 2;
-  eyeRollPos[4][0]  = ;
-  eyeRollPos[4][1]  = ;
-  eyeRollPos[4][2]  = ;
-  eyeRollPos[4][3]  = ;
-  eyeRollPos[4][4]  = ;
-  eyeRollPos[4][5]  = ;
-  eyeRollPos[4][6]  = ;
-  eyeRollPos[4][7]  = ;
-  eyeRollPos[4][8]  = ;
-  eyeRollPos[4][9]  = ;
-  eyeRollPos[4][10] = ;
-  eyeRollPos[4][11] = ;
-*/
+  // each "hour" from up to down (following the eye movement)
+  eyeRollPos[SERVO5][0]  =                servo5start;
+  eyeRollPos[SERVO5][1]  =       faktor + servo5start;
+  eyeRollPos[SERVO5][2]  =   2 * faktor + servo5start;
+  eyeRollPos[SERVO5][3]  =              servo5default;
+  eyeRollPos[SERVO5][4]  =     faktor + servo5default;
+  eyeRollPos[SERVO5][5]  = 2 * faktor + servo5default;
+  eyeRollPos[SERVO5][6]  =                  servo5end;
+  eyeRollPos[SERVO5][7]  =      eyeRollPos[SERVO5][5];
+  eyeRollPos[SERVO5][8]  =      eyeRollPos[SERVO5][4];
+  eyeRollPos[SERVO5][9]  =      eyeRollPos[SERVO5][3];
+  eyeRollPos[SERVO5][10] =      eyeRollPos[SERVO5][2];
+  eyeRollPos[SERVO5][11] =      eyeRollPos[SERVO5][1];
+
   
   myservo1.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
   myservo2.attach(servo2pin);  // attaches the servo on pin 9 to the servo object 
@@ -205,66 +211,90 @@ void setup()
 
 void loop() 
 {
-    pause = 80;
+    pause = 500;
 
     i = 9;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 10;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 11;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 0;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 1;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 2;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 3;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 4;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 5;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 6;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 7;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
     i = 8;
     rollEye(SERVO1, i);
     rollEye(SERVO2, i);
+    rollEye(SERVO4, i);
+    rollEye(SERVO5, i);
     delay(pause);
 
 /*  

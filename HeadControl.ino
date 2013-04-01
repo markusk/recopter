@@ -82,6 +82,7 @@ static const unsigned char SVMIN     = 4;
 static const unsigned char SVMAX     = 5;
 
 //! the servo numbers
+// do not play around carelessly with these numbers, since we use them later in the eyeRollPos array!
 static const unsigned char SERVO1 = 0;
 static const unsigned char SERVO2 = 1;
 static const unsigned char SERVO3 = 2;
@@ -113,18 +114,18 @@ void setup()
   // left/right (looking _to_ head head)
   faktor = (((servo1end - servo1default) / 3) + ((servo1default - servo1start) / 3) ) / 2;
   // each "hour"
-  eyeRollPos[0][0]  =              servo1default;
-  eyeRollPos[0][1]  =     faktor + servo1default;
-  eyeRollPos[0][2]  = 2 * faktor + servo1default;
-  eyeRollPos[0][3]  =              servo1end;
-  eyeRollPos[0][4]  = eyeRollPos[0][2];
-  eyeRollPos[0][5]  = eyeRollPos[0][1];
-  eyeRollPos[0][6]  = eyeRollPos[0][0];
-  eyeRollPos[0][7]  = eyeRollPos[0][1];
-  eyeRollPos[0][8]  = eyeRollPos[0][2];
-  eyeRollPos[0][9]  =              servo1start;
-  eyeRollPos[0][10] = eyeRollPos[0][8];
-  eyeRollPos[0][11] = eyeRollPos[0][7];
+  eyeRollPos[SERVO1][0]  =              servo1default;
+  eyeRollPos[SERVO1][1]  =     faktor + servo1default;
+  eyeRollPos[SERVO1][2]  = 2 * faktor + servo1default;
+  eyeRollPos[SERVO1][3]  =                  servo1end;
+  eyeRollPos[SERVO1][4]  =      eyeRollPos[SERVO1][2];
+  eyeRollPos[SERVO1][5]  =      eyeRollPos[SERVO1][1];
+  eyeRollPos[SERVO1][6]  =      eyeRollPos[SERVO1][0];
+  eyeRollPos[SERVO1][7]  =      eyeRollPos[SERVO1][1];
+  eyeRollPos[SERVO1][8]  =      eyeRollPos[SERVO1][2];
+  eyeRollPos[SERVO1][9]  =                servo1start;
+  eyeRollPos[SERVO1][10] =      eyeRollPos[SERVO1][8];
+  eyeRollPos[SERVO1][11] =      eyeRollPos[SERVO1][7];
 /*
   // servo 4
   faktor = (((servo4end - servo4default) / 3) + ((servo4default - servo4start) / 3) ) / 2;

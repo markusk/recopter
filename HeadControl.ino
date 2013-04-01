@@ -141,22 +141,22 @@ void setup()
   eyeRollPos[2][9]  = ;
   eyeRollPos[2][10] = ;
   eyeRollPos[2][11] = ;
-
+*/
   // servo 2
   faktor = (((servo2end - servo2default) / 3) + ((servo2default - servo2start) / 3) ) / 2;
-  eyeRollPos[3][0]  = ;
-  eyeRollPos[3][1]  = ;
-  eyeRollPos[3][2]  = ;
-  eyeRollPos[3][3]  = ;
-  eyeRollPos[3][4]  = ;
-  eyeRollPos[3][5]  = ;
-  eyeRollPos[3][6]  = ;
-  eyeRollPos[3][7]  = ;
-  eyeRollPos[3][8]  = ;
-  eyeRollPos[3][9]  = ;
-  eyeRollPos[3][10] = ;
-  eyeRollPos[3][11] = ;
-
+  eyeRollPos[SERVO2][0]  =                servo2start;
+  eyeRollPos[SERVO2][1]  =       faktor + servo2start;
+  eyeRollPos[SERVO2][2]  =   2 * faktor + servo2start;
+  eyeRollPos[SERVO2][3]  =              servo2default;
+  eyeRollPos[SERVO2][4]  =     faktor + servo2default;
+  eyeRollPos[SERVO2][5]  = 2 * faktor + servo2default;
+  eyeRollPos[SERVO2][6]  =                  servo2end;
+  eyeRollPos[SERVO2][7]  =      eyeRollPos[SERVO2][5];
+  eyeRollPos[SERVO2][8]  =      eyeRollPos[SERVO2][4];
+  eyeRollPos[SERVO2][9]  =      eyeRollPos[SERVO2][3];
+  eyeRollPos[SERVO2][10] =      eyeRollPos[SERVO2][2];
+  eyeRollPos[SERVO2][11] =      eyeRollPos[SERVO2][1];
+/*
   // servo 5
   faktor = (((servo5end - servo5default) / 3) + ((servo5default - servo5start) / 3) ) / 2;
   eyeRollPos[4][0]  = ;
@@ -180,23 +180,35 @@ void setup()
   myservo5.attach(servo5pin);  // attaches the servo on pin 9 to the servo object 
   myservo6.attach(servo6pin);  // attaches the servo on pin 9 to the servo object 
 
+/*
   // move servos to thier default positions
-  myservo1.write(servo1default); 
-  myservo2.write(servo2default); 
-  myservo3.write(servo3default); 
-  myservo4.write(servo4default); 
-  myservo5.write(servo5default); 
-  myservo6.write(servo6default); 
+  myservo1.write(servo1default);
+  myservo2.write(servo2default);
+  myservo3.write(servo3default);
+  myservo4.write(servo4default);
+  myservo5.write(servo5default);
+  myservo6.write(servo6default);
+*/
+
+  look(FORWARD);
+  look(NORMAL);
+  delay(500);
 } 
 
 
 void loop() 
 {
-
-  look(FORWARD);
-  look(NORMAL);
-  delay(500);
-
+/*
+pause = 1000;
+  
+  // 0 to 11 o clock
+  for (i=0; i<11; i++)
+  {
+    rollEye(SERVO1, i);
+    rollEye(SERVO2, i);
+    delay(pause);
+  }
+*/
 /*  
   look(UPLEFT);
   delay(pause);
@@ -670,7 +682,7 @@ void eyebrow(unsigned char whichBrow, unsigned char direction)
 void rollEye(unsigned char servo, unsigned char hour)
 {
   // temp action, array to be completely initialised...!!!      <  <  <  <  <  <  <  <  
-  if (servo > SERVO1)
+  if (servo > SERVO2)
     return;
 
   moveServo(servo, eyeRollPos[servo][hour]);

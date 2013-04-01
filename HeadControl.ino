@@ -10,7 +10,7 @@ Servo myservo4;  // create servo object to control a servo
 Servo myservo5;  // create servo object to control a servo 
 Servo myservo6;  // create servo object to control a servo 
 
-int s1 = 0;    // variable to store the servo position 
+int i = 0;    // variable to store the servo position 
 int pause = 250;  // for delay in ms
 
 // servo 1
@@ -268,15 +268,15 @@ void loop()
  */
  
 /*  
-  for(s1 = servo1start; s1 < servo1end; s1 += 1)
+  for(i = servo1start; i < servo1end; ii += 1)
    {
-   moveServo(SERVO1, s1);
+   moveServo(SERVO1, i);
    delay(5);            // waits 15ms for the servo to reach the position 
    } 
    
-   for(s1 = servo1end; s1 > servo1start; s1 -= 1)
+   for(i = servo1end; i > servo1start; i -= 1)
    {
-   moveServo(SERVO1, s1);
+   moveServo(SERVO1, i);
    delay(5);            // waits 15ms for the servo to reach the position 
    } 
 */  

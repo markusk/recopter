@@ -113,7 +113,10 @@ void setup()
   // right eye
   // left/right (looking _to_ head head)
   faktor = (((servo1end - servo1default) / 3) + ((servo1default - servo1start) / 3) ) / 2;
-  // each "hour"
+  // each "hour" from left to right (following the eye movement)
+  eyeRollPos[SERVO1][9]  =                servo1start;
+  eyeRollPos[SERVO1][10] =       faktor + servo1start;
+  eyeRollPos[SERVO1][11] =   2 * faktor + servo1start;
   eyeRollPos[SERVO1][0]  =              servo1default;
   eyeRollPos[SERVO1][1]  =     faktor + servo1default;
   eyeRollPos[SERVO1][2]  = 2 * faktor + servo1default;
@@ -121,11 +124,8 @@ void setup()
   eyeRollPos[SERVO1][4]  =      eyeRollPos[SERVO1][2];
   eyeRollPos[SERVO1][5]  =      eyeRollPos[SERVO1][1];
   eyeRollPos[SERVO1][6]  =      eyeRollPos[SERVO1][0];
-  eyeRollPos[SERVO1][7]  =      eyeRollPos[SERVO1][1];
-  eyeRollPos[SERVO1][8]  =      eyeRollPos[SERVO1][2];
-  eyeRollPos[SERVO1][9]  =                servo1start;
-  eyeRollPos[SERVO1][10] =      eyeRollPos[SERVO1][8];
-  eyeRollPos[SERVO1][11] =      eyeRollPos[SERVO1][7];
+  eyeRollPos[SERVO1][7]  =      eyeRollPos[SERVO1][11];
+  eyeRollPos[SERVO1][8]  =      eyeRollPos[SERVO1][10];
 /*
   // servo 4
   faktor = (((servo4end - servo4default) / 3) + ((servo4default - servo4start) / 3) ) / 2;
@@ -198,17 +198,17 @@ void setup()
 
 void loop() 
 {
-/*
-pause = 1000;
-  
+
   // 0 to 11 o clock
   for (i=0; i<11; i++)
   {
     rollEye(SERVO1, i);
-    rollEye(SERVO2, i);
+//    rollEye(SERVO2, i);
     delay(pause);
   }
-*/
+
+  delay(2000);
+
 /*  
   look(UPLEFT);
   delay(pause);

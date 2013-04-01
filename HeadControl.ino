@@ -1,4 +1,4 @@
-#include <Servo.h> 
+#include <Servo.h>
 
 
 // a maximum of eight servo objects can be created!
@@ -107,6 +107,10 @@ static const unsigned char ANGRY      = 11;
 
 void setup()
 {
+  // for debugging
+  Serial.begin(9600);
+
+
   // init eye roll array
   
   // servo 1
@@ -198,15 +202,67 @@ void setup()
 
 void loop() 
 {
+pause = 1000;
 
-  // 0 to 11 o clock
-  for (i=0; i<11; i++)
+    i = 9;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 10;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 11;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 0;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 1;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 2;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 3;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 4;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 5;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 6;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 7;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+    i = 8;
+    rollEye(SERVO1, i);
+//    rollEye(SERVO2, i);
+    delay(pause);
+
+
+/*
+  // 11 to 0 o clock
+  for (i=11; i>0; i--)
   {
     rollEye(SERVO1, i);
 //    rollEye(SERVO2, i);
     delay(pause);
   }
-
+*/
   delay(2000);
 
 /*  
@@ -681,10 +737,9 @@ void eyebrow(unsigned char whichBrow, unsigned char direction)
 
 void rollEye(unsigned char servo, unsigned char hour)
 {
-  // temp action, array to be completely initialised...!!!      <  <  <  <  <  <  <  <  
-  if (servo > SERVO2)
-    return;
-
+  Serial.print("Moving to ");
+  Serial.println(hour);
+  
   moveServo(servo, eyeRollPos[servo][hour]);
 }
 

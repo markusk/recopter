@@ -1,0 +1,6 @@
+serial/qt/bin/test.app/Contents/Info.plist
+serial/qt/bin/test.app/Contents/MacOS/test
+serial/qt/bin/test.app/Contents/PkgInfo
+serial/qt/bin/test.app/Contents/Resources/empty.lproj
+serial/qt/src/Makefile
+test.pro.user

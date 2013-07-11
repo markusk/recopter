@@ -1,15 +1,10 @@
 SOURCES += test.cpp \
-	laser.cpp \
-	laserSickS300.cpp \
         main.cpp \
         direcsSerial.cpp \
         inifile.cpp \
         interfaceAvr.cpp \
         circuit.cpp
 HEADERS += test.h \
-	laser.h \
-	laserSickS300.h \
-	laserThread.h
         direcsSerial.h \
         inifile.h \
         interfaceAvr.h \

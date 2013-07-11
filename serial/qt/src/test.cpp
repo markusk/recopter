@@ -40,72 +40,6 @@ test::test()
 	readSettings();
 
 
-/*
-	  //---------------------------------------------------------------------------------------------------
-	  // test qthread and qlist stuff (queueing Signals for Slots)
-
-	  laserThread = new LaserThread();
-
-	  qRegisterMetaType < QList <float> > ("QList <float>");
-	  qRegisterMetaType < QList <int> > ("QList <int>");
-
-	  connect(laserThread, SIGNAL( laserDataCompleteFront(QList <float>, QList <int>) ), this, SLOT( refreshLaserViewFront(QList <float>, QList <int>) ));
-	  //---------------------------------------------------------------------------------------------------
-*/
-
-
-/*
-	  //---------------------------------------------------------------------------------------------------
-	  // SICK laser S300 test stuff
-
-	  // sickS300 = new SickS300();
-
-	  // send messages from the other class to this class (to the GUI)
-	  // connect(sickS300, SIGNAL( message(QString) ), this, SLOT( appendLog(QString) ));
-
-	  // "/dev/tty.USA19Hfa141P1.1" // Keyspan
-	  // "/dev/tty.PL2303-000013FD" // Prolific
-	  // "/dev/ttyLaserScannerFront"
-
-	  // sickS300->setDevicePort("/dev/ttyLaserScannerFront");
-
-
-	  // create laser thread
-	  laserThread = new LaserThread();
-
-	  // send messages from the other class to this class (to the GUI)
-	  connect(laserThread, SIGNAL( message(QString) ), this, SLOT( appendLog(QString) ));
-
-	  laserThread->setType(LASER1, "S300"); // this also creates the S300 object within the laser thread
-	  laserThread->setAngle(LASER1, 270);
-	  laserThread->setMounting(LASER1, "normal");
-	  laserThread->setResolution(LASER1, 0.5);
-	  laserThread->setSerialPort(LASER1, "/dev/ttyLaserScannerFront");
-
-	  textEdit->append("Starting laser thread...");
-
-	  // start laser thread
-	  laserThread->start();
-
-	  textEdit->append("Looking for S300...");
-
-	  // init the laser
-	  if (laserThread->isConnected(LASER1))
-	  {
-		  // * The laser is ON *
-		  appendLog("OKAY");
-	  }
-	  else
-	  {
-		  appendLog("ERROR");
-	  }
-
-	  //---------------------------------------------------------------------------------------------------
-*/
-
-
-	  //---------------------------------------------------------------------------------------------------
-	  // AtmelBoard test stuff
 	//---------------------------------------------------------------------------------------------------
 	// AtmelBoard test stuff
 
@@ -113,8 +47,9 @@ test::test()
 	interface1 = new InterfaceAvr();
 	circuit1 = new Circuit(interface1, mutex);
 
-	 // serialPortPath = "/dev/tty.SLAB_USBtoUART"; // Original driver "CP210x Macintosh OSX Driver v2." from SiLabs used.
-	  serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
+	serialPortPath = "/dev/tty.SLAB_USBtoUART"; // Original driver "CP210x Macintosh OSX Driver v2." from SiLabs used.
+	//      serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
+	serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
 
 	// send messages from the other class to this class (to the GUI)
 	connect(interface1, SIGNAL( message(QString) ), this, SLOT( appendLog(QString) ));
@@ -328,70 +263,4 @@ void test::testSlot()
 
 
 
-	/*
-	if (sickS300->readRequestTelegram() == -1)
-	{
-		appendLog("scan ERROR");
-	}
-	else
-	{
-
-		for (int angle=0; angle < 270*2; angle++)
-		{
-			textEdit->append( QString("%1: %2m | %3: %4m | %5: %6m | %7: %8m | %9: %10m | %11: %12m | %13: %14m | %15: %16m | %17: %18m")
-														 .arg(angle,     3, 10, QChar('0')).arg( sickS300->getDistance(angle    ), 4, 'f', 2 )
-														 .arg(angle + 1, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 1), 4, 'f', 2 )
-														 .arg(angle + 2, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 2), 4, 'f', 2 )
-														 .arg(angle + 3, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 3), 4, 'f', 2 )
-														 .arg(angle + 4, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 4), 4, 'f', 2 )
-														 .arg(angle + 5, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 5), 4, 'f', 2 )
-														 .arg(angle + 6, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 6), 4, 'f', 2 )
-														 .arg(angle + 7, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 7), 4, 'f', 2 )
-														 .arg(angle + 8, 3, 10, QChar('0')).arg( sickS300->getDistance(angle + 8), 4, 'f', 2 )
-														 );
-			angle = angle + 8;
-
-			if (angle>= 270*2)
-				break;
-		}
-	}
-*/
-/*
-	//
-	// using laser thread values !
-	//
-	for (int angle=0; angle < 270*2; angle++)
-	{
-		textEdit->append( QString("%1: %2m | %3: %4m | %5: %6m | %7: %8m | %9: %10m | %11: %12m | %13: %14m | %15: %16m | %17: %18m")
-													 .arg(angle,     3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle    ), 4, 'f', 2 )
-													 .arg(angle + 1, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 1), 4, 'f', 2 )
-													 .arg(angle + 2, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 2), 4, 'f', 2 )
-													 .arg(angle + 3, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 3), 4, 'f', 2 )
-													 .arg(angle + 4, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 4), 4, 'f', 2 )
-													 .arg(angle + 5, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 5), 4, 'f', 2 )
-													 .arg(angle + 6, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 6), 4, 'f', 2 )
-													 .arg(angle + 7, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 7), 4, 'f', 2 )
-													 .arg(angle + 8, 3, 10, QChar('0')).arg( laserThread->getValue(LASER1, angle + 8), 4, 'f', 2 )
-													 );
-		angle = angle + 8;
-
-		if (angle>= 270*2)
-			break;
-	}
-*/
-}
-
-
-void test::refreshLaserViewFront(QList <float> laserScannerValues, QList <int> laserScannerFlags)
-{
-//	appendLog(QString("laserScannerValues size: %1").arg(laserScannerValues.size()));
-//	appendLog(QString("laserScannerFlags  size: %1").arg(laserScannerFlags.size()));
-	Q_UNUSED(laserScannerFlags);
-
-	for (int i=0; i<laserScannerValues.size(); i++)
-	{
-		appendLog(QString("laserScannerValue no. %1 = size: %2").arg(i).arg(laserScannerValues[i]));
-	}
-
-	appendLog("-----------------------------------------------");
 }

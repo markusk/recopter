@@ -32,8 +32,6 @@
 
 #include "circuit.h"
 #include "interfaceAvr.h"
-#include "laserSickS300.h"
-#include "laserThread.h"
 
 //---------------------------------------------------------------------------------------------------
 
@@ -44,75 +42,72 @@ class QTextEdit;
 
 class test:public QMainWindow
 {
-	  Q_OBJECT
+	Q_OBJECT
 
 public:
-	  test();
-	  ~test();
+	test();
+	~test();
 
 protected:
-	  void closeEvent(QCloseEvent *event);
+	void closeEvent(QCloseEvent *event);
 
 public slots:
-	  void appendLog(QString message);
-	  void refreshLaserViewFront(QList <float> laserScannerValues, QList <int> laserScannerFlags);
+	void appendLog(QString message);
 
 private slots:
-	  void about();
-	  void testSlot();      //    < < < <   this is the test slot where all magic happens
+	void about();
+	void testSlot();      //    < < < <   this is the test slot where all magic happens
 
 signals:
-	  /**
+	/**
 	  Emits a string to the GUI log / console.
 	  @sa this::appendLog()
 	  @param text is the message to be emitted
 	  */
-	  void message(QString text);
+	void message(QString text);
 
 private:
-	  void createActions();
-	  void createMenus();
-	  void createToolBars();
-	  void createStatusBar();
-	  void readSettings();
-	  void writeSettings();
+	void createActions();
+	void createMenus();
+	void createToolBars();
+	void createStatusBar();
+	void readSettings();
+	void writeSettings();
 
-	  QTextEdit *textEdit;
-	  QString curFile;
+	QTextEdit *textEdit;
+	QString curFile;
 
-	  QMenu *fileMenu;
-	  QMenu *editMenu;
-	  QMenu *helpMenu;
-	  QMenu *testMenu;
-	  QToolBar *editToolBar;
-	  QToolBar *testToolBar;
-	  QAction *exitAct;
-	  QAction *cutAct;
-	  QAction *copyAct;
-	  QAction *pasteAct;
-	  QAction *aboutAct;
-	  QAction *aboutQtAct;
-	  QAction *testAct;      //    < < < <   this is the test action for me and anyone who may need it ;-)  It calls the "testSlot" method.
+	QMenu *fileMenu;
+	QMenu *editMenu;
+	QMenu *helpMenu;
+	QMenu *testMenu;
+	QToolBar *editToolBar;
+	QToolBar *testToolBar;
+	QAction *exitAct;
+	QAction *cutAct;
+	QAction *copyAct;
+	QAction *pasteAct;
+	QAction *aboutAct;
+	QAction *aboutQtAct;
+	QAction *testAct;      //    < < < <   this is the test action for me and anyone who may need it ;-)  It calls the "testSlot" method.
 
-	  // QList <float> laserScannerValuesFront;  /// The measured distances from the front laser scanner.
-	  QList <float> pointerFloatList;
-	  QList <int *> pointerIntList;
+	// QList <float> laserScannerValuesFront;  /// The measured distances from the front laser scanner.
+	QList <float> pointerFloatList;
+	QList <int *> pointerIntList;
 
-	  mutable QMutex *mutex; // make the threads thread-safe (e.g. senorThread, servo...)
-	  Circuit *circuit1;
-	  InterfaceAvr *interface1;
-//	  SickS300 *sickS300;
-	  LaserThread *laserThread;
-	  QString serialPortPath; // something like /dev/ttyUSB0
+	mutable QMutex *mutex; // make the threads thread-safe (e.g. senorThread, servo...)
+	Circuit *circuit1;
+	InterfaceAvr *interface1;
+	QString serialPortPath; // something like /dev/ttyUSB0
 
-	  /**
+	/**
 	  For the integrated DIRECS laser module
 	  */
-	  static const short int LASER1 = 1;
-	  static const short int LASER2 = 2;
-	  static const short int LASER3 = 4;
-	  static const short int LASER4 = 8;
-	  static const short int LASER5 = 16;
+	static const short int LASER1 = 1;
+	static const short int LASER2 = 2;
+	static const short int LASER3 = 4;
+	static const short int LASER4 = 8;
+	static const short int LASER5 = 16;
 };
 
 #endif

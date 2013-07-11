@@ -1,25 +1,24 @@
 SOURCES += test.cpp \
-	main.cpp \
-	direcsSerial.cpp \
-	inifile.cpp \
-	interfaceAvr.cpp \
-	circuit.cpp \
 	laser.cpp \
 	laserSickS300.cpp \
-	laserThread.cpp
+        main.cpp \
+        direcsSerial.cpp \
+        inifile.cpp \
+        interfaceAvr.cpp \
+        circuit.cpp
 HEADERS += test.h \
-	direcsSerial.h \
-	inifile.h \
-	interfaceAvr.h \
-	circuit.h \
 	laser.h \
 	laserSickS300.h \
 	laserThread.h
+        direcsSerial.h \
+        inifile.h \
+        interfaceAvr.h \
+        circuit.h
 TEMPLATE = app
 CONFIG += warn_on \
-	thread \
-	qt \
-	release
+        thread \
+        qt \
+        release
 TARGET = test
 DESTDIR = ../bin
 RESOURCES = application.qrc

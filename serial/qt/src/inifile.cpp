@@ -91,7 +91,7 @@ bool Inifile::checkFiles()
 	{
 		return true;
 	}
-/*
+	/*
 	// This variable holds the version of the Windows operating system on which the application is run (Windows only).
 	WinVersion QSysInfo::WindowsVersion;
 */

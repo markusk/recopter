@@ -76,7 +76,7 @@ void InterfaceAvr::closeComPort()
 bool InterfaceAvr::sendChar(unsigned char character)
 {
 	int result = 0;
-// 	static int receiveErrorCounter = 0;
+	// 	static int receiveErrorCounter = 0;
 
 
 	// send one byte to the serial port with direcsSerial
@@ -85,15 +85,15 @@ bool InterfaceAvr::sendChar(unsigned char character)
 
 	if (result < 0)
 	{
-// 		receiveErrorCounter++;
+		// 		receiveErrorCounter++;
 		emit message( QString("<font color=\"#FF0000\">ERROR '%1' (InterfaceAvr::sendChar)!<font>").arg(strerror(result)) );
 
-// 		// MASSIVE COMMUNICATION ERROR!
-// 		if (receiveErrorCounter >= 4)
-// 		{
-// 			receiveErrorCounter = 0;
-			emit tooMuchErrors();
-// 		}
+		// 		// MASSIVE COMMUNICATION ERROR!
+		// 		if (receiveErrorCounter >= 4)
+		// 		{
+		// 			receiveErrorCounter = 0;
+		emit tooMuchErrors();
+		// 		}
 		return false;
 	}
 
@@ -124,14 +124,14 @@ bool InterfaceAvr::receiveChar(unsigned char *character)
 
 bool InterfaceAvr::sendString(QString string)
 {
-//	QString debugstring;
+	//	QString debugstring;
 
 
 	// send starter
 	if (sendChar(starter) == true)
 	{
 		// send 'content' of string
-//		debugstring = "*";
+		//		debugstring = "*";
 		for (int i=0; i<string.length(); i++)
 		{
 			// char by char
@@ -139,15 +139,15 @@ bool InterfaceAvr::sendString(QString string)
 			{
 				return false;
 			}
-//			debugstring.append(string.at(i));
+			//			debugstring.append(string.at(i));
 		}
 
 		// send terminator
 		if (sendChar(terminator) == true)
 		{
 			// success
-//			debugstring.append("#");
-//			emit message(debugstring);
+			//			debugstring.append("#");
+			//			emit message(debugstring);
 			return true;
 		}
 	}
@@ -199,7 +199,7 @@ bool InterfaceAvr::receiveString(QString &string)
 
 bool InterfaceAvr::receiveInt(int *value)
 {
-// 	static int receiveErrorCounter = 0;
+	// 	static int receiveErrorCounter = 0;
 	unsigned char character = 0;
 	int intValue = 0;
 
@@ -209,24 +209,24 @@ bool InterfaceAvr::receiveInt(int *value)
 	//-----------------
 	if (receiveChar(&character) == false)
 	{
-// 		receiveErrorCounter++;
+		// 		receiveErrorCounter++;
 		// emit error message already in calling receiveChar!
 
 		//
 		// MASSIVE COMMUNICATION ERROR!
 		//
-// 		if (receiveErrorCounter >= 4)
-// 		{
-// 			receiveErrorCounter = 0;
-//			emit tooMuchErrors();
-// 		}
+		// 		if (receiveErrorCounter >= 4)
+		// 		{
+		// 			receiveErrorCounter = 0;
+		//			emit tooMuchErrors();
+		// 		}
 
 		value = 0;
 		return false;
 	}
 
 	// reset error counter
-// 	receiveErrorCounter = 0;
+	// 	receiveErrorCounter = 0;
 
 
 	// bit shifting

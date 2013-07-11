@@ -39,7 +39,7 @@ int DirecsSerial::openAtmelPort(char *dev_name, int baudrate)
 	int newbaud = 0;
 
 
-	 // mDev_fd = open(dev_name, O_RDWR | O_NOCTTY, 0);	// 2010-05-23: not needed for Atmel and SICK laser S300!
+	// mDev_fd = open(dev_name, O_RDWR | O_NOCTTY, 0);	// 2010-05-23: not needed for Atmel and SICK laser S300!
 	mDev_fd = open(dev_name, O_RDWR | O_NOCTTY | O_NONBLOCK);
 
 	// Note that open() follows POSIX semantics: multiple open() calls to
@@ -93,60 +93,60 @@ int DirecsSerial::openAtmelPort(char *dev_name, int baudrate)
 
 	switch(newbaud)
 	{
-		case 0:
-		#ifdef B0
-			spd = B0;	   break;
-		#else
-			spd = 0;  	   break;
-		#endif
-		case 3:
-			spd = B300;	   break;
-		case 6:
-			spd = B600;	   break;
-		case 12:
-			spd = B1200;   break;
-		case 24:
-			spd = B2400;   break;
-		case 48:
-			spd = B4800;   break;
-		case 96:
-			spd = B9600;   break;
-		#ifdef B19200
-		case 192:
-			spd = B19200;  break;
-		#else
-		#ifdef EXTA
-		case 192:
-			spd = EXTA;    break;
-		#else
-		case 192:
-			spd = B9600;   break;
-		#endif
-		#endif
-		#ifdef B38400
-		case 384:
-			spd = B38400;  break;
-		#else
-		#ifdef EXTB
-		case 384:
-			spd = EXTB;    break;
-		#else
-		case 384:
-			spd = B9600;   break;
-		#endif
-		#endif
-		#ifdef B57600
-		case 576:
-			spd = B57600;  break;
-		#endif
-		#ifdef B115200
-		case 1152:
-			spd = B115200; break;
-		#endif
-		#ifdef B500000
-		case 5000:
-			spd = B500000; break;
-		#endif
+	case 0:
+#ifdef B0
+		spd = B0;	   break;
+#else
+		spd = 0;  	   break;
+#endif
+	case 3:
+		spd = B300;	   break;
+	case 6:
+		spd = B600;	   break;
+	case 12:
+		spd = B1200;   break;
+	case 24:
+		spd = B2400;   break;
+	case 48:
+		spd = B4800;   break;
+	case 96:
+		spd = B9600;   break;
+#ifdef B19200
+	case 192:
+		spd = B19200;  break;
+#else
+#ifdef EXTA
+	case 192:
+		spd = EXTA;    break;
+#else
+	case 192:
+		spd = B9600;   break;
+#endif
+#endif
+#ifdef B38400
+	case 384:
+		spd = B38400;  break;
+#else
+#ifdef EXTB
+	case 384:
+		spd = EXTB;    break;
+#else
+	case 384:
+		spd = B9600;   break;
+#endif
+#endif
+#ifdef B57600
+	case 576:
+		spd = B57600;  break;
+#endif
+#ifdef B115200
+	case 1152:
+		spd = B115200; break;
+#endif
+#ifdef B500000
+	case 5000:
+		spd = B500000; break;
+#endif
 	}
 
 	// set speed (input and output)
@@ -199,16 +199,16 @@ void DirecsSerial::setRTS(int fd)
 void DirecsSerial::setRTS(int fd  __attribute__ ((unused)))
 #endif
 {
-	#if defined(TIOCM_RTS) && defined(TIOCMODG)
+#if defined(TIOCM_RTS) && defined(TIOCMODG)
 	int mcs = 0;
 
 	ioctl(fd, TIOCMODG, &mcs);
 	mcs |= TIOCM_RTS;
 	ioctl(fd, TIOCMODS, &mcs);
-	#endif
-	#ifdef _COHERENT
+#endif
+#ifdef _COHERENT
 	ioctl(fd, TIOCSRTS, 0);
-	#endif
+#endif
 }
 
 
@@ -218,13 +218,13 @@ void DirecsSerial::setParms(int fd, int baudr, char par, char bits, int hwf, int
 	int newbaud = 0;
 
 
-	#ifdef _POSIX
+#ifdef _POSIX
 	struct termios tty;
 	tcgetattr(fd, &tty);
-	#else
+#else
 	struct sgttyb tty;
 	ioctl(fd, TIOCGETP, &tty);
-	#endif
+#endif
 
 
 	/* We generate mark and space parity ourself. */
@@ -233,69 +233,69 @@ void DirecsSerial::setParms(int fd, int baudr, char par, char bits, int hwf, int
 
 
 	/* Check if 'baudr' is really a number */
-// 	if((newbaud = (atol(baudr) / 100)) == 0 && baudr[0] != '0')
-// 		newbaud = -1;
+	// 	if((newbaud = (atol(baudr) / 100)) == 0 && baudr[0] != '0')
+	// 		newbaud = -1;
 	newbaud = (baudr/100);
 
 	switch(newbaud)
 	{
-		case 0:
-		#ifdef B0
-			spd = B0;	   break;
-		#else
-			spd = 0;  	   break;
-		#endif
-		case 3:
-			spd = B300;	   break;
-		case 6:
-			spd = B600;	   break;
-		case 12:
-			spd = B1200;   break;
-		case 24:
-			spd = B2400;   break;
-		case 48:
-			spd = B4800;   break;
-		case 96:
-			spd = B9600;   break;
-		#ifdef B19200
-		case 192:
-			spd = B19200;  break;
-		#else
-		#ifdef EXTA
-		case 192:
-			spd = EXTA;    break;
-		#else
-		case 192:
-			spd = B9600;   break;
-		#endif
-		#endif
-		#ifdef B38400
-		case 384:
-			spd = B38400;  break;
-		#else
-		#ifdef EXTB
-		case 384:
-			spd = EXTB;    break;
-		#else
-		case 384:
-			spd = B9600;   break;
-		#endif
-		#endif
-		#ifdef B57600
-		case 576:
-			spd = B57600;  break;
-		#endif
-		#ifdef B115200
-		case 1152:
-			spd = B115200; break;
-		#endif
-		#ifdef B500000
-		case 5000:
-			spd = B500000; break;
-		#endif
+	case 0:
+#ifdef B0
+		spd = B0;	   break;
+#else
+		spd = 0;  	   break;
+#endif
+	case 3:
+		spd = B300;	   break;
+	case 6:
+		spd = B600;	   break;
+	case 12:
+		spd = B1200;   break;
+	case 24:
+		spd = B2400;   break;
+	case 48:
+		spd = B4800;   break;
+	case 96:
+		spd = B9600;   break;
+#ifdef B19200
+	case 192:
+		spd = B19200;  break;
+#else
+#ifdef EXTA
+	case 192:
+		spd = EXTA;    break;
+#else
+	case 192:
+		spd = B9600;   break;
+#endif
+#endif
+#ifdef B38400
+	case 384:
+		spd = B38400;  break;
+#else
+#ifdef EXTB
+	case 384:
+		spd = EXTB;    break;
+#else
+	case 384:
+		spd = B9600;   break;
+#endif
+#endif
+#ifdef B57600
+	case 576:
+		spd = B57600;  break;
+#endif
+#ifdef B115200
+	case 1152:
+		spd = B115200; break;
+#endif
+#ifdef B500000
+	case 5000:
+		spd = B500000; break;
+#endif
 	}
 
-	#if defined (_BSD43) && !defined(_POSIX)
+#if defined (_BSD43) && !defined(_POSIX)
 	if(spd != -1)
 		tty.sg_ispeed = tty.sg_ospeed = spd;
 
@@ -310,13 +310,13 @@ void DirecsSerial::setParms(int fd, int baudr, char par, char bits, int hwf, int
 		tty.sg_flags |= PASS8 | ANYP; //
 
 	ioctl(fd, TIOCSETP, &tty);
-	#ifdef TIOCSDTR
+#ifdef TIOCSDTR
 	/*  huh? - MvS */
 	ioctl(fd, TIOCSDTR, 0);
-	#endif
-	#endif
+#endif
+#endif
 
-	#if defined (_V7) && !defined(_POSIX)
+#if defined (_V7) && !defined(_POSIX)
 	if(spd != -1) tty.sg_ispeed = tty.sg_ospeed = spd;
 	tty.sg_flags = RAW;
 	if(par == parityEven)
@@ -324,9 +324,9 @@ void DirecsSerial::setParms(int fd, int baudr, char par, char bits, int hwf, int
 	else if(par == parityOdd)
 		tty.sg_flags |= ODDP;
 	ioctl(fd, TIOCSETP, &tty);
-	#endif
+#endif
 
-	#ifdef _POSIX
+#ifdef _POSIX
 	if(spd != -1)
 	{
 		cfsetospeed(&tty, (speed_t)spd);
@@ -337,34 +337,34 @@ void DirecsSerial::setParms(int fd, int baudr, char par, char bits, int hwf, int
 	/* The data bits */
 	switch (bits)
 	{
-		case 5:
-			tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS5;
-			break;
-		case 6:
-			tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS6;
-			break;
-		case 7:
-			tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS7;
-			break;
-		case 8:
-		default:
-			tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;
-			break;
+	case 5:
+		tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS5;
+		break;
+	case 6:
+		tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS6;
+		break;
+	case 7:
+		tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS7;
+		break;
+	case 8:
+	default:
+		tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;
+		break;
 	}
 
 	/* Set into raw, no echo mode */
-	#if !defined(_DGUX_SOURCE)
+#if !defined(_DGUX_SOURCE)
 	tty.c_iflag &= ~(IGNBRK | IGNCR | INLCR | ICRNL | /* IUCLC | */ IXANY | IXON | IXOFF | INPCK | ISTRIP);
 	tty.c_iflag |= (BRKINT | IGNPAR);
 	tty.c_oflag &= ~OPOST;
 	tty.c_lflag = ~(ICANON | ISIG | ECHO | ECHONL | ECHOE | ECHOK | IEXTEN);
 	tty.c_cflag |= CREAD | CRTSCTS;
-	#else /* Okay, this is better. XXX - Fix the above. */
+#else /* Okay, this is better. XXX - Fix the above. */
 	tty.c_iflag =  IGNBRK;
 	tty.c_lflag = 0;
 	tty.c_oflag = 0;
 	tty.c_cflag |= CLOCAL | CREAD;
-	#endif
+#endif
 	tty.c_cc[VMIN] = 1;
 	tty.c_cc[VTIME] = 5;
 
@@ -406,12 +406,12 @@ void DirecsSerial::setParms(int fd, int baudr, char par, char bits, int hwf, int
 	/* The stop bit */
 	switch (stopb)
 	{
-		case 0:
-			tty.c_cflag |= CSTOPB;
-			break;
-		case 1:
-			tty.c_cflag &= ~CSTOPB; // deleting the bis is setting it to 1 STOP BIT!
-			break;
+	case 0:
+		tty.c_cflag |= CSTOPB;
+		break;
+	case 1:
+		tty.c_cflag &= ~CSTOPB; // deleting the bis is setting it to 1 STOP BIT!
+		break;
 	}
 
 
@@ -419,10 +419,10 @@ void DirecsSerial::setParms(int fd, int baudr, char par, char bits, int hwf, int
 	tcsetattr(fd, TCSANOW, &tty);
 
 	setRTS(fd);
-	#ifdef _DGUX_SOURCE
+#ifdef _DGUX_SOURCE
 	serial_sethwf(fd, hwf);
-	#endif
-	#endif
+#endif
+#endif
 }
 
 
@@ -505,11 +505,11 @@ int DirecsSerial::clearInputBuffer(int dev_fd)
 
 int DirecsSerial::purgeRx()
 {
-		/**
+	/**
 		Clears the read buffer.
 		TCIFLUSH = Flush data received but not read.
 		 */
-		return tcflush(mDev_fd, TCIFLUSH);
+	return tcflush(mDev_fd, TCIFLUSH);
 }
 
 
@@ -521,16 +521,16 @@ int DirecsSerial::writePort(int dev_fd, unsigned char *buf, int nChars)
 	{
 		amountWritten = write(dev_fd, buf, nChars);
 		if(amountWritten < 0) {
-		if(errno == EWOULDBLOCK) {
-			fprintf(stderr, "\nWARNING: writeN: EWOULDBLOCK: trying again!\n");
+			if(errno == EWOULDBLOCK) {
+				fprintf(stderr, "\nWARNING: writeN: EWOULDBLOCK: trying again!\n");
+			}
+			else {
+				return -1;
+			}
 		}
 		else {
-			return -1;
-		}
-		}
-		else {
-		nChars -= amountWritten;
-		buf += amountWritten;
+			nChars -= amountWritten;
+			buf += amountWritten;
 		}
 	}
 	return 0;
@@ -544,7 +544,7 @@ int DirecsSerial::writeAtmelPort(unsigned char *c)
 	if (n < 0)
 	{
 		emit message(QString("<font color=\"#FF0000\">ERROR '%1=%2' when writing to serial device at DirecsSerial::writeAtmelPort.</font>").arg(errno).arg(strerror(errno)));
-//		qDebug("Error %d writing to serial device: %s\n", errno, strerror(errno));
+		//		qDebug("Error %d writing to serial device: %s\n", errno, strerror(errno));
 		return errno;
 	}
 	else
@@ -571,15 +571,15 @@ int DirecsSerial::readPort(int dev_fd, unsigned char *buf, int nChars)
 		FD_SET(dev_fd, &set);
 		err = select(dev_fd + 1, &set, NULL, NULL, &t);
 		if(err == 0)
-		return -2;
+			return -2;
 
 		amountRead = read(dev_fd, buf, nChars);
 		if(amountRead < 0 && errno != EWOULDBLOCK)
-		return -1;
+			return -1;
 		else if(amountRead > 0) {
-		bytes_read += amountRead;
-		nChars -= amountRead;
-		buf += amountRead;
+			bytes_read += amountRead;
+			nChars -= amountRead;
+			buf += amountRead;
 		}
 	}
 	return bytes_read;
@@ -640,7 +640,7 @@ int DirecsSerial::readAtmelPort(unsigned char *buf, int nChars)
 		if (amountRead < 0 && errno != EWOULDBLOCK)
 		{
 			emit message(QString("<font color=\"#FF0000\">ERROR '%1=%2' when using read() on serial device at DirecsSerial::readAtmelPort.</font>").arg(errno).arg(strerror(errno)));
-// FIXME: was, wenn return 0 ?!?!?
+			// FIXME: was, wenn return 0 ?!?!?
 			return errno;
 		}
 		else
@@ -659,17 +659,17 @@ int DirecsSerial::readAtmelPort(unsigned char *buf, int nChars)
 
 int DirecsSerial::closeAtmelPort()
 {
-  return close(mDev_fd);
+	return close(mDev_fd);
 }
 
 
 int DirecsSerial::setLowLatency(int fd)
 {
 #ifdef Q_OS_LINUX // currently supported only under linux (no MAC OS, Windoze at the moment)
-	#ifdef CYGWIN
+#ifdef CYGWIN
 	fd = fd;
 	return -1;
-	#else
+#else
 
 	struct serial_struct serial;
 	int result;
@@ -694,7 +694,7 @@ int DirecsSerial::setLowLatency(int fd)
 		}
 	}
 	return result;
-	#endif
+#endif
 #else
 	Q_UNUSED(fd);
 	return -1;
@@ -705,9 +705,9 @@ int DirecsSerial::setLowLatency(int fd)
 int DirecsSerial::setLowLatency()
 {
 #ifdef Q_OS_LINUX // currently supported only under linux (no MAC OS, Windoze at the moment)
-	#ifdef CYGWIN
+#ifdef CYGWIN
 	return -1;
-	#else
+#else
 
 	struct serial_struct serial;
 	int result;
@@ -732,7 +732,7 @@ int DirecsSerial::setLowLatency()
 		}
 	}
 	return result;
-	#endif
+#endif
 #else
 	return -1;
 #endif

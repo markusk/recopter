@@ -4,3 +4,6 @@ serial/qt/bin/test.app/Contents/PkgInfo
 serial/qt/bin/test.app/Contents/Resources/empty.lproj
 serial/qt/src/Makefile
 test.pro.user
+serial/qt/tmp
+qrc_application.cpp
+Makefile

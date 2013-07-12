@@ -46,9 +46,10 @@ public:
 	/**
 		Opens a serial port/device. On POSIX systems this looks like "/dev/tty4" oder "/dev/ttyUSB0". On Windows systems it's like "COM1".
 		@param comPort is the serial port
+		@param baudrate e.g. 115200
 		@return true on access or false if an error occured, while opening the device.
 		*/
-	bool openComPort(QString comPort);
+	bool openComPort(QString comPort, int baudrate);
 
 	/**
 		Closes the serial port

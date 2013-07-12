@@ -47,9 +47,9 @@ test::test()
 	interface1 = new InterfaceAvr();
 	circuit1 = new Circuit(interface1, mutex);
 
-	serialPortPath = "/dev/tty.SLAB_USBtoUART"; // Original driver "CP210x Macintosh OSX Driver v2." from SiLabs used.
-	//      serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
-	serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
+//	serialPortPath = "/dev/tty.SLAB_USBtoUART"; // Original driver "CP210x Macintosh OSX Driver v2." from SiLabs used.
+//	serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
+	serialPortPath = "/dev/tty.USA19Hfa141P1.1"; // KEYSPAN Adapter
 
 	// send messages from the other class to this class (to the GUI)
 	connect(interface1, SIGNAL( message(QString) ), this, SLOT( appendLog(QString) ));
@@ -63,7 +63,7 @@ test::test()
 
 	textEdit->append("Opening serial port for microcontroller communication...");
 
-	if (interface1->openComPort(serialPortPath) == false)
+	if (interface1->openComPort(serialPortPath, 115200) == false)
 	{
 		// ********************
 		// * The robot is OFF *

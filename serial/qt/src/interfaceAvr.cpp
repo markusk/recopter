@@ -37,7 +37,7 @@ InterfaceAvr::~InterfaceAvr()
 }
 
 
-bool InterfaceAvr::openComPort(QString comPort)
+bool InterfaceAvr::openComPort(QString comPort, int baudrate)
 {
 	// for QString to char* conversion
 	QByteArray ba = comPort.toLatin1();
@@ -55,7 +55,7 @@ bool InterfaceAvr::openComPort(QString comPort)
 
 
 	// serial port config and flush also done in openAtmelPort!
-	if (serialPort->openAtmelPort( ba.data(), 38400 ) == -1)
+	if (serialPort->openAtmelPort( ba.data(), baudrate ) == -1)
 	{
 		// this tells other classes that the robot is OFF!
 		emit robotState(false);
@@ -124,35 +124,22 @@ bool InterfaceAvr::receiveChar(unsigned char *character)
 
 bool InterfaceAvr::sendString(QString string)
 {
-	//	QString debugstring;
+// send starter
+//	if (sendChar(starter) == true)  // @todo: maybe send a $M as enw starter here always?
 
 
-	// send starter
-	if (sendChar(starter) == true)
+	// send 'content' of string
+	for (int i=0; i<string.length(); i++)
 	{
-		// send 'content' of string
-		//		debugstring = "*";
-		for (int i=0; i<string.length(); i++)
+		// char by char
+		if (sendChar( string.at(i).toAscii() ) == false)
 		{
-			// char by char
-			if (sendChar( string.at(i).toAscii() ) == false)
-			{
-				return false;
-			}
-			//			debugstring.append(string.at(i));
-		}
-
-		// send terminator
-		if (sendChar(terminator) == true)
-		{
-			// success
-			//			debugstring.append("#");
-			//			emit message(debugstring);
-			return true;
+			return false;
 		}
 	}
 
-	return false;
+
+	return true;
 }
 
 

@@ -59,6 +59,7 @@ public slots:
 private slots:
 	void about();
 	void testSlot();      //    < < < <   this is the test slot where all magic happens
+	void setSerialPort(QString serialPort);
 
 signals:
 	/**
@@ -80,6 +81,7 @@ private:
 
 	QTextEdit *textEdit;
 	QString curFile;
+	QString mSerialPort;
 
 	QMenu *fileMenu;
 	QMenu *editMenu;

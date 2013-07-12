@@ -206,6 +206,9 @@ void test::createComboBox()
 {
 	serialPortBox = new QComboBox(this);
 	serialPortBox->setParent(serialToolBar);
+
+	// change serial port name when selected in combo box
+	connect(serialPortBox, SIGNAL(activated(QString)), this, SLOT(setSerialPort(QString)));
 }
 
 
@@ -274,6 +277,13 @@ void test::readSerialDevices()
 void test::appendLog(QString message)
 {
 	textEdit->append(message);
+}
+
+
+void test::setSerialPort(QString serialPort)
+{
+	mSerialPort = serialPort;
+	textEdit->append(QString("Port set to %1.").arg(mSerialPort));
 }
 
 

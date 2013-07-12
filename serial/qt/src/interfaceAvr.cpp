@@ -187,6 +187,54 @@ bool InterfaceAvr::receiveString(QString &string, int numBytes)
 }
 
 
+bool InterfaceAvr::receiveBytes(QByteArray &data, int numBytes)
+{
+	int result = 0;
+	int byteCounter = 0;
+	unsigned char character;
+	QByteArray ba;
+
+
+	// clear given argument
+	data.clear();
+
+	do
+	{
+		// reading one char. Must return 1 (one character succussfull read).
+		result = serialPort->readAtmelPort(&character, 1);
+
+		if (result == 1)
+		{
+			byteCounter++;
+
+			// append received char to byte array
+			ba.append(character);
+		}
+
+	} while ( (result == 1) && (byteCounter != numBytes) ); // remark: timeout is implemented in readAtmelPort
+
+	if (result != 1)
+	{
+		// ERROR (error message already emitted from readAtmelPort!)
+		qDebug() << "error at receiveBytes";
+
+		return false;
+	}
+
+	// copy 3 chars to QString to pointer to return the QString
+	QString string = QString::fromUtf8(ba.data(), 3);
+
+	// check result!
+	if (string.startsWith("$M>")) // @todo: place this fixed string somewhere else
+	{
+		return true;
+	}
+
+
+	return false;
+}
+
+
 bool InterfaceAvr::receiveInt(int *value)
 {
 	// 	static int receiveErrorCounter = 0;

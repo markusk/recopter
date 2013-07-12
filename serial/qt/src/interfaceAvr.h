@@ -88,6 +88,14 @@ public:
 	bool receiveString(QString &string, int numBytes);
 
 	/**
+		Receives data (byts) from the serial port/device.
+		@param &data is the complete result
+		@param numBytes is the number of bytes to be received
+		@return true on access or false if an error occured.
+		*/
+	bool receiveBytes(QByteArray &data, int numBytes);
+
+	/**
 		Receives an integer value from the serial port/device (consisting of two char values, which are receivced one after another and combined to an int back).
 		@param *value
 		@return true on access or false if an error occured.
@@ -95,7 +103,7 @@ public:
 	bool receiveInt(int *value);
 
 	/**
-		Returns an integer value which comes from a former recevied string.
+		Returns an integer value which comes from a former received string.
 		Example: With *42# the 42 is the 'string' here.
 		@param string
 		@param &value is the int value when the conversion was successfull.

@@ -61,6 +61,10 @@ test::test()
 	connect(interface1,	SIGNAL( robotState(bool) ), circuit1,		SLOT( setRobotState(bool) ));
 
 
+	// find out serial devices
+	textEdit->append("Searching serial ports...");
+	readSerialDevices();
+
 	textEdit->append("Opening serial port for microcontroller communication...");
 
 	if (interface1->openComPort(serialPortPath, 115200) == false)
@@ -207,7 +211,7 @@ void test::createStatusBar()
 
 void test::readSettings()
 {
-	QSettings settings("Trolltech", "Application Example");
+	QSettings settings("Markus Knapp", "recopterGUItest");
 	QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
 	QSize size = settings.value("size", QSize(400, 400)).toSize();
 	resize(size);
@@ -217,9 +221,43 @@ void test::readSettings()
 
 void test::writeSettings()
 {
-	QSettings settings("Trolltech", "Application Example");
+	QSettings settings("Markus Knapp", "recopterGUItest");
 	settings.setValue("pos", pos());
 	settings.setValue("size", size());
+}
+
+
+void test::readSerialDevices()
+{
+	QDir dir = QDir::root();                 // "/"
+	QFileInfoList devices;
+
+
+	// set and change directory
+	dir.cd("dev");
+
+	// set filters
+	dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot | QDir::System);
+	dir.setSorting(QDir::Name | QDir::DirsFirst);
+
+	// check
+	if (!dir.exists())
+		qWarning("Cannot find directory!");
+
+	// read directory
+	devices = dir.entryInfoList();
+
+	// show filenames
+	for (int i = 0; i < devices.size(); ++i)
+	{
+		QFileInfo fileInfo = devices.at(i);
+		QString test;
+
+		test = QString("%1").arg(fileInfo.fileName());
+
+		if (test.startsWith("tty"))
+			textEdit->append(test);
+	}
 }
 
 

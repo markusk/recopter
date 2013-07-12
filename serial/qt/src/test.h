@@ -27,6 +27,7 @@
 #include <QtDebug>
 #include <QMutex>
 #include <QMetaType> // for qRegisterMetaType
+#include <QDir>
 
 //---------------------------------------------------------------------------------------------------
 
@@ -73,6 +74,7 @@ private:
 	void createStatusBar();
 	void readSettings();
 	void writeSettings();
+	void readSerialDevices();
 
 	QTextEdit *textEdit;
 	QString curFile;
@@ -91,7 +93,6 @@ private:
 	QAction *aboutQtAct;
 	QAction *testAct;      //    < < < <   this is the test action for me and anyone who may need it ;-)  It calls the "testSlot" method.
 
-	// QList <float> laserScannerValuesFront;  /// The measured distances from the front laser scanner.
 	QList <float> pointerFloatList;
 	QList <int *> pointerIntList;
 
@@ -100,14 +101,6 @@ private:
 	InterfaceAvr *interface1;
 	QString serialPortPath; // something like /dev/ttyUSB0
 
-	/**
-	  For the integrated DIRECS laser module
-	  */
-	static const short int LASER1 = 1;
-	static const short int LASER2 = 2;
-	static const short int LASER3 = 4;
-	static const short int LASER4 = 8;
-	static const short int LASER5 = 16;
 };
 
 #endif

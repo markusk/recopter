@@ -143,9 +143,10 @@ bool InterfaceAvr::sendString(QString string)
 }
 
 
-bool InterfaceAvr::receiveString(QString &string)
+bool InterfaceAvr::receiveString(QString &string, int numBytes)
 {
 	int result = 0;
+	int byteCounter = 0;
 	unsigned char character;
 	QByteArray ba;
 
@@ -157,11 +158,13 @@ bool InterfaceAvr::receiveString(QString &string)
 
 		if (result == 1)
 		{
+			byteCounter++;
+
 			// append received char to byte array
 			ba.append(character);
 		}
 
-	} while ( (result == 1) && (character != '#') );
+	} while ( (result == 1) && (byteCounter != numBytes) ); // remark: timeout is implemented in readAtmelPort
 
 	if (result != 1)
 	{
@@ -174,7 +177,7 @@ bool InterfaceAvr::receiveString(QString &string)
 	string = QString::fromUtf8(ba.data(), ba.length());
 
 	// check result!
-	if ((string.startsWith(starter)) && (string.endsWith(terminator)))
+	if (string.startsWith("$M>")) // @todo: place this fixed string somewhere else
 	{
 		return true;
 	}

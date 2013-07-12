@@ -82,9 +82,10 @@ public:
 		Receives a string from the serial port/device. It expects a starter at the beginning and a termintator at the end of the string which is currently defined as a const.
 		Example: With *42# the 42 is the 'string' here.
 		@param &string is the complete result - including the starter and the terminator!
+		@param numBytes is the number of bytes to be received
 		@return true on access or false if an error occured.
 		*/
-	bool receiveString(QString &string);
+	bool receiveString(QString &string, int numBytes);
 
 	/**
 		Receives an integer value from the serial port/device (consisting of two char values, which are receivced one after another and combined to an int back).

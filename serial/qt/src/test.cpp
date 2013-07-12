@@ -250,7 +250,7 @@ void test::testSlot()
 */
 
 
-
+/*
 	// send s7
 	interface1->sendString("s7");
 	// debug msg
@@ -260,7 +260,5 @@ void test::testSlot()
 	interface1->receiveString(string);
 	// debug msg
 	textEdit->append( QString("%1: %2 received.").arg(QDateTime::currentDateTime().toString() ).arg(string) );
-
-
-
+*/
 }

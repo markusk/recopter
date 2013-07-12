@@ -52,23 +52,35 @@ bool Circuit::initCircuit()
 		//-------------------------------------------------------
 
 		// sending RESET (INIT) command
-		if (interface1->sendString("re") == true)
+		if (interface1->sendString("$M<") == true)
 		{
-			// check if the robot answers with "ok"
-			if ( interface1->receiveString(answer) == true)
+			// send 'length' in bytes
+			if (interface1->sendChar(0) == true)
 			{
-				// everthing's fine :-)
-				if (answer == "*re#")
+				// MSP_IDENT
+				if (interface1->sendChar(100) == true)
 				{
-					// Unlock the mutex
-					mutex->unlock();
+					// CRC
+					if (interface1->sendChar(100) == true)
+					{
+						// wait for correct answer (12 bytes)
+						if (interface1->receiveString(answer, 12) == true)
+						{
+							//
+							// okay
+							//
 
-					// ciruit init okay
-					firstInitDone = true;
-					circuitState = true;
-					emit robotState(true);
+							// Unlock the mutex
+							mutex->unlock();
 
-					return true;
+							// ciruit init okay
+							firstInitDone = true;
+							circuitState = true;
+							emit robotState(true);
+
+							return true;
+						}
+					}
 				}
 			}
 		}
@@ -91,7 +103,7 @@ bool Circuit::initCompass()
 {
 	QString answer = "error";
 
-
+/*
 	if (circuitState) // maybe robot is already recognized as OFF by the interface class (e.g. path to serial port not found)!
 	{
 		// Lock the mutex. If another thread has locked the mutex then this call will block until that thread has unlocked it.
@@ -123,7 +135,7 @@ bool Circuit::initCompass()
 
 	compassCircuitState = false;
 	emit compassState(false);
-
+*/
 	return false;
 }
 

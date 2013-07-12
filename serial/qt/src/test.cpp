@@ -201,13 +201,16 @@ void test::createToolBars()
 
 	testToolBar = addToolBar(tr("Test"));
 	testToolBar->addAction(testAct);
+
+	serialToolBar = addToolBar(tr("Serial Port Choice"));
+//	serialToolBar->addAction(testAct);
 }
 
 
 void test::createComboBox()
 {
 	serialPortBox = new QComboBox(this);
-	serialPortBox->setParent(testToolBar);
+	serialPortBox->setParent(serialToolBar);
 }
 
 

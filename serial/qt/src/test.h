@@ -87,6 +87,7 @@ private:
 	QMenu *testMenu;
 	QToolBar *editToolBar;
 	QToolBar *testToolBar;
+	QToolBar *serialToolBar;
 	QComboBox *serialPortBox;
 	QAction *exitAct;
 	QAction *cutAct;
@@ -94,6 +95,7 @@ private:
 	QAction *pasteAct;
 	QAction *aboutAct;
 	QAction *aboutQtAct;
+//	QAction *portSelectedAct;
 	QAction *testAct;      //    < < < <   this is the test action for me and anyone who may need it ;-)  It calls the "testSlot" method.
 
 	QList <float> pointerFloatList;

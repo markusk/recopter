@@ -131,20 +131,17 @@ void test::createActions()
 
 	cutAct = new QAction(QIcon(":/editcut.xpm"), tr("Cu&t"), this);
 	cutAct->setShortcut(tr("Ctrl+X"));
-	cutAct->setStatusTip(tr("Cut the current selection's contents to the "
-							"clipboard"));
+	cutAct->setStatusTip(tr("Cut the current selection's contents to the clipboard"));
 	connect(cutAct, SIGNAL(triggered()), textEdit, SLOT(cut()));
 
 	copyAct = new QAction(QIcon(":/editcopy.xpm"), tr("&Copy"), this);
 	copyAct->setShortcut(tr("Ctrl+C"));
-	copyAct->setStatusTip(tr("Copy the current selection's contents to the "
-							 "clipboard"));
+	copyAct->setStatusTip(tr("Copy the current selection's contents to the clipboard"));
 	connect(copyAct, SIGNAL(triggered()), textEdit, SLOT(copy()));
 
 	pasteAct = new QAction(QIcon(":/editpaste.xpm"), tr("&Paste"), this);
 	pasteAct->setShortcut(tr("Ctrl+V"));
-	pasteAct->setStatusTip(tr("Paste the clipboard's contents into the current "
-							  "selection"));
+	pasteAct->setStatusTip(tr("Paste the clipboard's contents into the current selection"));
 	connect(pasteAct, SIGNAL(triggered()), textEdit, SLOT(paste()));
 
 	aboutAct = new QAction(tr("&About"), this);
@@ -157,10 +154,8 @@ void test::createActions()
 
 	cutAct->setEnabled(false);
 	copyAct->setEnabled(false);
-	connect(textEdit, SIGNAL(copyAvailable(bool)),
-			cutAct, SLOT(setEnabled(bool)));
-	connect(textEdit, SIGNAL(copyAvailable(bool)),
-			copyAct, SLOT(setEnabled(bool)));
+	connect(textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
+	connect(textEdit, SIGNAL(copyAvailable(bool)), copyAct, SLOT(setEnabled(bool)));
 
 	testAct = new QAction(QIcon(":/utilities-system-monitor-active.png"), tr("&Test"), this);
 	testAct->setShortcut(tr("Ctrl+T"));

@@ -36,9 +36,9 @@ test::test()
 	createMenus();
 	createToolBars();
 	createStatusBar();
-
 	readSettings();
 
+	createComboBox(); // for serial ports
 
 	//---------------------------------------------------------------------------------------------------
 	// AtmelBoard test stuff
@@ -168,6 +168,7 @@ void test::createActions()
 	connect(testAct, SIGNAL(triggered()), this, SLOT(testSlot()));
 }
 
+
 void test::createMenus()
 {
 	fileMenu = menuBar()->addMenu(tr("&File"));
@@ -200,6 +201,15 @@ void test::createToolBars()
 
 	testToolBar = addToolBar(tr("Test"));
 	testToolBar->addAction(testAct);
+}
+
+
+void test::createComboBox()
+{
+	serialPortBox = new QComboBox(this);
+	serialPortBox->setParent(testToolBar);
+
+	serialPortBox->addItem("test");
 }
 
 

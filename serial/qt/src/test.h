@@ -40,6 +40,7 @@
 class QAction;
 class QMenu;
 class QTextEdit;
+class QComboBox;
 
 class test:public QMainWindow
 {
@@ -71,6 +72,7 @@ private:
 	void createActions();
 	void createMenus();
 	void createToolBars();
+	void createComboBox();
 	void createStatusBar();
 	void readSettings();
 	void writeSettings();
@@ -85,6 +87,7 @@ private:
 	QMenu *testMenu;
 	QToolBar *editToolBar;
 	QToolBar *testToolBar;
+	QComboBox *serialPortBox;
 	QAction *exitAct;
 	QAction *cutAct;
 	QAction *copyAct;

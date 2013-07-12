@@ -208,8 +208,6 @@ void test::createComboBox()
 {
 	serialPortBox = new QComboBox(this);
 	serialPortBox->setParent(testToolBar);
-
-	serialPortBox->addItem("test");
 }
 
 
@@ -241,6 +239,8 @@ void test::readSerialDevices()
 {
 	QDir dir = QDir::root();                 // "/"
 	QFileInfoList devices;
+	QFileInfo fileInfo;
+	QString listItem;
 
 
 	// set and change directory
@@ -260,13 +260,15 @@ void test::readSerialDevices()
 	// show filenames
 	for (int i = 0; i < devices.size(); ++i)
 	{
-		QFileInfo fileInfo = devices.at(i);
-		QString test;
+		fileInfo = devices.at(i);
 
-		test = QString("%1").arg(fileInfo.fileName());
+		listItem = QString("%1").arg(fileInfo.fileName());
 
-		if (test.startsWith("tty"))
-			textEdit->append(test);
+		if (listItem.startsWith("tty"))
+		{
+//			textEdit->append(listItem);
+			serialPortBox->addItem(listItem);
+		}
 	}
 }
 

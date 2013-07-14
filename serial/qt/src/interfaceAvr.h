@@ -83,7 +83,7 @@ public:
 		@param bytes are the data to send
 		@return true on success
 		*/
-	bool sendBytes(QByteArray &bytes, int numBytes);
+	bool sendBytes(QByteArray &bytes);
 
 	/**
 		Receives a string from the serial port/device. It expects a starter at the beginning and a termintator at the end of the string which is currently defined as a const.

@@ -143,8 +143,25 @@ bool InterfaceAvr::sendString(QString string)
 }
 
 
-bool InterfaceAvr::sendBytes(QByteArray &bytes, int numBytes)
+bool InterfaceAvr::sendBytes(QByteArray &bytes)
 {
+	int i = 0;
+	int result = 0;
+
+
+	do
+	{
+		result = serialPort->writeAtmelPort( (unsigned char *) bytes.at(0) );
+		i++;
+
+	} while ((result < 0) || (i < bytes.length()-1 ));
+
+
+	if (result < 0)
+	{
+		emit message( QString("<font color=\"#FF0000\">ERROR '%1' (InterfaceAvr::sendBytes)!<font>").arg(strerror(result)) );
+		return false;
+	}
 
 	return true;
 }

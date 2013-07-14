@@ -174,10 +174,17 @@ void test::createActions()
 	connect(textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
 	connect(textEdit, SIGNAL(copyAvailable(bool)), copyAct, SLOT(setEnabled(bool)));
 
+	// first test action
 	testAct = new QAction(QIcon(":/utilities-system-monitor-active.png"), tr("&Test"), this);
 	testAct->setShortcut(tr("Ctrl+T"));
 	testAct->setStatusTip(tr("Test"));
 	connect(testAct, SIGNAL(triggered()), this, SLOT(testSlot()));
+
+	// answer test action
+	replyAct = new QAction(QIcon(":/system-switch-user.png"), tr("&Reply"), this);
+	replyAct->setShortcut(tr("Ctrl+R"));
+	replyAct->setStatusTip(tr("Reply"));
+	connect(replyAct, SIGNAL(triggered()), this, SLOT(replySlot()));
 }
 
 
@@ -199,8 +206,10 @@ void test::createMenus()
 
 	menuBar()->addSeparator();
 
+	// test
 	testMenu = menuBar()->addMenu(tr("&Test"));
 	testMenu->addAction(testAct);
+	testMenu->addAction(replyAct);
 }
 
 
@@ -213,9 +222,9 @@ void test::createToolBars()
 
 	testToolBar = addToolBar(tr("Test"));
 	testToolBar->addAction(testAct);
+	testToolBar->addAction(replyAct);
 
 	serialToolBar = addToolBar(tr("Serial Port Choice"));
-//	serialToolBar->addAction(testAct);
 }
 
 
@@ -343,4 +352,9 @@ void test::testSlot()
 	// debug msg
 	textEdit->append( QString("%1: %2 received.").arg(QDateTime::currentDateTime().toString() ).arg(string) );
 */
+}
+
+void test::replySlot()
+{
+	textEdit->append("answer");
 }

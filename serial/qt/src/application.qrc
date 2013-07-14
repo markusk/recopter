@@ -7,5 +7,6 @@
         <file>editpaste.xpm</file>
         <file>filesave.xpm</file>
         <file>utilities-system-monitor-active.png</file>
+        <file>system-switch-user.png</file>
     </qresource>
 </RCC>

@@ -59,6 +59,7 @@ public slots:
 private slots:
 	void about();
 	void testSlot();      //    < < < <   this is the test slot where all magic happens
+	void replySlot(); // second slot for testing
 	void setSerialPort(QString port);
 
 signals:
@@ -96,8 +97,8 @@ private:
 	QAction *pasteAct;
 	QAction *aboutAct;
 	QAction *aboutQtAct;
-//	QAction *portSelectedAct;
 	QAction *testAct;      //    < < < <   this is the test action for me and anyone who may need it ;-)  It calls the "testSlot" method.
+	QAction *replyAct;    //    < < < <   this is the second action for me and anyone who may need it ;-)  It calls the "answerSlot" method.
 
 	QList <float> pointerFloatList;
 	QList <int *> pointerIntList;

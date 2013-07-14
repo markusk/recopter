@@ -40,8 +40,6 @@ test::test()
 
 	createComboBox(); // for serial ports
 
-	//---------------------------------------------------------------------------------------------------
-	// AtmelBoard test stuff
 
 	mutex = new QMutex();
 	interface1 = new InterfaceAvr();
@@ -49,7 +47,10 @@ test::test()
 
 //	serialPortPath = "/dev/tty.SLAB_USBtoUART"; // Original driver "CP210x Macintosh OSX Driver v2." from SiLabs used.
 //	serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
-	serialPortPath = "/dev/tty.USA19Hfa141P1.1"; // KEYSPAN Adapter
+//	serialPortPath = "/dev/tty.USA19Hfa141P1.1"; // KEYSPAN Adapter
+
+	QString mySerialPort = "tty.USA19H";
+	serialPort = "undefined";
 
 	// send messages from the other class to this class (to the GUI)
 	connect(interface1, SIGNAL( message(QString) ), this, SLOT( appendLog(QString) ));

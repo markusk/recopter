@@ -59,7 +59,7 @@ public slots:
 private slots:
 	void about();
 	void testSlot();      //    < < < <   this is the test slot where all magic happens
-	void setSerialPort(QString serialPort);
+	void setSerialPort(QString port);
 
 signals:
 	/**
@@ -81,7 +81,6 @@ private:
 
 	QTextEdit *textEdit;
 	QString curFile;
-	QString mSerialPort;
 
 	QMenu *fileMenu;
 	QMenu *editMenu;
@@ -106,8 +105,7 @@ private:
 	mutable QMutex *mutex; // make the threads thread-safe (e.g. senorThread, servo...)
 	Circuit *circuit1;
 	InterfaceAvr *interface1;
-	QString serialPortPath; // something like /dev/ttyUSB0
-
+	QString serialPort; // something like /dev/ttyUSB0
 };
 
 #endif

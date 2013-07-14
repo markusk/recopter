@@ -39,7 +39,8 @@ Circuit::~Circuit()
 
 bool Circuit::initCircuit()
 {
-	QString answer = "error";
+	QByteArray bytes;
+	bytes.resize(255); // @todo: serial receive buffer large enough?
 
 
 	if (circuitState) // maybe robot is already recognized as OFF by the interface class (e.g. path to serial port not found)!
@@ -64,7 +65,7 @@ bool Circuit::initCircuit()
 					if (interface1->sendChar(100) == true)
 					{
 						// wait for correct answer (12 bytes)
-						if (interface1->receiveString(answer, 12) == true)
+						if (interface1->receiveBytes(bytes, 12) == true)
 						{
 							//
 							// okay

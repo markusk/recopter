@@ -89,11 +89,11 @@ public:
 
 	/**
 		Receives data (byts) from the serial port/device.
-		@param &data is the complete result
+		@param &bytes is the complete result
 		@param numBytes is the number of bytes to be received
 		@return true on access or false if an error occured.
 		*/
-	bool receiveBytes(QByteArray &data, int numBytes);
+	bool receiveBytes(QByteArray &bytes, int numBytes);
 
 	/**
 		Receives an integer value from the serial port/device (consisting of two char values, which are receivced one after another and combined to an int back).

@@ -119,6 +119,37 @@ bool Circuit::replyCircuit()
 	bytes.append(23);    // "
 	bytes.append(99);    // CRC
 
+
+	if (circuitState) // maybe robot is already recognized as OFF by the interface class (e.g. path to serial port not found)!
+	{
+		// Lock the mutex. If another thread has locked the mutex then this call will block until that thread has unlocked it.
+		mutex->lock();
+
+		//-------------------------------------------------------
+		// Basic init for all the bits on the robot circuit
+		//-------------------------------------------------------
+
+		// sending RESET (INIT) command
+		if (interface1->sendBytes(bytes) == true)
+		{
+			// okay
+
+			// Unlock the mutex
+			mutex->unlock();
+
+			return true;
+		}
+
+		// Unlock the mutex.
+		mutex->unlock();
+
+	}
+
+	qDebug("INFO from initCircuit: Robot is OFF.");
+	firstInitDone = true;
+	circuitState = false;
+	emit robotState(false);
+
 	return false;
 }
 

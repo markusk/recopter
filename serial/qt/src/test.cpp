@@ -49,6 +49,8 @@ test::test()
 //	serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
 //	serialPortPath = "/dev/tty.USA19Hfa141P1.1"; // KEYSPAN Adapter
 
+
+	//-----------------------------------------------
 	QString mySerialPort = "tty.USA19H";
 	serialPort = "undefined";
 
@@ -76,25 +78,7 @@ test::test()
 		serialPortBox->setCurrentIndex(index);
 
 		// set serial port
-		setSerialPort(QString("/dev/%1").arg(serialPortBox->itemText(index)));
-		textEdit->append(QString("Port set to /dev/%1.").arg(serialPort));
-
-		textEdit->append("Opening port for communication...");
-
-		if (interface1->openComPort(serialPort, 115200) == false)
-		{
-			// ********************
-			// * The copter is OFF *
-			// ********************
-			textEdit->append(QString("Error opening serial port '%1'").arg(serialPort));
-		}
-		else
-		{
-			// *******************
-			// * The copter is ON *
-			// *******************
-			textEdit->append("Serial port opened.");
-		}
+		setSerialPort(serialPortBox->itemText(index));
 	} // port found
 	else
 	{
@@ -304,23 +288,77 @@ void test::appendLog(QString message)
 
 void test::setSerialPort(QString port)
 {
-	serialPort = port;
+	serialPort = QString("/dev/%1").arg(port);
+	textEdit->append(QString("Port now set to %1.").arg(serialPort));
 }
 
 
 void test::testSlot()
 {
+	static bool portOpened = false;
+
+
+	if (portOpened == false)
+	{
+		textEdit->append("Opening port for communication...");
+
+		if (interface1->openComPort(serialPort, 115200) == false)
+		{
+			// ********************
+			// * The copter is OFF *
+			// ********************
+			textEdit->append(QString("Error opening serial port '%1'").arg(serialPort));
+		}
+		else
+		{
+			// *******************
+			// * The copter is ON *
+			// *******************
+			portOpened = true;
+			textEdit->append("Serial port opened.");
+		}
+	}
+
 	textEdit->append("Searching copter...");
+
 
 	if (circuit1->initCircuit() == true)
 	{
 		textEdit->append("Copter is <font color=\"#00FF00\">ON</font> and answers.");
+	}
+	else
+	{
+		textEdit->append("Error initializing.");
 	}
 }
 
 
 void test::replySlot()
 {
+	static bool portOpened = false;
+
+
+	if (portOpened == false)
+	{
+		textEdit->append("Opening port for communication...");
+
+		if (interface1->openComPort(serialPort, 115200) == false)
+		{
+			// ********************
+			// * The copter is OFF *
+			// ********************
+			textEdit->append(QString("Error opening serial port '%1'").arg(serialPort));
+		}
+		else
+		{
+			// *******************
+			// * The copter is ON *
+			// *******************
+			portOpened = true;
+			textEdit->append("Serial port opened.");
+		}
+	}
+
 	textEdit->append("Replying...");
 
 	if (circuit1->replyCircuit() == true)

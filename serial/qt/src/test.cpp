@@ -75,7 +75,8 @@ test::test()
 	//----------------------------------------------------------------------------
 	connect(this, SIGNAL( simulate(bool) ), this, SLOT( setSimulationMode(bool) ));
 
-	// show messages in gui
+	// show messages in GUI / log window
+	connect(this, SIGNAL( message(QString, bool, bool, bool) ), this, SLOT( appendLog(QString, bool, bool, bool) ));
 	connect(simulationThread, SIGNAL( message(QString, bool, bool, bool) ), this, SLOT( appendLog(QString, bool, bool, bool) ));
 	connect(simulationThread, SIGNAL( answer(QString, bool, bool, bool) ),  this, SLOT( appendLog(QString, bool, bool, bool) ));
 
@@ -304,9 +305,30 @@ void test::readSerialDevices()
 }
 
 
-void test::appendLog(QString message)
+void test::appendLog(QString text, bool CR, bool sayIt, bool addTimestamp)
 {
-	textEdit->append(message);
+	QDateTime now; /// this is for the timestamp in the logs in the gui
+
+
+	if (addTimestamp)
+	{
+		// get the current date and time for a timestimp in the log
+		now = QDateTime::currentDateTime();
+
+		// prepend timestamp
+		text = QString("%1:%2:%3 %4").arg(now.toString("hh")).arg(now.toString("mm")).arg(now.toString("ss")).arg(text);
+	}
+
+	// insert the text in the GUI
+	textEdit->insertHtml(text);
+
+	if (CR == TRUE) // default!
+		textEdit->insertHtml("<br>");
+
+	// Ensures that the cursor is visible by scrolling the text edit if necessary.
+	textEdit->ensureCursorVisible();
+
+	Q_UNUSED(sayIt);
 }
 
 

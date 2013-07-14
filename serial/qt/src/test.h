@@ -33,6 +33,7 @@
 
 #include "circuit.h"
 #include "interfaceAvr.h"
+#include "simulationThread.h"
 
 //---------------------------------------------------------------------------------------------------
 
@@ -50,17 +51,32 @@ public:
 	test();
 	~test();
 
+	/**
+	Returns the status of the main program. True, if the simulationMode ist active.
+	*/
+	bool simulationMode() const;
+
+
 protected:
 	void closeEvent(QCloseEvent *event);
 
+
 public slots:
 	void appendLog(QString message);
+
 
 private slots:
 	void about();
 	void testSlot();      //    < < < <   this is the test slot where all magic happens
 	void replySlot(); // second slot for testing
 	void setSerialPort(QString port);
+
+	/**
+	This slot enables or disables the simulation mode.
+	@param status
+	*/
+	void setSimulationMode(bool status);
+
 
 signals:
 	/**
@@ -69,6 +85,14 @@ signals:
 	  @param text is the message to be emitted
 	  */
 	void message(QString text);
+
+	/**
+	Enables or disables the copter simulation mode.
+	@param state can be true or false.
+	@sa Direcs::setSimulationMode()
+	*/
+	void simulate(bool state);
+
 
 private:
 	void createActions();
@@ -107,6 +131,8 @@ private:
 	Circuit *circuit1;
 	InterfaceAvr *interface1;
 	QString serialPort; // something like /dev/ttyUSB0
+	SimulationThread *simulationThread;
+	bool robotSimulationMode; /// Stores the robots simulation state
 };
 
 #endif

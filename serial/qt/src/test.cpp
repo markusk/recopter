@@ -45,6 +45,11 @@ test::test()
 	interface1 = new InterfaceAvr();
 	circuit1 = new Circuit(interface1, mutex);
 
+	// this thread checks the received serial stuff
+	robotSimulationMode = false;
+	simulationThread = new SimulationThread(interface1, mutex);
+
+
 //	serialPortPath = "/dev/tty.SLAB_USBtoUART"; // Original driver "CP210x Macintosh OSX Driver v2." from SiLabs used.
 //	serialPortPath = "/dev/tty.usbserial-A900J1TU"; // ARM board with STM32F4 and FTDI RS232R chip
 //	serialPortPath = "/dev/tty.USA19Hfa141P1.1"; // KEYSPAN Adapter
@@ -62,6 +67,17 @@ test::test()
 	//--------------------------------------------------------------------------
 	// this is needed, when the first openCOMPort method fails:
 	connect(interface1,	SIGNAL( robotState(bool) ), circuit1,		SLOT( setRobotState(bool) ));
+	connect(interface1,	SIGNAL( robotState(bool) ), simulationThread,	SLOT( setRobotState(bool) ));
+
+	//----------------------------------------------------------------------------
+	// connect simulation button from gui to activate the simulation mode
+	// (sets the direcs an the threads to simulation mode)
+	//----------------------------------------------------------------------------
+	connect(this, SIGNAL( simulate(bool) ), this, SLOT( setSimulationMode(bool) ));
+
+	// show messages in gui
+	connect(simulationThread, SIGNAL( message(QString, bool, bool, bool) ), this, SLOT( appendLog(QString, bool, bool, bool) ));
+	connect(simulationThread, SIGNAL( answer(QString, bool, bool, bool) ),  this, SLOT( appendLog(QString, bool, bool, bool) ));
 
 
 	// find out serial devices
@@ -84,6 +100,14 @@ test::test()
 	{
 		textEdit->append(QString("Error: serial port '%1' not found in list / file system").arg(serialPort));
 	}
+
+
+	//--------------------------
+	// lets have fun, now
+	//--------------------------
+
+	// we do not wait for the GUI button to be clicked
+	this->setSimulationMode(true);
 }
 
 
@@ -290,6 +314,44 @@ void test::setSerialPort(QString port)
 {
 	serialPort = QString("/dev/%1").arg(port);
 	textEdit->append(QString("Port now set to %1.").arg(serialPort));
+}
+
+
+bool test::simulationMode() const
+{
+	return robotSimulationMode;
+}
+
+
+void test::setSimulationMode(bool status)
+{
+	robotSimulationMode = status;
+
+	if (status == true)
+	{
+		emit message("<font color=\"#0000FF\">Simulation mode enabled!!</front>");
+
+		emit message("TO DO: Clearing serial input buffer first."); // @todo implement flush in interace class
+//		interface1->flush();
+
+		//------------------------------
+		// start the simulation thread
+		//------------------------------
+		if (simulationThread->isRunning() == false)
+		{
+			emit message("Starting simulation thread...");
+			simulationThread->start();
+			emit message("Simulation thread started.");
+		}
+	}
+	else
+	{
+		emit message("Stopping simulation thread...");
+		simulationThread->stop();
+		emit message("Simulation thread stopped.");
+
+		emit message("<font color=\"#0000FF\">Simulation mode disabled.</font>");
+	}
 }
 
 

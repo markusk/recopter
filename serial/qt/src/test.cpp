@@ -65,36 +65,52 @@ test::test()
 	textEdit->append("Searching serial ports...");
 	readSerialDevices();
 
-	textEdit->append("Opening serial port for microcontroller communication...");
+	// find specific adapter in combo box list
+	int index = serialPortBox->findText(mySerialPort, Qt::MatchStartsWith);
 
-	if (interface1->openComPort(serialPortPath, 115200) == false)
+	// port found
+	if (index != -1)
 	{
-		// ********************
-		// * The robot is OFF *
-		// ********************
-		textEdit->append(QString("Error opening serial port '%1'").arg(serialPortPath));
+		// change port in GUI
+		serialPortBox->setCurrentIndex(index);
 
-	}
+		// set serial port
+		setSerialPort(QString("/dev/%1").arg(serialPortBox->itemText(index)));
+		textEdit->append(QString("Port set to /dev/%1.").arg(serialPort));
+
+		textEdit->append("Opening port for communication...");
+
+		if (interface1->openComPort(serialPort, 115200) == false)
+		{
+			// ********************
+			// * The robot is OFF *
+			// ********************
+			textEdit->append(QString("Error opening serial port '%1'").arg(serialPort));
+
+		}
+		else
+		{
+			// *******************
+			// * The robot is ON *
+			// *******************
+			textEdit->append("Serial port opened.");
+
+
+			//==========================
+			// init the robots circuit
+			//==========================
+			textEdit->append("Searching robot...");
+
+			if (circuit1->initCircuit() == true)
+			{
+				textEdit->append("Robot is <font color=\"#00FF00\">ON</font> and answers.");
+			}
+		}
+	} // port found
 	else
 	{
-		// *******************
-		// * The robot is ON *
-		// *******************
-		textEdit->append("Serial port opened.");
-
-
-		//==========================
-		// init the robots circuit
-		//==========================
-		textEdit->append("Searching robot...");
-
-		if (circuit1->initCircuit() == true)
-		{
-			textEdit->append("Robot is <font color=\"#00FF00\">ON</font> and answers.");
-		}
+		textEdit->append(QString("Error: serial port '%1' not found in list / file system").arg(serialPort));
 	}
-	//---------------------------------------------------------------------------------------------------
-
 }
 
 
@@ -225,6 +241,11 @@ void test::readSettings()
 	QSize size = settings.value("size", QSize(400, 400)).toSize();
 	resize(size);
 	move(pos);
+
+	// read serial port
+//	settings.setValue("serialPort", serialPortPath);
+
+//	textEdit->append(QString("Port %1 read from settings.").arg(serialPortPath));
 }
 
 
@@ -233,6 +254,9 @@ void test::writeSettings()
 	QSettings settings("Markus Knapp", "recopterGUItest");
 	settings.setValue("pos", pos());
 	settings.setValue("size", size());
+
+	// serial port
+//	settings.setValue("serialPort", serialPortPath);
 }
 
 
@@ -280,10 +304,9 @@ void test::appendLog(QString message)
 }
 
 
-void test::setSerialPort(QString serialPort)
+void test::setSerialPort(QString port)
 {
-	mSerialPort = serialPort;
-	textEdit->append(QString("Port set to %1.").arg(mSerialPort));
+	serialPort = port;
 }
 
 

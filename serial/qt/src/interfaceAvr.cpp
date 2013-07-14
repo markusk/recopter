@@ -46,7 +46,7 @@ bool InterfaceAvr::openComPort(QString comPort, int baudrate)
 	// check if file (serial port) exists
 	if (QFile::exists(comPort) == false)
 	{
-		emit message(QString("<font color=\"#FF0000\">ERROR: %1 not found!</font>").arg(comPort));
+		emit message(QString("<font color=\"#FF0000\">ERROR: Port '%1'' not found!</font>").arg(comPort));
 		// this tells other classes that the robot is OFF!
 		emit robotState(false);
 

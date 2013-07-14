@@ -151,7 +151,7 @@ bool InterfaceAvr::sendBytes(QByteArray &bytes)
 
 	do
 	{
-		result = serialPort->writeAtmelPort( (unsigned char *) bytes.at(0) );
+		result = serialPort->writeAtmelPort( (unsigned char *) bytes.at(i) );
 		i++;
 
 	} while ((result < 0) || (i < bytes.length()-1 ));

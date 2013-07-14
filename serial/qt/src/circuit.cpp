@@ -100,6 +100,29 @@ bool Circuit::initCircuit()
 }
 
 
+bool Circuit::replyCircuit()
+{
+	QByteArray bytes;
+
+
+	// MSP_IDENT (100) reply
+	//
+	bytes.append("$M>"); // answer string
+	bytes.append(7);     // length of payload
+	bytes.append(100);   // MSP_IDENT
+	bytes.append(1);     // VERSION
+	bytes.append(3);     // MULTITYPE    (3 = Quad X)
+	bytes.append(3);     // MSP_VERSION  (serial protocoll version)
+	bytes.append(42);    // Capability   (DWord)
+	bytes.append(23);    // "
+	bytes.append(42);    // "
+	bytes.append(23);    // "
+	bytes.append(99);    // CRC
+
+	return false;
+}
+
+
 bool Circuit::initCompass()
 {
 	QString answer = "error";

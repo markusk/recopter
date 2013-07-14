@@ -59,6 +59,12 @@ public slots:
 	bool initCircuit();
 
 	/**
+		Replies to the robot's init circuit command.
+		@return true on success
+		*/
+	bool replyCircuit();
+
+	/**
 		Initialises the robot's 3D compass. Actually it checks, if the module is connected or not.
 		@return true, when connected.
 		*/

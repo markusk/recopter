@@ -56,7 +56,7 @@ test::test()
 	connect(interface1, SIGNAL( message(QString) ), this, SLOT( appendLog(QString) ));
 
 	//--------------------------------------------------------------------------
-	// let some classes know the robots state
+	// let some classes know the copters state
 	//--------------------------------------------------------------------------
 	// this is needed, when the first openCOMPort method fails:
 	connect(interface1,	SIGNAL( robotState(bool) ), circuit1,		SLOT( setRobotState(bool) ));
@@ -84,28 +84,16 @@ test::test()
 		if (interface1->openComPort(serialPort, 115200) == false)
 		{
 			// ********************
-			// * The robot is OFF *
+			// * The copter is OFF *
 			// ********************
 			textEdit->append(QString("Error opening serial port '%1'").arg(serialPort));
-
 		}
 		else
 		{
 			// *******************
-			// * The robot is ON *
+			// * The copter is ON *
 			// *******************
 			textEdit->append("Serial port opened.");
-
-
-			//==========================
-			// init the robots circuit
-			//==========================
-			textEdit->append("Searching robot...");
-
-			if (circuit1->initCircuit() == true)
-			{
-				textEdit->append("Robot is <font color=\"#00FF00\">ON</font> and answers.");
-			}
 		}
 	} // port found
 	else
@@ -322,39 +310,25 @@ void test::setSerialPort(QString port)
 
 void test::testSlot()
 {
-	QString string;
+	textEdit->append("Searching copter...");
 
-
-	// clear content
-	// textEdit->clear();
-
-	/*
-	// send re
-	interface1->sendString("re");
-	// debug msg
-	textEdit->append( QString("%1: %2 sent").arg(QDateTime::currentDateTime().toString() ).arg(string) );
-
-	// receive answer
-	interface1->receiveString(string);
-	// debug msg
-	textEdit->append( QString("%1: %2 received.").arg(QDateTime::currentDateTime().toString() ).arg(string) );
-*/
-
-
-/*
-	// send s7
-	interface1->sendString("s7");
-	// debug msg
-	textEdit->append( QString("%1: %2 sent").arg(QDateTime::currentDateTime().toString() ).arg(string) );
-
-	// receive answer
-	interface1->receiveString(string);
-	// debug msg
-	textEdit->append( QString("%1: %2 received.").arg(QDateTime::currentDateTime().toString() ).arg(string) );
-*/
+	if (circuit1->initCircuit() == true)
+	{
+		textEdit->append("Copter is <font color=\"#00FF00\">ON</font> and answers.");
+	}
 }
+
 
 void test::replySlot()
 {
-	textEdit->append("answer");
+	textEdit->append("Replying...");
+
+	if (circuit1->replyCircuit() == true)
+	{
+		textEdit->append("replied.");
+	}
+	else
+	{
+		textEdit->append("Error replying.");
+	}
 }

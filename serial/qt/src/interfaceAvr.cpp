@@ -143,6 +143,13 @@ bool InterfaceAvr::sendString(QString string)
 }
 
 
+bool InterfaceAvr::sendBytes(QByteArray &bytes, int numBytes)
+{
+
+	return true;
+}
+
+
 bool InterfaceAvr::receiveString(QString &string, int numBytes)
 {
 	int result = 0;

@@ -79,6 +79,13 @@ public:
 	bool sendString(QString string);
 
 	/**
+		Sends plain bytes to the serial port/device.
+		@param bytes are the data to send
+		@return true on success
+		*/
+	bool sendBytes(QByteArray &bytes, int numBytes);
+
+	/**
 		Receives a string from the serial port/device. It expects a starter at the beginning and a termintator at the end of the string which is currently defined as a const.
 		Example: With *42# the 42 is the 'string' here.
 		@param &string is the complete result - including the starter and the terminator!

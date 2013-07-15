@@ -106,8 +106,6 @@ test::test()
 	//--------------------------
 	// lets have fun, now
 	//--------------------------
-
-	// we do not wait for the GUI button to be clicked
 	this->setSimulationMode(true);
 }
 

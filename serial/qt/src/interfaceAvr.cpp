@@ -251,6 +251,9 @@ bool InterfaceAvr::receiveBytes(QByteArray &bytes, int numBytes)
 	// check result!
 	if (string.startsWith("$M>")) // @todo: place this fixed string somewhere else
 	{
+		// emit completed command to simulationThread
+		emit commandCompleted( bytes ); // check format. maybe bytes.data() ?!??
+
 		return true;
 	}
 

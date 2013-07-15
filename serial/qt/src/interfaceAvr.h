@@ -140,6 +140,12 @@ signals:
 		*/
 	void message(QString text);
 
+	/**
+		This signal emits if a complete command string was received. @sa SimulationThread::commandReceived()
+		@param data contains the received data
+	*/
+	void commandCompleted(QBytearray data);
+
 
 private:
 	DirecsSerial *serialPort;

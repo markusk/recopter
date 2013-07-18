@@ -110,9 +110,9 @@ bool Circuit::replyCircuit()
 	bytes.append("$M>"); // answer string
 	bytes.append(7);     // length of payload
 	bytes.append(100);   // MSP_IDENT
-	bytes.append(1);     // VERSION
+	bytes.append(1);     // Multiwii software VERSION
 	bytes.append(3);     // MULTITYPE    (3 = Quad X)
-	bytes.append(3);     // MSP_VERSION  (serial protocoll version)
+	bytes.append(4);     // MSP_VERSION  (serial protocoll version)
 	bytes.append(42);    // Capability   (DWord)
 	bytes.append(23);    // "
 	bytes.append(42);    // "
@@ -152,18 +152,17 @@ bool Circuit::replyCircuit()
 	if (interface1->sendChar('$'))
 		if (interface1->sendChar('M'))
 			if (interface1->sendChar('>'))
-				if (interface1->sendChar(1))
-					if (interface1->sendChar(0))
-						if (interface1->sendChar(0))
-							if (interface1->sendChar(1))
-								if (interface1->sendChar(3))
+				if (interface1->sendChar(7))
+					if (interface1->sendChar(100))
+								if (interface1->sendChar(1)) // sw version
 									if (interface1->sendChar(3))
-										if (interface1->sendChar(42))
-											if (interface1->sendChar(23))
-												if (interface1->sendChar(42))
-													if (interface1->sendChar(23))
-														if (interface1->sendChar(99))
-															return true;
+										if (interface1->sendChar(4))
+											if (interface1->sendChar(42))
+												if (interface1->sendChar(23))
+													if (interface1->sendChar(42))
+														if (interface1->sendChar(23))
+															if (interface1->sendChar(99))
+																return true;
 
 
 	return false;

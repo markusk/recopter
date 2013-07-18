@@ -603,7 +603,7 @@ int DirecsSerial::readAtmelPort(unsigned char *buf, int nChars)
 		// wait up to READ_TIMEOUT microseconds
 		// Timeout is not changed by select(), and may be reused on subsequent calls, however it is good style to re-initialize it before each invocation of select().
 		t.tv_sec  = 0;
-		t.tv_usec = SERIAL_TIMEOUT; // 0,25 seconds
+		t.tv_usec = SERIAL_TIMEOUT_READ; // 0,25 seconds
 
 		// watch serial port to see when it has input
 		FD_ZERO(&set);
@@ -627,7 +627,7 @@ int DirecsSerial::readAtmelPort(unsigned char *buf, int nChars)
 			else
 			{
 				// timeout
-				emit message(QString("<font color=\"#FF0000\">ERROR No data available within %1 microseconds when using select() on serial device (DirecsSerial::readAtmelPort).</font>").arg(SERIAL_TIMEOUT));
+				emit message(QString("<font color=\"#FF0000\">ERROR No data available within %1 microseconds when using select() on serial device (DirecsSerial::readAtmelPort).</font>").arg(SERIAL_TIMEOUT_READ));
 				emit message(QString("<font color=\"#FF0000\">ERROR %1: %2.</font>").arg(errno).arg(strerror(errno)));
 
 				return errno;

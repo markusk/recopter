@@ -47,7 +47,8 @@
 
 #endif
 
-#define SERIAL_TIMEOUT    500      /// the timout for serial reading in microseconds! s.a. 'select' command in @sa readAtmelPort
+#define SERIAL_TIMEOUT           500      /// the timout for serial stuff
+#define SERIAL_TIMEOUT_READ    10000      /// the timout for serial reading in microseconds! s.a. 'select' command in @sa readAtmelPort
 #define _POSIX
 
 #include <QtGlobal>

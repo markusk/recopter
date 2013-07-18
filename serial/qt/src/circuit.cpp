@@ -91,9 +91,9 @@ bool Circuit::initCircuit()
 
 	}
 
-	qDebug("INFO from initCircuit: Robot is OFF.");
-	firstInitDone = true;
-	circuitState = false;
+	qDebug("INFO from initCircuit: Copter is OFF.");
+//	firstInitDone = true;
+//	circuitState = false;
 	emit robotState(false);
 
 	return false;

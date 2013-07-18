@@ -254,6 +254,8 @@ bool InterfaceAvr::receiveBytes(QByteArray &bytes, int numBytes)
 		// emit completed command to simulationThread
 		emit commandCompleted( bytes ); // check format. maybe bytes.data() ?!??
 
+//		qDebug(QString("Received data: %1\n").arg(bytes.data()));
+
 		return true;
 	}
 

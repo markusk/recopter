@@ -334,6 +334,8 @@ void test::setSerialPort(QString port)
 {
 	serialPort = QString("/dev/%1").arg(port);
 	textEdit->append(QString("Port now set to %1.").arg(serialPort));
+
+	serialPortBox->adjustSize();
 }
 
 

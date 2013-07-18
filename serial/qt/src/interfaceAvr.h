@@ -28,6 +28,7 @@
 #include <QFile>
 #include <QObject>
 #include <QDebug>
+#include <QByteArray>
 
 
 /**
@@ -144,7 +145,7 @@ signals:
 		This signal emits if a complete command string was received. @sa SimulationThread::commandReceived()
 		@param data contains the received data
 	*/
-	void commandCompleted(QBytearray data);
+	void commandCompleted(QByteArray data);
 
 
 private:

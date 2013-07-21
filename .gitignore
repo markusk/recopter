@@ -7,3 +7,4 @@ test.pro.user
 serial/qt/tmp
 qrc_application.cpp
 Makefile
+*.

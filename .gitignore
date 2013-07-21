@@ -8,3 +8,5 @@ serial/qt/tmp
 qrc_application.cpp
 Makefile
 *.
+raspberry_pi/serial/qt/bin/test.app
+raspberry_pi/serial/qt/tmp

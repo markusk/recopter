@@ -10,3 +10,4 @@ Makefile
 *.
 raspberry_pi/serial/qt/bin/test.app
 raspberry_pi/serial/qt/tmp
+test.pro.user.2.7pre1

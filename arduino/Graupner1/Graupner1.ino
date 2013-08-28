@@ -22,6 +22,9 @@ int value = 0;
 // The servos
 //
 Servo servoLeftUpDown;  // create servo object to control a servo 
+Servo servoLeftLeftRight;
+Servo servoRightUpDown;
+Servo servoRightLeftRight;
 
 
 void setup()
@@ -31,6 +34,9 @@ void setup()
   // initialize the digital pin as an output.
   pinMode(led, OUTPUT);
 
+  //
+  // pin init
+  //
   // pins which get signal from RC reciever
   pinMode(rcPinLeftUpDown, INPUT);
   pinMode(rcPinLeftLeftRight, INPUT);
@@ -39,9 +45,21 @@ void setup()
 
   pinMode(rcRegler, INPUT);
 
-  // servo left eye, up/down
-  servoLeftUpDown.attach(3);  // attaches the servo on this pin to the servo object 
+
+  //
+  // Servo init
+  //
+  servoLeftUpDown.attach(3); // attach servo to this pin
   servoLeftUpDown.write(80); // default position
+
+  servoLeftLeftRight.attach(5);
+  servoLeftLeftRight.write(120);
+
+  servoRightUpDown.attach(6);
+  servoRightUpDown.write(80);
+
+  servoRightLeftRight.attach(9);
+  servoRightLeftRight.write(100);
 }
 
 
@@ -71,10 +89,10 @@ void loop()
 //  servoLeftUpDown.write(ServoValue);
 
   
-  Serial.print("pulseIn: ");
-  Serial.println(value);
+//  Serial.print("pulseIn: ");
+//  Serial.println(value);
 //  Serial.println(ServoValue);
-  Serial.println("----------");
-  delay(500);               // wait some time
+//  Serial.println("----------");
+//  delay(500);               // wait some time
 }
 

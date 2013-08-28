@@ -1,13 +1,20 @@
+#include <Servo.h> 
+
 // Pin 13 has an LED connected on most Arduino boards.
 int led = 13;
 int relais = 12;
 
-int rcpin = 7;  //  pin from RC receiver
+//
+// Graupner stuff
+//
+int rcpin = 9;  //  pin from RC receiver
 int rcRegler = 6;  //  pin from RC receiver (Drehregler)
 
 int ServoValue = 0;
 
 int value = 0;
+
+Servo myservo;  // create servo object to control a servo 
 
 
 void setup()
@@ -19,6 +26,10 @@ void setup()
 
   pinMode(rcpin, INPUT);
   pinMode(rcRegler, INPUT);
+
+  // servo left eye, up/down
+  myservo.attach(3);  // attaches the servo on this pin to the servo object 
+  myservo.write(80); // default position
 }
 
 
@@ -40,13 +51,18 @@ void loop()
 
   // Drehregler auslesen
   value = pulseIn(rcRegler, INPUT);
-
+  
   // map read values to servo compatible
   ServoValue = map(value, 17927, 18725, 0, 255);
+
+  // sets the servo position according to the scaled value
+//  myservo.write(ServoValue);
+
   
-//  Serial.println(value);
+  Serial.print("pulseIn: ");
+  Serial.println(value);
 //  Serial.println(ServoValue);
-//  Serial.println("----------");
-//  delay(500);               // wait some time
+  Serial.println("----------");
+  delay(500);               // wait some time
 }
 

@@ -7,10 +7,10 @@ int relais = 12;
 //
 // Graupner stuff
 //
-int rcpinLeftUpDown     = 8;  //  pin from RC receiver
-int rcpinLeftLeftRight  = 7;  //  pin from RC receiver
-int rcpinRightUpDown    = 4;  //  pin from RC receiver
-int rcpinRightLeftRight = 2;  //  pin from RC receiver
+int rcPinLeftUpDown     = 8;  //  pin from RC receiver
+int rcPinLeftLeftRight  = 7;  //  pin from RC receiver
+int rcPinRightUpDown    = 4;  //  pin from RC receiver
+int rcPinRightLeftRight = 2;  //  pin from RC receiver
 
 int rcRegler = 6;  //  pin from RC receiver (Drehregler)
 
@@ -31,7 +31,12 @@ void setup()
   // initialize the digital pin as an output.
   pinMode(led, OUTPUT);
 
-  pinMode(rcpinLeftUpDown, INPUT);
+  // pins which get signal from RC reciever
+  pinMode(rcPinLeftUpDown, INPUT);
+  pinMode(rcPinLeftLeftRight, INPUT);
+  pinMode(rcPinRightUpDown, INPUT);
+  pinMode(rcPinRightLeftRight, INPUT);
+
   pinMode(rcRegler, INPUT);
 
   // servo left eye, up/down
@@ -42,7 +47,7 @@ void setup()
 
 void loop()
 {
-  value = pulseIn(rcpinLeftUpDown, INPUT);
+  value = pulseIn(rcPinLeftUpDown, INPUT);
   
   
   if (value < 18600) // <18600 = switch down  >18600 = switch up

@@ -14,7 +14,7 @@ int ServoValue = 0;
 
 int value = 0;
 
-Servo myservo;  // create servo object to control a servo 
+Servo servoLeftUpDown;  // create servo object to control a servo 
 
 
 void setup()
@@ -28,8 +28,8 @@ void setup()
   pinMode(rcRegler, INPUT);
 
   // servo left eye, up/down
-  myservo.attach(3);  // attaches the servo on this pin to the servo object 
-  myservo.write(80); // default position
+  servoLeftUpDown.attach(3);  // attaches the servo on this pin to the servo object 
+  servoLeftUpDown.write(80); // default position
 }
 
 
@@ -56,7 +56,7 @@ void loop()
   ServoValue = map(value, 17927, 18725, 0, 255);
 
   // sets the servo position according to the scaled value
-//  myservo.write(ServoValue);
+//  servoLeftUpDown.write(ServoValue);
 
   
   Serial.print("pulseIn: ");

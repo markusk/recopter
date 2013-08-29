@@ -7,7 +7,7 @@ int led = 13;
 // Graupner stuff
 //
 int rcPinEyesLeftRight     = 8;  //  pin from RC receiver
-int rcPinLeftLeftRight  = 7;  //  pin from RC receiver
+int rcPinEyesUpDown  = 7;  //  pin from RC receiver
 int rcPinRightUpDown    = 4;  //  pin from RC receiver
 int rcPinRightLeftRight = 2;  //  pin from RC receiver
 
@@ -38,7 +38,7 @@ void setup()
   //
   // pins which get signal from RC reciever
   pinMode(rcPinEyesLeftRight, INPUT);
-  pinMode(rcPinLeftLeftRight, INPUT);
+  pinMode(rcPinEyesUpDown, INPUT);
   pinMode(rcPinRightUpDown, INPUT);
   pinMode(rcPinRightLeftRight, INPUT);
 

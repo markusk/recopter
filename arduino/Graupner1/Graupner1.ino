@@ -8,7 +8,7 @@ int led = 13;
 //
 int rcPinEyesLeftRight     = 8;  //  pin from RC receiver
 int rcPinEyesUpDown  = 7;  //  pin from RC receiver
-int rcPinRightUpDown    = 4;  //  pin from RC receiver
+int rcPinSpeech    = 4;  //  pin from RC receiver
 int rcPinRightLeftRight = 2;  //  pin from RC receiver
 
 int rcRegler = 6;  //  pin from RC receiver (Drehregler)
@@ -39,7 +39,7 @@ void setup()
   // pins which get signal from RC reciever
   pinMode(rcPinEyesLeftRight, INPUT);
   pinMode(rcPinEyesUpDown, INPUT);
-  pinMode(rcPinRightUpDown, INPUT);
+  pinMode(rcPinSpeech, INPUT);
   pinMode(rcPinRightLeftRight, INPUT);
 
   pinMode(rcRegler, INPUT);

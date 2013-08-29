@@ -128,10 +128,10 @@ void loop()
 /*  
   look(UPRIGHT);
   delay(pause);
-  
+*/  
   look(RIGHT);
   delay(pause);
-  
+/*
   look(DOWNRIGHT);
   delay(pause);
   
@@ -283,7 +283,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==RIGHTEYE)
     {
       // up
-      moveServo(SERVO5, servo5start);
+      moveServo(SERVO5, servo5end);
       // left
       moveServo(SERVO1, servo1start);
       return;
@@ -305,7 +305,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==RIGHTEYE)
     {
       // up
-      moveServo(SERVO5, servo5start);
+      moveServo(SERVO5, servo5end);
       // right
       moveServo(SERVO1, servo1end);
       return;
@@ -350,7 +350,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==RIGHTEYE)
     {
       // down
-      moveServo(SERVO5, servo5end);
+      moveServo(SERVO5, servo5start);
       // left
       moveServo(SERVO1, servo1start);
       return;
@@ -372,7 +372,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==RIGHTEYE)
     {
       // right
-      moveServo(SERVO1, servo1end);
+      moveServo(SERVO1, servo1end); // check order of these two blocks!
       // down
       moveServo(SERVO5, servo5end);
       return;

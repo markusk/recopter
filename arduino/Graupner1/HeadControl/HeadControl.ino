@@ -25,9 +25,9 @@ static const int servo1end      = 180;    // right   180
 // right eye
 // up/down
 static const int servo2pin      =   3;
-static const int servo2start    =  36;    // up       36
+static const int servo2start    =  55;    // down     36
 static const int servo2default  =  80;    // neutral  80
-static const int servo2end      = 124;    // down    124
+static const int servo2end      = 124;    // up      124
 
 /* servo 3 >>>>>>>>>> not used
 // right eyebrow
@@ -49,9 +49,9 @@ static const int servo4end      = 155;    // right   155
 // left eye
 // up/down
 static const int servo5pin      =   6;
-static const int servo5start    =  36;    // up       36
+static const int servo5start    =  55;    // down     36
 static const int servo5default  =  80;    // neutral  80
-static const int servo5end      = 124;    // down    124
+static const int servo5end      = 124;    // up      124
 
 /* servo 6 >>>>>>>>>> not used
 // left eyebrow
@@ -114,7 +114,6 @@ void setup()
 //  myservo6.attach(servo6pin);  // attaches the servo on pin 9 to the servo object 
 
   look(FORWARD);
-//  look(NORMAL);
   delay(500);
 } 
 
@@ -125,31 +124,29 @@ void loop()
  
   look(UP);
   delay(pause);
-/*  
+  
   look(UPRIGHT);
   delay(pause);
-*/  
+  
   look(RIGHT);
   delay(pause);
-/*
+
   look(DOWNRIGHT);
   delay(pause);
-  
+
   look(DOWN);
   delay(pause);
   
   look(DOWNLEFT);
   delay(pause);
-*/ 
+ 
   look(LEFT);
   delay(pause);
-/*  
+  
   look(UPLEFT);
   delay(pause);
-*/
 
   look(FORWARD);
-//  look(NORMAL);
   delay(pause);
 } 
 
@@ -371,10 +368,10 @@ void eye(unsigned char whichEye, unsigned char direction)
 
     if (whichEye==RIGHTEYE)
     {
-      // right
-      moveServo(SERVO1, servo1end); // check order of these two blocks!
       // down
-      moveServo(SERVO5, servo5end);
+      moveServo(SERVO5, servo5start);
+      // right
+      moveServo(SERVO1, servo1end);
       return;
     }
     return;

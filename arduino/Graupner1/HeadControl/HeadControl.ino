@@ -18,15 +18,15 @@ int pause = 250;  // for delay in ms
 // left/right (looking _to_ head head)
 static const int servo1pin      =   5;
 static const int servo1start    =  42;    // left     42
-static const int servo1default  =  74;    // neutral  74
-static const int servo1end      = 110;    // right   110
+static const int servo1default  = 120;    // neutral  74
+static const int servo1end      = 120;    // right   110
 
 // servo 2
 // right eye
 // up/down
 static const int servo2pin      =   3;
 static const int servo2start    =  36;    // up       36
-static const int servo2default  =  70;    // neutral  70
+static const int servo2default  =  80;    // neutral  70
 static const int servo2end      = 124;    // down    124
 
 // servo 3 >>>>>>>>>> not used
@@ -42,7 +42,7 @@ static const int servo3end      = 136;    // left    136
 // left/right (looking _to_ head head)
 static const int servo4pin      =   9;
 static const int servo4start    =  30;    // left     30
-static const int servo4default  =  74;    // neutral  74
+static const int servo4default  = 100;    // neutral  74
 static const int servo4end      = 110;    // right   110
 
 // servo 5
@@ -50,7 +50,7 @@ static const int servo4end      = 110;    // right   110
 // up/down
 static const int servo5pin      =   6;
 static const int servo5start    =  36;    // up       36
-static const int servo5default  =  66;    // neutral  66
+static const int servo5default  =  80;    // neutral  66
 static const int servo5end      = 124;    // down    124
 
 // servo 6 >>>>>>>>>> not used

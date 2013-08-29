@@ -6,10 +6,10 @@ int led = 13;
 //
 // Graupner stuff
 //
-int rcPinEyesLeftRight     = 8;  //  pin from RC receiver
-int rcPinEyesUpDown  = 7;  //  pin from RC receiver
-int rcPinSpeech    = 4;  //  pin from RC receiver
-int rcPinRightLeftRight = 2;  //  pin from RC receiver
+int rcPinEyesLeftRight = 8;  //  pin from RC receiver
+int rcPinEyesUpDown    = 7;  //  pin from RC receiver
+int rcPinSpeech        = 4;  //  pin from RC receiver
+int rcPinMusic         = 2;  //  pin from RC receiver
 
 int rcRegler = 6;  //  pin from RC receiver (Drehregler)
 
@@ -40,7 +40,7 @@ void setup()
   pinMode(rcPinEyesLeftRight, INPUT);
   pinMode(rcPinEyesUpDown, INPUT);
   pinMode(rcPinSpeech, INPUT);
-  pinMode(rcPinRightLeftRight, INPUT);
+  pinMode(rcPinMusic, INPUT);
 
   pinMode(rcRegler, INPUT);
 

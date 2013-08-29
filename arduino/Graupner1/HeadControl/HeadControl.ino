@@ -29,13 +29,13 @@ static const int servo2start    =  36;    // up       36
 static const int servo2default  =  80;    // neutral  70
 static const int servo2end      = 124;    // down    124
 
-// servo 3 >>>>>>>>>> not used
+/* servo 3 >>>>>>>>>> not used
 // right eyebrow
 // left/right
 static const int servo3pin      =   6;
 static const int servo3start    =  50;    // right    50
 static const int servo3default  = 100;    // neutral 100
-static const int servo3end      = 136;    // left    136
+static const int servo3end      = 136;    // left    136 */
 
 // servo 4
 // left eye
@@ -53,13 +53,13 @@ static const int servo5start    =  36;    // up       36
 static const int servo5default  =  80;    // neutral  66
 static const int servo5end      = 124;    // down    124
 
-// servo 6 >>>>>>>>>> not used
+/* servo 6 >>>>>>>>>> not used
 // left eyebrow
 // left/right
 static const int servo6pin      =  11;
 static const int servo6start    =  42;    // right    42
 static const int servo6default  =  87;    // neutral  87
-static const int servo6end      = 132;    // left    132
+static const int servo6end      = 132;    // left    132 */
 
 //! the possible eyes
 static const unsigned char LEFTEYE  = 1;
@@ -122,10 +122,10 @@ void setup()
 void loop() 
 {
   pause = 1000;
- /* 
+ 
   look(UP);
   delay(pause);
-  
+/*  
   look(UPRIGHT);
   delay(pause);
   
@@ -151,21 +151,6 @@ void loop()
   look(FORWARD);
 //  look(NORMAL);
   delay(pause);
-/*  
-//  look(CURIOUS);
-//  delay(pause);
-
-  look(FORWARD);
-//  look(NORMAL);
-  delay(pause);
-
-//  look(ANGRY);
-  delay(pause);
-
-  look(FORWARD);
-  look(NORMAL);
-  delay(pause);
-*/
 } 
 
 

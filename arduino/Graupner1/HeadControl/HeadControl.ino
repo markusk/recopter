@@ -15,7 +15,7 @@ int pause = 250;  // for delay in ms
 
 // servo 1
 // right eye
-// left/right (looking _to_ head head)
+// left/right (looking _from_ head head) ???
 static const int servo1pin      =   5;
 static const int servo1start    =  42;    // left     42
 static const int servo1default  = 120;    // neutral  74
@@ -39,7 +39,7 @@ static const int servo3end      = 136;    // left    136 */
 
 // servo 4
 // left eye
-// left/right (looking _to_ head head)
+// left/right (looking _from_ head head) ???
 static const int servo4pin      =   9;
 static const int servo4start    =  30;    // left     30
 static const int servo4default  = 100;    // neutral  74
@@ -261,7 +261,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==RIGHTEYE)
     {
       // up
-      moveServo(SERVO5, servo5start);
+      moveServo(SERVO5, servo5end);
       // default
       moveServo( SERVO4, servo4default);
       return;
@@ -328,7 +328,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==RIGHTEYE)
     {
       // down
-      moveServo(SERVO5, servo5end);
+      moveServo(SERVO5, servo5start);
       // default
       moveServo(SERVO4, servo4default);
       return;

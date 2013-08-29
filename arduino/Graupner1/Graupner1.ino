@@ -2,7 +2,6 @@
 
 // Pin 13 has an LED connected on most Arduino boards.
 int led = 13;
-int relais = 12;
 
 //
 // Graupner stuff
@@ -71,12 +70,10 @@ void loop()
   if (value < 18600) // <18600 = switch down  >18600 = switch up
   {
     digitalWrite(led, HIGH);   // turn the LED on (HIGH)
-    digitalWrite(relais, HIGH);   // turn the LED on (HIGH)
   }
   else
   {
     digitalWrite(led, LOW);    // turn the LED off (LOW)
-    digitalWrite(relais, LOW);    // turn the LED off (LOW)
   }
 
   // Drehregler auslesen

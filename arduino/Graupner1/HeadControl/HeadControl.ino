@@ -17,16 +17,16 @@ int pause = 250;  // for delay in ms
 // right eye
 // left/right (looking _from_ head head)
 static const int servo1pin      =   5;
-static const int servo1start    =  42;    // left     42
-static const int servo1default  = 120;    // neutral  74
-static const int servo1end      = 180;    // right   110
+static const int servo1start    =  55;    // left     55 ??? left eye from head?!? wtf?
+static const int servo1default  = 120;    // neutral 120
+static const int servo1end      = 180;    // right   180
 
 // servo 2
 // right eye
 // up/down
 static const int servo2pin      =   3;
 static const int servo2start    =  36;    // up       36
-static const int servo2default  =  80;    // neutral  70
+static const int servo2default  =  80;    // neutral  80
 static const int servo2end      = 124;    // down    124
 
 /* servo 3 >>>>>>>>>> not used
@@ -42,15 +42,15 @@ static const int servo3end      = 136;    // left    136 */
 // left/right (looking _from_ head head)
 static const int servo4pin      =   9;
 static const int servo4start    =  30;    // left     30
-static const int servo4default  = 100;    // neutral  74
-static const int servo4end      = 155;    // right   110
+static const int servo4default  = 100;    // neutral 100
+static const int servo4end      = 155;    // right   155
 
 // servo 5
 // left eye
 // up/down
 static const int servo5pin      =   6;
 static const int servo5start    =  36;    // up       36
-static const int servo5default  =  80;    // neutral  66
+static const int servo5default  =  80;    // neutral  80
 static const int servo5end      = 124;    // down    124
 
 /* servo 6 >>>>>>>>>> not used
@@ -140,10 +140,10 @@ void loop()
   
   look(DOWNLEFT);
   delay(pause);
-  
+*/ 
   look(LEFT);
   delay(pause);
-  
+/*  
   look(UPLEFT);
   delay(pause);
 */

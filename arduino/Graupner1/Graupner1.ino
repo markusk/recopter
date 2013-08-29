@@ -6,7 +6,7 @@ int led = 13;
 //
 // Graupner stuff
 //
-int rcPinLeftUpDown     = 8;  //  pin from RC receiver
+int rcPinEyesLeftRight     = 8;  //  pin from RC receiver
 int rcPinLeftLeftRight  = 7;  //  pin from RC receiver
 int rcPinRightUpDown    = 4;  //  pin from RC receiver
 int rcPinRightLeftRight = 2;  //  pin from RC receiver
@@ -37,7 +37,7 @@ void setup()
   // pin init
   //
   // pins which get signal from RC reciever
-  pinMode(rcPinLeftUpDown, INPUT);
+  pinMode(rcPinEyesLeftRight, INPUT);
   pinMode(rcPinLeftLeftRight, INPUT);
   pinMode(rcPinRightUpDown, INPUT);
   pinMode(rcPinRightLeftRight, INPUT);
@@ -64,7 +64,7 @@ void setup()
 
 void loop()
 {
-  value = pulseIn(rcPinLeftUpDown, INPUT);
+  value = pulseIn(rcPinEyesLeftRight, INPUT);
   
   
   if (value < 18600) // <18600 = switch down  >18600 = switch up

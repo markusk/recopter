@@ -150,20 +150,38 @@ void setup()
 
 //  digitalWrite(led, HIGH);   // turn the LED on (HIGH)
 
-//  look(FORWARD); < < < 
+  look(FORWARD);
   delay(500);
 }
 
 
 void loop()
 {
+  //
+  // look LEFT, RIGHT, NORMAL
+  //
   // read PPM signals from RC receiver
   value = pulseIn(rcPinEyesLeftRight, INPUT);
 
   // map read values to servo compatible values
   ServoValue = map(value, 17927, 18725, 0, 255);
 
-
+  if (ServoValue < 128)
+  {
+    look(LEFT);
+  }
+  else
+  {
+    if (ServoValue > 128)
+    {
+      look(RIGHT);
+    }
+    else
+    {
+      look(FORWARD);
+    }
+  }
+  
 
   
 //  Serial.print("pulseIn: ");

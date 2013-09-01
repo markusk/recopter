@@ -164,6 +164,7 @@ void loop()
   ServoValue = map(value, 17927, 18725, 0, 255);
 
 
+
   
 //  Serial.print("pulseIn: ");
 //  Serial.println(value);
@@ -172,4 +173,424 @@ void loop()
 //  delay(500);               // wait some time
 }
 
+
+
+void look(unsigned char direction)
+{
+  	if (direction == UP)
+	{
+		
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == UPLEFT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == UPRIGHT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+		
+	if (direction == DOWN)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == DOWNLEFT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == DOWNRIGHT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == LEFT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == RIGHT)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == FORWARD)
+	{
+		eye(LEFTEYE, direction);
+		eye(RIGHTEYE, direction);
+		return;
+	}
+	
+	if (direction == NORMAL)
+	{
+//		eyebrow(LEFTBROW, direction);
+//		eyebrow(RIGHTBROW, direction);
+		return;
+	}
+	
+	if (direction == CURIOUS)
+	{
+//		eyebrow(LEFTBROW, UP);
+//		eyebrow(RIGHTBROW, UP);
+		return;
+	}
+	
+	if (direction == ANGRY)
+	{
+//		eyebrow(LEFTBROW, DOWN);
+//		eyebrow(RIGHTBROW, DOWN);
+		return;
+	}
+}
+
+
+
+void eye(unsigned char whichEye, unsigned char direction)
+{
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == UP)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // up
+      moveServo(SERVO2, servo2end);
+      // default
+      moveServo(SERVO1, servo1default);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // up
+      moveServo(SERVO5, servo5end);
+      // default
+      moveServo( SERVO4, servo4default);
+      return;
+    }
+    return;
+  }
+
+  if (direction == UPLEFT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // up
+      moveServo(SERVO2, servo2end);
+      //left
+      moveServo(SERVO4, servo4start);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // up
+      moveServo(SERVO5, servo5end);
+      // left
+      moveServo(SERVO1, servo1start);
+      return;
+    }
+    return;
+  }
+
+  if (direction == UPRIGHT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // right
+      moveServo(SERVO4, servo4end);
+      // up
+      moveServo(SERVO2, servo2end);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // up
+      moveServo(SERVO5, servo5end);
+      // right
+      moveServo(SERVO1, servo1end);
+      return;
+    }
+    return;
+  }
+
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == DOWN)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // down
+      moveServo(SERVO2, servo2start);
+      // default
+      moveServo( SERVO1, servo1default);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // down
+      moveServo(SERVO5, servo5start);
+      // default
+      moveServo(SERVO4, servo4default);
+      return;
+    }
+    return;
+  }
+
+  if (direction == DOWNLEFT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // down
+      moveServo(SERVO2, servo2start);
+      // left
+      moveServo(SERVO4, servo4start);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // down
+      moveServo(SERVO5, servo5start);
+      // left
+      moveServo(SERVO1, servo1start);
+      return;
+    }
+    return;
+  }
+
+  if (direction == DOWNRIGHT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // down
+      moveServo(SERVO2, servo2start);
+      // right
+      moveServo(SERVO4, servo4end);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // down
+      moveServo(SERVO5, servo5start);
+      // right
+      moveServo(SERVO1, servo1end);
+      return;
+    }
+    return;
+  }
+
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == LEFT)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // left
+      moveServo(SERVO4, servo4start);
+      // default
+      moveServo(SERVO2, servo2default);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // left
+      moveServo(SERVO1, servo1start);
+      // default
+      moveServo(SERVO5, servo5default);
+      return;
+    }
+    return;
+  }
+
+/*
+  // move servo to its maximum end position
+  if (direction == LEFTMAX)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      // 
+      moveServo(SERVO4, servo4start); // min
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // 
+      moveServo(SERVO1, servo1start); // min
+      return;
+    }
+    return;
+  }
+*/
+
+  // move servo to the start or end position (*not* to the min or max posisiotns!)
+  if (direction == RIGHT)
+  {
+    //qDebug("right");
+    if (whichEye==LEFTEYE)
+    {
+      // right
+      moveServo(SERVO4, servo4end); // end
+      // default
+      moveServo(SERVO2, servo2default);
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      // right
+      moveServo(SERVO1, servo1end); // end
+      // default
+      moveServo(SERVO5, servo5default);
+      return;
+    }
+    return;
+  }
+  
+/*
+  // move servo to its maximum end position
+  if (direction == RIGHTMAX)
+  {
+    if (whichEye==LEFTEYE)
+    {
+      moveServo(SERVO4, servo4end); // max
+      return;
+    }
+
+    if (whichEye==RIGHTEYE)
+    {
+      moveServo(SERVO1, servo1end); // max
+      return;
+    }
+    return;
+  }
+*/
+
+  if (direction == FORWARD)
+  {
+    moveServo(SERVO1, servo1default);
+    moveServo(SERVO2, servo2default);
+
+    moveServo(SERVO4, servo4default);
+    moveServo(SERVO5, servo5default);
+    return;
+  }
+}
+
+
+void eyebrow(unsigned char whichBrow, unsigned char direction)
+{
+/*
+  	if (direction == NORMAL)
+	{
+		if (whichBrow==LEFTBROW)
+		{
+			// default pos
+			moveServo(SERVO3, servo3default);
+			return;
+		}
+
+		if (whichBrow==RIGHTBROW)
+		{
+			// default pos
+			moveServo(SERVO6, servo6default);
+			return;
+		}
+		return;
+	}
+
+	if (direction == UP)
+	{
+		if (whichBrow==LEFTBROW)
+		{
+			// inside up
+			moveServo(SERVO3, servo3end);
+			return;
+		}
+
+		if (whichBrow==RIGHTBROW)
+		{
+			// inside up
+			moveServo(SERVO6, servo6start);
+			return;
+		}
+		return;
+	}
+	
+	if (direction == DOWN)
+	{
+		if (whichBrow==LEFTBROW)
+		{
+			// inside down
+			moveServo(SERVO3, servo3start);
+			return;
+		}
+
+		if (whichBrow==RIGHTBROW)
+		{
+			// inside down
+			moveServo(SERVO6, servo6end);
+			return;
+		}
+		return;
+	}
+*/
+}
+
+
+void rollEye(unsigned char servo, unsigned char hour)
+{
+//  Serial.print("Moving to ");
+//  Serial.println(hour);
+  
+//  moveServo(servo, eyeRollPos[servo][hour]);
+}
+
+
+void moveServo(unsigned char servo, unsigned char position)
+{
+  switch (servo)
+  {
+  case SERVO1:
+    myservo1.write(position);
+    break; 
+  case SERVO2:
+    myservo2.write(position);
+    break; 
+  case SERVO3:
+    myservo3.write(position);
+    break; 
+  case SERVO4:
+    myservo4.write(position);
+    break; 
+  case SERVO5:
+    myservo5.write(position);
+    break; 
+  case SERVO6:
+    myservo6.write(position);
+    break; 
+  }
+}
 

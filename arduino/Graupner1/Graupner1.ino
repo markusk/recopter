@@ -139,19 +139,17 @@ void setup()
 
 
   //
-  // Servo init
+  // servo init
   //
-  servoLeftUpDown.attach(3); // attach servo to this pin
-  servoLeftUpDown.write(80); // default position
+  myservo1.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
+  myservo2.attach(servo2pin);  // attaches the servo on pin 9 to the servo object 
+//  myservo3.attach(servo3pin);  // attaches the servo on pin 9 to the servo object 
+  myservo4.attach(servo4pin);  // attaches the servo on pin 9 to the servo object 
+  myservo5.attach(servo5pin);  // attaches the servo on pin 9 to the servo object 
+//  myservo6.attach(servo6pin);  // attaches the servo on pin 9 to the servo object 
 
-  servoLeftLeftRight.attach(5);
-  servoLeftLeftRight.write(120);
-
-  servoRightUpDown.attach(6);
-  servoRightUpDown.write(80);
-
-  servoRightLeftRight.attach(9);
-  servoRightLeftRight.write(100);
+//  look(FORWARD); < < < 
+  delay(500);
 }
 
 

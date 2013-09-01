@@ -11,7 +11,6 @@ int rcPinEyesUpDown    = 7;  //  pin from RC receiver
 int rcPinSpeech        = 4;  //  pin from RC receiver
 int rcPinMusic         = 2;  //  pin from RC receiver
 
-int rcRegler = 6;  //  pin from RC receiver (Drehregler)
 
 int ServoValue = 0;
 
@@ -114,8 +113,8 @@ static const unsigned char LEFT       =  6;
 static const unsigned char RIGHT      =  7;
 static const unsigned char FORWARD    =  8;
 static const unsigned char NORMAL     =  9; // eyebrow
-static const unsigned char CURIOUS    = 10;
-static const unsigned char ANGRY      = 11;
+static const unsigned char CURIOUS    = 10; // eyebrow
+static const unsigned char ANGRY      = 11; // eyebrow
 
 
 
@@ -134,8 +133,6 @@ void setup()
   pinMode(rcPinEyesUpDown, INPUT);
   pinMode(rcPinSpeech, INPUT);
   pinMode(rcPinMusic, INPUT);
-
-  pinMode(rcRegler, INPUT);
 
 
   //

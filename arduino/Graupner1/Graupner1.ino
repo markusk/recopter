@@ -148,6 +148,8 @@ void setup()
   myservo5.attach(servo5pin);  // attaches the servo on pin 9 to the servo object 
 //  myservo6.attach(servo6pin);  // attaches the servo on pin 9 to the servo object 
 
+//  digitalWrite(led, HIGH);   // turn the LED on (HIGH)
+
 //  look(FORWARD); < < < 
   delay(500);
 }
@@ -157,24 +159,10 @@ void loop()
 {
   // read PPM signals from RC receiver
   value = pulseIn(rcPinEyesLeftRight, INPUT);
-    
-  if (value < 18600) // <18600 = switch down  >18600 = switch up
-  {
-    digitalWrite(led, HIGH);   // turn the LED on (HIGH)
-  }
-  else
-  {
-    digitalWrite(led, LOW);    // turn the LED off (LOW)
-  }
 
-  // Drehregler auslesen
-  value = pulseIn(rcRegler, INPUT);
-  
-  // map read values to servo compatible
+  // map read values to servo compatible values
   ServoValue = map(value, 17927, 18725, 0, 255);
 
-  // sets the servo position according to the scaled value
-//  servoLeftUpDown.write(ServoValue);
 
   
 //  Serial.print("pulseIn: ");

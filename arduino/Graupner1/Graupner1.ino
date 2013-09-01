@@ -17,13 +17,106 @@ int ServoValue = 0;
 
 int value = 0;
 
+
+// a maximum of eight servo objects can be created!
 //
-// The servos
-//
-Servo servoLeftUpDown;  // create servo object to control a servo 
-Servo servoLeftLeftRight;
-Servo servoRightUpDown;
-Servo servoRightLeftRight;
+Servo myservo1;  // create servo object to control a servo 
+Servo myservo2;  // create servo object to control a servo 
+Servo myservo3;  // create servo object to control a servo > not used, eyebrow
+Servo myservo4;  // create servo object to control a servo 
+Servo myservo5;  // create servo object to control a servo 
+Servo myservo6;  // create servo object to control a servo > not used, eyebrow 
+
+int i = 0;    // variable to store the servo position 
+int pause = 250;  // for delay in ms
+
+// servo 1
+// right eye
+// left/right (looking _from_ head head)
+static const int servo1pin      =   5;
+static const int servo1start    =  55;    // left     55 ??? left eye from head?!? wtf?
+static const int servo1default  = 120;    // neutral 120
+static const int servo1end      = 180;    // right   180
+
+// servo 2
+// right eye
+// up/down
+static const int servo2pin      =   3;
+static const int servo2start    =  55;    // down     36
+static const int servo2default  =  80;    // neutral  80
+static const int servo2end      = 124;    // up      124
+
+/* servo 3 >>>>>>>>>> not used
+// right eyebrow
+// left/right
+static const int servo3pin      =   6;
+static const int servo3start    =  50;    // right    50
+static const int servo3default  = 100;    // neutral 100
+static const int servo3end      = 136;    // left    136 */
+
+// servo 4
+// left eye
+// left/right (looking _from_ head head)
+static const int servo4pin      =   9;
+static const int servo4start    =  30;    // left     30
+static const int servo4default  = 100;    // neutral 100
+static const int servo4end      = 155;    // right   155
+
+// servo 5
+// left eye
+// up/down
+static const int servo5pin      =   6;
+static const int servo5start    =  55;    // down     36
+static const int servo5default  =  80;    // neutral  80
+static const int servo5end      = 124;    // up      124
+
+/* servo 6 >>>>>>>>>> not used
+// left eyebrow
+// left/right
+static const int servo6pin      =  11;
+static const int servo6start    =  42;    // right    42
+static const int servo6default  =  87;    // neutral  87
+static const int servo6end      = 132;    // left    132 */
+
+//! the possible eyes
+static const unsigned char LEFTEYE  = 1;
+static const unsigned char RIGHTEYE = 2;
+
+//! the possible eyebrows
+static const unsigned char LEFTBROW  = 1;
+static const unsigned char RIGHTBROW = 2;
+
+//! the possible servo data
+static const unsigned char SVSTART   = 0;
+static const unsigned char SVEND     = 1;
+static const unsigned char SVDEFAULT = 2;
+static const unsigned char SVCURRENT = 3;
+static const unsigned char SVMIN     = 4;
+static const unsigned char SVMAX     = 5;
+
+//! the servo numbers
+// +++ do not play around carelessly with these numbers, since we use them later in the eyeRollPos array +++
+static const unsigned char SERVO1 = 0;
+static const unsigned char SERVO2 = 1;
+static const unsigned char SERVO3 = 2;
+static const unsigned char SERVO4 = 3;
+static const unsigned char SERVO5 = 4;
+static const unsigned char SERVO6 = 5;
+
+//! the head directions
+static const unsigned char UP         =  0;
+static const unsigned char UPLEFT     =  1;
+static const unsigned char UPRIGHT    =  2;
+static const unsigned char DOWN       =  3;
+static const unsigned char DOWNLEFT   =  4;
+static const unsigned char DOWNRIGHT  =  5;
+static const unsigned char LEFT       =  6;
+static const unsigned char RIGHT      =  7;
+static const unsigned char FORWARD    =  8;
+static const unsigned char NORMAL     =  9; // eyebrow
+static const unsigned char CURIOUS    = 10;
+static const unsigned char ANGRY      = 11;
+
 
 
 void setup()
@@ -64,9 +157,9 @@ void setup()
 
 void loop()
 {
+  // read PPM signals from RC receiver
   value = pulseIn(rcPinEyesLeftRight, INPUT);
-  
-  
+    
   if (value < 18600) // <18600 = switch down  >18600 = switch up
   {
     digitalWrite(led, HIGH);   // turn the LED on (HIGH)
@@ -92,4 +185,5 @@ void loop()
 //  Serial.println("----------");
 //  delay(500);               // wait some time
 }
+
 

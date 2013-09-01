@@ -11,6 +11,8 @@ int rcPinEyesUpDown    = 7;  //  pin from RC receiver
 int rcPinSpeech        = 4;  //  pin from RC receiver
 int rcPinMusic         = 2;  //  pin from RC receiver
 
+int servoLeftValue  = 120;
+int servoRightValue = 136;
 
 int ServoValue = 0;
 
@@ -163,13 +165,13 @@ void loop()
   // map read values to servo compatible values
   ServoValue = map(value, 17927, 18725, 0, 255);
 
-  if (ServoValue < 128)
+  if (ServoValue < servoLeftValue)
   {
     look(LEFT);
   }
   else
   {
-    if (ServoValue > 128)
+    if (ServoValue > servoRightValue)
     {
       look(RIGHT);
     }
@@ -178,6 +180,33 @@ void loop()
       look(FORWARD);
     }
   }
+
+
+  //
+  // look UP, DOWN, NORMAL?
+  //
+  // read PPM signals from RC receiver
+  value = pulseIn(rcPinEyesUpDown, INPUT);
+
+  // map read values to servo compatible values
+  ServoValue = map(value, 17927, 18725, 0, 255);
+
+  if (ServoValue < servoLeftValue)
+  {
+    look(DOWN);
+  }
+  else
+  {
+    if (ServoValue > servoRightValue)
+    {
+      look(UP);
+    }
+    else
+    {
+      look(FORWARD); // collides with look FORWARD, when looking left or right! @todo: think about alternative. e.g. look MIDDLE
+    }
+  }
+
   
 
   

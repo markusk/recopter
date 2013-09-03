@@ -168,36 +168,34 @@ void loop()
   value = pulseIn(rcPinEyesLeftRight, HIGH);
 
   // map read values to servo compatible values
-//  ServoValue = map(value, 17927, 18725, 0, 255);
   ServoValue = map(value, 1089, 1880, 0, 255);
 
+/*
   Serial.print("pulseIn rcPinEyesLeftRight: ");
   Serial.println(value);
   Serial.print("mapped to ServoValue: ");
   Serial.println(ServoValue);
   Serial.println("----------");
 //      delay(500);               // wait some time
-  
+*/
+
   if (ServoValue < servoLeftValue)
   {
-//    Serial.println("look left");
     look(LEFT);
   }
   else
   {
     if (ServoValue > servoRightValue)
     {
-//      Serial.println("look right");
       look(RIGHT);
     }
     else
     {
-//      Serial.println("look forward");
       look(FORWARD);
     }
   }
 
-/*
+
   //
   // look UP, DOWN, NORMAL?
   //
@@ -205,35 +203,23 @@ void loop()
   value = pulseIn(rcPinEyesUpDown, HIGH);
 
   // map read values to servo compatible values
-  ServoValue = map(value, 17927, 18725, 0, 255);
-
-  Serial.print("pulseIn rcPinEyesUpDown: ");
-  Serial.println(value);
-  Serial.print("mapped to ServoValue: ");
-  Serial.println(ServoValue);
-  Serial.println("----------");
-//      delay(500);               // wait some time
+  ServoValue = map(value, 1089, 1880, 0, 255);
 
   if (ServoValue < servoLeftValue)
   {
-    Serial.println("look down");
-//    look(DOWN);
+    look(DOWN);
   }
   else
   {
     if (ServoValue > servoRightValue)
     {
-      Serial.println("look up");
-//      look(UP);
+      look(UP);
     }
     else
     {
-//    Serial.println("look forward");
-//      look(FORWARD); // collides with look FORWARD, when looking left or right! @todo: think about alternative. e.g. look MIDDLE
+      look(FORWARD); // collides with look FORWARD, when looking left or right! @todo: think about alternative. e.g. look MIDDLE
     }
   }
-*/
-//delay(2000);
 
 }
 

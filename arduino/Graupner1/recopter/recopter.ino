@@ -230,10 +230,36 @@ void look(unsigned char direction)
   static int lastDirection = FORWARD;
 
 
+ Serial.print("direction vorher: ");
+ Serial.println(direction);
+
+  // precheck for last directions and update them
   if (direction == UP)
   {
+    if (lastDirection == LEFT)
+      direction == UPLEFT;
+    else
+      if (lastDirection == RIGHT)
+    direction == UPRIGHT;
+  }
+  else
+  {
+    if (direction == DOWN)
+    {
+      if (lastDirection == LEFT)
+        direction == DOWNLEFT;
+      else
+        if (lastDirection == RIGHT)
+      direction == DOWNRIGHT;
+    }
+  }
 
+ Serial.print("direction nachher: ");
+ Serial.println(direction);
+delay(1000);
 
+  if (direction == UP)
+  {
     eye(LEFTEYE, direction);
     eye(RIGHTEYE, direction);
 

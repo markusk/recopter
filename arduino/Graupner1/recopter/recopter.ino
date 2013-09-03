@@ -1,8 +1,12 @@
 #include <Servo.h>   // Servo
-#include <Wire.>"    // I2C
+#include <Wire.h>    // I2C
 
-#define RASPI_I2CADDR 0x77
 
+#define SLAVE_ADDRESS 0x04
+
+// I2C stuff
+int number = 0;
+int state = 0;
 
 
 // Pin 13 has an LED connected on most Arduino boards.
@@ -125,7 +129,6 @@ static const unsigned char CURIOUS    = 10; // eyebrow
 static const unsigned char ANGRY      = 11; // eyebrow
 
 
-
 void setup()
 {
   Serial.begin(9600);
@@ -155,6 +158,15 @@ void setup()
 
   //  digitalWrite(led, HIGH);   // turn the LED on (HIGH)
 
+  // I2C
+  // initialize i2c as slave
+  Wire.begin(SLAVE_ADDRESS);
+ 
+  // define callbacks for i2c communication
+  Wire.onReceive(receiveData);
+  Wire.onRequest(sendData);
+
+  // eye default position
   look(FORWARD);
   delay(500);
 }
@@ -739,4 +751,39 @@ void moveServo(unsigned char servo, unsigned char position)
   }
 }
 
+
+// I2C callback for received data
+void receiveData(int byteCount)
+{
+ 
+    while(Wire.available())
+    {
+        number = Wire.read();
+        Serial.print("data received: ");
+        Serial.println(number);
+ 
+        if (number == 1)
+        {
+ 
+            if (state == 0)
+            {
+                digitalWrite(13, HIGH); // set the LED on
+                state = 1;
+
+            }
+            else
+            {
+                digitalWrite(13, LOW); // set the LED off
+                state = 0;
+            }
+         }
+     }
+}
+
+ 
+// I2C callback for sending data
+void sendData()
+{
+    Wire.write(number);
+}
 

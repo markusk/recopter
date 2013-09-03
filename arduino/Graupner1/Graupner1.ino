@@ -1,4 +1,9 @@
-#include <Servo.h> 
+#include <Servo.h>   // Servo
+#include <Wire.>"    // I2C
+
+#define RASPI_I2CADDR 0x77
+
+
 
 // Pin 13 has an LED connected on most Arduino boards.
 int led = 13;
@@ -11,8 +16,8 @@ int rcPinEyesUpDown    = 7;  //  pin from RC receiver
 int rcPinSpeech        = 4;  //  pin from RC receiver
 int rcPinMusic         = 2;  //  pin from RC receiver
 
-int servoLeftValue  = 120;
-int servoRightValue = 136;
+int servoLeftValue  = 110;
+int servoRightValue = 140;
 
 int ServoValue = 0;
 
@@ -163,8 +168,8 @@ void loop()
   value = pulseIn(rcPinEyesLeftRight, HIGH);
 
   // map read values to servo compatible values
-  ServoValue = map(value, 17927, 18725, 0, 255);
-
+//  ServoValue = map(value, 17927, 18725, 0, 255);
+  ServoValue = map(value, 1089, 1880, 0, 255);
   if (ServoValue < servoLeftValue)
   {
     look(LEFT);

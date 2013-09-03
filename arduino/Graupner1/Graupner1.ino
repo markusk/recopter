@@ -160,7 +160,7 @@ void loop()
   // look LEFT, RIGHT, NORMAL
   //
   // read PPM signals from RC receiver
-  value = pulseIn(rcPinEyesLeftRight, INPUT);
+  value = pulseIn(rcPinEyesLeftRight, HIGH);
 
   // map read values to servo compatible values
   ServoValue = map(value, 17927, 18725, 0, 255);
@@ -186,7 +186,7 @@ void loop()
   // look UP, DOWN, NORMAL?
   //
   // read PPM signals from RC receiver
-  value = pulseIn(rcPinEyesUpDown, INPUT);
+  value = pulseIn(rcPinEyesUpDown, HIGH);
 
   // map read values to servo compatible values
   ServoValue = map(value, 17927, 18725, 0, 255);

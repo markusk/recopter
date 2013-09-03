@@ -162,7 +162,7 @@ void setup()
 void loop()
 {
   //
-  // look LEFT, RIGHT, NORMAL
+  // look LEFT, RIGHT
   //
   // read PPM signals from RC receiver
   value = pulseIn(rcPinEyesLeftRight, HIGH);
@@ -170,34 +170,18 @@ void loop()
   // map read values to servo compatible values
   ServoValue = map(value, 1089, 1880, 0, 255);
 
-  /*
-  Serial.print("pulseIn rcPinEyesLeftRight: ");
-   Serial.println(value);
-   Serial.print("mapped to ServoValue: ");
-   Serial.println(ServoValue);
-   Serial.println("----------");
-   //      delay(500);               // wait some time
-   */
+  //
+  // write to 2 servos
+  //
+  // left eye, left/right, watched _from_ head
+  myservo1.write(ServoValue);
+  // right eye, left/right, watched _from_ head
+  myservo4.write(ServoValue);
 
-  if (ServoValue < servoLeftValue)
-  {
-    look(LEFT);
-  }
-  else
-  {
-    if (ServoValue > servoRightValue)
-    {
-      look(RIGHT);
-    }
-    else
-    {
-      look(FORWARD);
-    }
-  }
 
 
   //
-  // look UP, DOWN, NORMAL?
+  // look UP, DOWN
   //
   // read PPM signals from RC receiver
   value = pulseIn(rcPinEyesUpDown, HIGH);
@@ -205,21 +189,13 @@ void loop()
   // map read values to servo compatible values
   ServoValue = map(value, 1089, 1880, 0, 255);
 
-  if (ServoValue < servoLeftValue)
-  {
-    look(DOWN);
-  }
-  else
-  {
-    if (ServoValue > servoRightValue)
-    {
-      look(UP);
-    }
-    else
-    {
-      //      look(FORWARD); // collides with look FORWARD, when looking left or right! @todo: think about alternative. e.g. look MIDDLE
-    }
-  }
+  //
+  // write to 2 servos
+  //
+  // left eye, up/down, watched _from_ head
+  myservo2.write(ServoValue);
+  // right eye, up/down, watched _from_ head
+  myservo5.write(ServoValue);
 
 }
 

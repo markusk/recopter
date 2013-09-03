@@ -181,7 +181,7 @@ void loop()
 
   if (ServoValue < servoLeftValue)
   {
-    look(LEFT);
+      look(LEFT);
   }
   else
   {
@@ -217,7 +217,7 @@ void loop()
     }
     else
     {
-      look(FORWARD); // collides with look FORWARD, when looking left or right! @todo: think about alternative. e.g. look MIDDLE
+//      look(FORWARD); // collides with look FORWARD, when looking left or right! @todo: think about alternative. e.g. look MIDDLE
     }
   }
 

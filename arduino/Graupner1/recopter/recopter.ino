@@ -22,6 +22,7 @@ int servoRightValue = 140;
 int ServoValue = 0;
 
 int value = 0;
+int newServoValue = 0;
 
 
 // a maximum of eight servo objects can be created!
@@ -170,13 +171,48 @@ void loop()
   // map read values to servo compatible values
   ServoValue = map(value, 1089, 1880, 0, 255);
 
-  //
-  // write to 2 servos
-  //
+  // fix servo values to their indidivual maximum
+  if (ServoValue < servo1start)
+  {
+    newServoValue = servo1start;
+  }
+  else
+  {
+    if (ServoValue > servo1end)
+    {
+      newServoValue = servo1end;
+    }
+    else
+    {
+      newServoValue = ServoValue;
+    }
+  }
+
+  // write to servo
   // left eye, left/right, watched _from_ head
-  myservo1.write(ServoValue);
+  myservo1.write(newServoValue);
+
+
+  // fix servo values to their indidivual maximum
+  if (ServoValue < servo4start)
+  {
+    newServoValue = servo4start;
+  }
+  else
+  {
+    if (ServoValue > servo4end)
+    {
+      newServoValue = servo4end;
+    }
+    else
+    {
+      newServoValue = ServoValue;
+    }
+  }
+
+  // write to servo
   // right eye, left/right, watched _from_ head
-  myservo4.write(ServoValue);
+  myservo4.write(newServoValue);
 
 
 

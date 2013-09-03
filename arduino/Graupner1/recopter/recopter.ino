@@ -225,13 +225,47 @@ void loop()
   // map read values to servo compatible values
   ServoValue = map(value, 1089, 1880, 0, 255);
 
-  //
-  // write to 2 servos
-  //
+  // fix servo values to their indidivual maximum
+  if (ServoValue < servo2start)
+  {
+    newServoValue = servo2start;
+  }
+  else
+  {
+    if (ServoValue > servo2end)
+    {
+      newServoValue = servo2end;
+    }
+    else
+    {
+      newServoValue = ServoValue;
+    }
+  }
+
+  // write to servo
   // left eye, up/down, watched _from_ head
-  myservo2.write(ServoValue);
+  myservo2.write(newServoValue);
+  
+  // fix servo values to their indidivual maximum
+  if (ServoValue < servo5start)
+  {
+    newServoValue = servo5start;
+  }
+  else
+  {
+    if (ServoValue > servo5end)
+    {
+      newServoValue = servo5end;
+    }
+    else
+    {
+      newServoValue = ServoValue;
+    }
+  }
+    
+  // write to servo
   // right eye, up/down, watched _from_ head
-  myservo5.write(ServoValue);
+  myservo5.write(newServoValue);
 
 }
 

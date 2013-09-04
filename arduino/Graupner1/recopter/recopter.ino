@@ -180,9 +180,9 @@ void setup()
 
 void loop()
 {
-  //
+  // -----------------------------------
   // look LEFT, RIGHT
-  //
+  // -----------------------------------
   // read PPM signals from RC receiver
   value = pulseIn(rcPinEyesLeftRight, HIGH);
 
@@ -234,9 +234,9 @@ void loop()
 
 
 
-  //
+  // -----------------------------------
   // look UP, DOWN
-  //
+  // -----------------------------------
   // read PPM signals from RC receiver
   value = pulseIn(rcPinEyesUpDown, HIGH);
 
@@ -286,19 +286,35 @@ void loop()
   myservo5.write(newServoValue);
 
 
-  //
-  // read status from RC music switch
-  //
-
+  // -----------------------------------
+  // read music switch
+  // -----------------------------------
   // read PPM signals from RC receiver
   value = pulseIn(rcPinMusic, HIGH);
 
   // map read values to servo compatible values
   ServoValue = map(value, 1089, 1880, 0, 255);
 
-
+  // map read values
+  if (ServoValue < 10) // off
+  {
+    musicState = MUSICSTOPPED;
+  }
+  else
+  {
+    if ((ServoValue > 100) && (ServoValue < 150))// middle
+    {
+      musicState = MUSICPLAYING;
+    }
+    else
+    {
+      // on
+      musicState = MUSICPAUSED;
+    }
+  }
+  
   Serial.print("Music Switch: ");
-  Serial.println(ServoValue);
+  Serial.println(musicState);
 }
 
 

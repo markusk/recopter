@@ -1,5 +1,7 @@
-import smbus
-import time
+import smbus		# for I2C
+import time		# for delay
+import subprocess	# for using mplayer in the background
+
 
 # for speech
 from espeak import espeak
@@ -17,6 +19,11 @@ MUSICPAUSED  = 2;
 # this stores the laste values to not repeat the last command again and again
 lastMusicValue  = 0
 lastSpeechValue = 0
+
+# starting  mplayer and stop it right after (idle= dont quit, when stopping, quit=reduce information to be displayed)
+player = subprocess.Popen(["mplayer", "-idle", "/home/pi/robots.m4a", "quiet"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+# stop player to play
+player.stdin.write("U")
 
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)

@@ -43,7 +43,7 @@ while True:
     #--------
     # write 'command' to Arduino
     writeNumber(GETSPEECHSWITCH)
-    time.sleep(1)
+    time.sleep(0.5)
 
     # read answer / value from Arduino
     number = readNumber()
@@ -70,7 +70,7 @@ while True:
     #--------
     # write 'command' to Arduino
     writeNumber(GETMUSICSWITCH)
-    time.sleep(1)
+    time.sleep(0.5)
 
     # read answer / value from Arduino
     number = readNumber()

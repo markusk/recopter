@@ -5,7 +5,7 @@
 #define SLAVE_ADDRESS 0x04
 
 // I2C stuff
-int number = 0;
+int I2Ccommand = 0;
 int state = 0;
 
 
@@ -827,9 +827,9 @@ void receiveData(int byteCount)
   while(Wire.available())
   {
     // read I2C value
-    number = Wire.read();
+    I2Ccommand = Wire.read();
 //    Serial.print("data received: ");
-//    Serial.println(number);
+//    Serial.println(I2Ccommand);
 
     // toggle LED to indicate traffic
     if (state == 0)
@@ -850,13 +850,13 @@ void receiveData(int byteCount)
 void sendData()
 {
     // which command for Arduino?
-    if (number == GETSPEECHSWITCH)
+    if (I2Ccommand == GETSPEECHSWITCH)
     {
       Wire.write(speechState);
       return;
     }
     
     // unkown command received
-    Wire.write(-1);
+    Wire.write(0);
 }
 

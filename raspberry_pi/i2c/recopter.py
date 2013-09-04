@@ -16,6 +16,9 @@ MUSICSTOPPED = 0;
 MUSICPLAYING = 1;
 MUSICPAUSED  = 2;
 
+# stores the last played title / wave file
+lastFile = 0;
+
 # init pygame
 pygame.mixer.init()
 
@@ -69,7 +72,6 @@ while True:
     		time.sleep(2)
 
 
-
     #--------
     # MUSIC
     #--------
@@ -90,8 +92,17 @@ while True:
 		pygame.mixer.music.stop()
 
         if number == MUSICPLAYING:
-		pygame.mixer.music.load("/home/pi/SilenceIkillYou.wav")
-		pygame.mixer.music.play()
+		if lastFile == 0:
+			pygame.mixer.music.load("/home/pi/SilenceIkillYou.wav")
+			pygame.mixer.music.play()
+		if lastFile == 1:
+			pygame.mixer.music.load("/home/pi/AreYouScared.wav")
+			pygame.mixer.music.play()
+
+		lastFile = lastFile + 1
+
+		if lastFile == 2:
+			lastFile = 0
 
         if number == MUSICPAUSED:
 		# play music

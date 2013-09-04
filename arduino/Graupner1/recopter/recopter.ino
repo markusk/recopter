@@ -842,12 +842,6 @@ void receiveData(int byteCount)
         digitalWrite(13, LOW); // set the LED off
         state = 0;
     }
- 
-    // which command for Arduino?
-    if (number == GETSPEECHSWITCH)
-    {
- 
-    }
   }
 }
 
@@ -855,6 +849,14 @@ void receiveData(int byteCount)
 // I2C callback for sending data
 void sendData()
 {
-    Wire.write(number);
+    // which command for Arduino?
+    if (number == GETSPEECHSWITCH)
+    {
+      Wire.write(speechState);
+      return;
+    }
+    
+    // unkown command received
+    Wire.write(-1);
 }
 

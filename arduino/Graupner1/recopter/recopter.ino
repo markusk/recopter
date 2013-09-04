@@ -28,6 +28,12 @@ int ServoValue = 0;
 int value = 0;
 int newServoValue = 0;
 
+int musicState = 0;
+int speechState = 0;
+
+static int MUSICSTOPPED = 0;
+static int MUSICPLAYING = 1;
+static int MUSICPAUSED  = 2;
 
 // a maximum of eight servo objects can be created!
 //
@@ -279,6 +285,20 @@ void loop()
   // right eye, up/down, watched _from_ head
   myservo5.write(newServoValue);
 
+
+  //
+  // read status from RC music switch
+  //
+
+  // read PPM signals from RC receiver
+  value = pulseIn(rcPinMusic, HIGH);
+
+  // map read values to servo compatible values
+  ServoValue = map(value, 1089, 1880, 0, 255);
+
+
+  Serial.print("Music Switch: ");
+  Serial.println(ServoValue);
 }
 
 

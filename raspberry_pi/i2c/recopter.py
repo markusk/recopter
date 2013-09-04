@@ -4,6 +4,10 @@ import time
 # for speech
 from espeak import espeak
 
+# the commands from the Arduino
+GETMUSICSWITCH  = 0
+GETSPEECHSWITCH = 1
+
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
 
@@ -20,19 +24,27 @@ def readNumber():
     # number = bus.read_byte_data(address, 1)
     return number
 
+# main loop
 while True:
-    var = input("Enter 1 - 9: ")
-    if not var:
-        continue
 
-    writeNumber(var)
-    print "RPI: Hi Arduino, I sent you ", var
+    # write 'command' to Arduino
+    writeNumber(GETSPEECHSWITCH)
+
+#    print "RPI: Hi Arduino, I sent you ", var
+
     # sleep one second
     time.sleep(1)
 
+    # read answer / value from Arduino
     number = readNumber()
-    print "Arduino: Hey RPI, I received a digit ", number
-    print
+
+#    var = input("Enter 1 - 9: ")
+#    if not var:
+#        continue
+
+
+#    print "Arduino: Hey RPI, I received a digit ", number
+#    print
 
     if number == 1:
 		espeak.synth("Hello Campuseros.")

@@ -6,11 +6,11 @@ touch /var/lock/recopter
 case "$1" in
 start)
 echo "Starting RasPi I2C communication with recopter ... "
-/pi/develop/recopter/raspberry_pi/i2c/recopter.py > /dev/null &
+python /home/pi/develop/recopter/raspberry_pi/i2c/recopter.py > /dev/null &
 ;;
 stop)
 echo "Killing RasPi I2C communication with recopter ..."
-killall recopter.py
+killall python
 ;;
 *)
 echo "Usage: /etc/init.d/recopter {start|stop}"

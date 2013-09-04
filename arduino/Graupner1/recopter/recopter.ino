@@ -824,34 +824,39 @@ void moveServo(unsigned char servo, unsigned char position)
 void receiveData(int byteCount)
 {
  
-    while(Wire.available())
-    {
-        number = Wire.read();
-        Serial.print("data received: ");
-        Serial.println(number);
- 
-        if (number == 1)
-        {
- 
-            if (state == 0)
-            {
-                digitalWrite(13, HIGH); // set the LED on
-                state = 1;
+  while(Wire.available())
+  {
+    // read I2C value
+    number = Wire.read();
+//    Serial.print("data received: ");
+//    Serial.println(number);
 
-            }
-            else
-            {
-                digitalWrite(13, LOW); // set the LED off
-                state = 0;
-            }
-         }
-     }
+    // toggle LED to indicate traffic
+    if (state == 0)
+    {
+        digitalWrite(13, HIGH); // set the LED on
+        state = 1;
+    }
+    else
+    {
+        digitalWrite(13, LOW); // set the LED off
+        state = 0;
+    }
+  }
 }
 
  
 // I2C callback for sending data
 void sendData()
 {
-    Wire.write(number);
+    // which command for Arduino?
+    if (number == GETSPEECHSWITCH)
+    {
+      Wire.write(speechState);
+      return;
+    }
+    
+    // unkown command received
+    Wire.write(-1);
 }
 

@@ -28,6 +28,7 @@ def readNumber():
     # number = bus.read_byte_data(address, 1)
     return number
 
+
 # main loop
 while True:
 
@@ -40,15 +41,6 @@ while True:
 
     # read answer / value from Arduino
     number = readNumber()
-
-
-#    var = input("Enter 1 - 9: ")
-#    if not var:
-#        continue
-
-
-#    print "Arduino: Hey RPI, I received a digit ", number
-#    print
 
     if number != lastSpeechValue:
 
@@ -64,3 +56,4 @@ while True:
 		espeak.synth("This is fucking awesome.")
 		# sleep some time
     		time.sleep(2)
+

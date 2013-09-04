@@ -47,7 +47,6 @@ while True:
 
     # read answer / value from Arduino
     number = readNumber()
-    time.sleep(1)
 
     if number != lastSpeechValue:
 
@@ -75,7 +74,6 @@ while True:
 
     # read answer / value from Arduino
     number = readNumber()
-    time.sleep(1)
 
     if number != lastMusicValue:
 
@@ -84,15 +82,9 @@ while True:
         
 	if number == MUSICSTOPPED:
 		print "music stopped"
-		# sleep some time
-    		time.sleep(2)
 
         if number == MUSICPLAYING:
 		print "music playing"
-		# sleep some time
-    		time.sleep(2)
 
         if number == MUSICPAUSED:
 		print "music paused"
-		# sleep some time
-    		time.sleep(2)

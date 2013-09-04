@@ -8,6 +8,12 @@ from espeak import espeak
 GETMUSICSWITCH  = 0
 GETSPEECHSWITCH = 1
 
+# the music states, also defined in Arduino
+MUSICSTOPPED = 0;
+MUSICPLAYING = 1;
+MUSICPAUSED  = 2;
+
+
 # this stores the laste values to not repeat the last command again and again
 lastMusicValue  = 0
 lastSpeechValue = 0
@@ -41,6 +47,7 @@ while True:
 
     # read answer / value from Arduino
     number = readNumber()
+    time.sleep(1)
 
     if number != lastSpeechValue:
 
@@ -57,3 +64,35 @@ while True:
 		# sleep some time
     		time.sleep(2)
 
+
+
+    #--------
+    # MUSIC
+    #--------
+    # write 'command' to Arduino
+    writeNumber(GETMUSICSWITCH)
+    time.sleep(1)
+
+    # read answer / value from Arduino
+    number = readNumber()
+    time.sleep(1)
+
+    if number != lastMusicValue:
+
+	# store value
+	lastMusicValue = number
+        
+	if number == MUSICSTOPPED:
+		print "music stopped"
+		# sleep some time
+    		time.sleep(2)
+
+        if number == MUSICPLAYING:
+		print "music playing"
+		# sleep some time
+    		time.sleep(2)
+
+        if number == MUSICPAUSED:
+		print "music paused"
+		# sleep some time
+    		time.sleep(2)

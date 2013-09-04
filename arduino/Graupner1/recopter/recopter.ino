@@ -312,10 +312,35 @@ void loop()
       musicState = MUSICPAUSED;
     }
   }
-  
-  Serial.print("Music Switch: ");
-  Serial.println(musicState);
-}
+
+
+  // -----------------------------------
+  // read speech switch
+  // -----------------------------------
+  // read PPM signals from RC receiver
+  value = pulseIn(rcPinSpeech, HIGH);
+
+  // map read values to servo compatible values
+  ServoValue = map(value, 1089, 1880, 0, 255);
+
+  // map read values
+  if (ServoValue < 10) // off
+  {
+    speechState = 0;
+  }
+  else
+  {
+    if ((ServoValue > 100) && (ServoValue < 150))// middle
+    {
+      speechState = 1;
+    }
+    else
+    {
+      // on
+      speechState = 2;
+    }
+  }
+ }
 
 
 

@@ -28,12 +28,19 @@ int ServoValue = 0;
 int value = 0;
 int newServoValue = 0;
 
+// for storing the last state of the RC switches
 int musicState = 0;
 int speechState = 0;
 
 static int MUSICSTOPPED = 0;
 static int MUSICPLAYING = 1;
 static int MUSICPAUSED  = 2;
+
+// I2C commands from RasPi to read out the RC switches / their stored values in the local variables here
+int commandFromRasPi = 0;
+
+static int GETMUSICSWITCH  = 0;
+static int GETSPEECHSWITCH = 1;
 
 // a maximum of eight servo objects can be created!
 //

@@ -8,6 +8,10 @@ from espeak import espeak
 GETMUSICSWITCH  = 0
 GETSPEECHSWITCH = 1
 
+# this stores the laste values to not repeat the last command again and again
+lastMusicValue  = 0
+lastSpeechValue = 0
+
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
 
@@ -27,16 +31,16 @@ def readNumber():
 # main loop
 while True:
 
+    #--------
+    # SPEECH
+    #--------
     # write 'command' to Arduino
     writeNumber(GETSPEECHSWITCH)
-
-#    print "RPI: Hi Arduino, I sent you ", var
-
-    # sleep one second
     time.sleep(1)
 
     # read answer / value from Arduino
     number = readNumber()
+
 
 #    var = input("Enter 1 - 9: ")
 #    if not var:
@@ -46,9 +50,17 @@ while True:
 #    print "Arduino: Hey RPI, I received a digit ", number
 #    print
 
-    if number == 1:
+    if number != lastSpeechValue:
+
+	# store value
+	lastSpeechValue = number
+        
+	if number == 1:
 		espeak.synth("Hello Campuseros.")
+		# sleep some time
+    		time.sleep(2)
 
-    if number == 2:
+        if number == 2:
 		espeak.synth("This is fucking awesome.")
-
+		# sleep some time
+    		time.sleep(2)

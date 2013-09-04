@@ -43,11 +43,10 @@ while True:
     #--------
     # write 'command' to Arduino
     writeNumber(GETSPEECHSWITCH)
-    time.sleep(1)
+    time.sleep(0.5)
 
     # read answer / value from Arduino
     number = readNumber()
-    time.sleep(1)
 
     if number != lastSpeechValue:
 
@@ -71,11 +70,10 @@ while True:
     #--------
     # write 'command' to Arduino
     writeNumber(GETMUSICSWITCH)
-    time.sleep(1)
+    time.sleep(0.5)
 
     # read answer / value from Arduino
     number = readNumber()
-    time.sleep(1)
 
     if number != lastMusicValue:
 
@@ -84,15 +82,9 @@ while True:
         
 	if number == MUSICSTOPPED:
 		print "music stopped"
-		# sleep some time
-    		time.sleep(2)
 
         if number == MUSICPLAYING:
 		print "music playing"
-		# sleep some time
-    		time.sleep(2)
 
         if number == MUSICPAUSED:
 		print "music paused"
-		# sleep some time
-    		time.sleep(2)

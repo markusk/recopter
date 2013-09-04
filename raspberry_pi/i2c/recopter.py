@@ -1,6 +1,7 @@
 import smbus		# for I2C
 import time		# for delay
-import subprocess	# for using mplayer in the background
+#import subprocess	# for using mplayer in the background
+import pygame
 
 
 # for speech
@@ -15,6 +16,8 @@ MUSICSTOPPED = 0;
 MUSICPLAYING = 1;
 MUSICPAUSED  = 2;
 
+# init pygame
+pygame.mixer.init()
 
 # this stores the laste values to not repeat the last command again and again
 lastMusicValue  = 0
@@ -84,12 +87,12 @@ while True:
         
 	if number == MUSICSTOPPED:
 		# stop music
-		player.stdin.write("U")
+		pygame.mixer.music.stop()
 
         if number == MUSICPLAYING:
-		# starting  mplayer and stop it right after (idle= dont quit, when stopping, quit=reduce information to be displayed)
-		player = subprocess.Popen(["mplayer", "/home/pi/robots.m4a", "quiet"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		pygame.mixer.music.load("/home/pi/SilenceIkillYou.wav")
+		pygame.mixer.music.play()
 
         if number == MUSICPAUSED:
 		# play music
-		player.stdin.write("p")
+		pygame.mixer.music.pause()

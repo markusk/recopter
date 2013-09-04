@@ -23,7 +23,7 @@ lastSpeechValue = 0
 # starting  mplayer and stop it right after (idle= dont quit, when stopping, quit=reduce information to be displayed)
 player = subprocess.Popen(["mplayer", "-idle", "/home/pi/robots.m4a", "quiet"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 # stop player to play
-player.stdin.write("U")
+player.stdin.write("p")
 
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
@@ -88,10 +88,13 @@ while True:
 	lastMusicValue = number
         
 	if number == MUSICSTOPPED:
-		print "music stopped"
+		# stop music
+		player.stdin.write("U")
 
         if number == MUSICPLAYING:
-		print "music playing"
+		# play music
+		player.stdin.write("p")
 
         if number == MUSICPAUSED:
-		print "music paused"
+		# play music
+		player.stdin.write("p")

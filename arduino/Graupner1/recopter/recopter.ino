@@ -847,12 +847,20 @@ void receiveData(int byteCount)
 
  
 // I2C callback for sending data
+// This is called from the I2C master!
 void sendData()
 {
     // which command for Arduino?
     if (I2Ccommand == GETSPEECHSWITCH)
     {
       Wire.write(speechState);
+      return;
+    }
+    
+    // which command for Arduino?
+    if (I2Ccommand == GETMUSICSWITCH)
+    {
+      Wire.write(musicState);
       return;
     }
     

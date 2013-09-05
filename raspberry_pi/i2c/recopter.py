@@ -98,10 +98,22 @@ while True:
 		if lastFile == 1:
 			pygame.mixer.music.load("/home/pi/AreYouScared.wav")
 			pygame.mixer.music.play()
+		if lastFile == 2:
+			pygame.mixer.music.load("/home/pi/t2_trust_me.wav")
+			pygame.mixer.music.play()
+		if lastFile == 3:
+			pygame.mixer.music.load("/home/pi/t2_hasta_la_vista.wav")
+			pygame.mixer.music.play()
+		if lastFile == 4:
+			pygame.mixer.music.load("/home/pi/t1_be_back.wav")
+			pygame.mixer.music.play()
+		if lastFile == 5:
+			pygame.mixer.music.load("/home/pi/exterminateLoud.wav")
+			pygame.mixer.music.play()
 
 		lastFile = lastFile + 1
 
-		if lastFile == 2:
+		if lastFile == 6:
 			lastFile = 0
 
         if number == MUSICPAUSED:

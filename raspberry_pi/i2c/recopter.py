@@ -37,16 +37,16 @@ def writeNumber(value):
 	try:
 		bus.write_byte(address, value) # 5 = I/O error
 	except IOError, err:
-#		return self.errMsg()
 		return -1
-    	# bus.write_byte_data(address, 0, value)
     	return 0
 
 
 def readNumber():
-    number = bus.read_byte(address)
-    # number = bus.read_byte_data(address, 1)
-    return number
+	try:
+		number = bus.read_byte(address)
+	except IOError, err:
+		return -1
+	return number
 
 
 # main loop

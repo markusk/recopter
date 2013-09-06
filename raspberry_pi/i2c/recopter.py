@@ -32,10 +32,16 @@ bus = smbus.SMBus(1)
 # This is the address we setup in the Arduino Program
 address = 0x04
 
+
 def writeNumber(value):
-    bus.write_byte(address, value)
-    # bus.write_byte_data(address, 0, value)
-    return -1
+	try:
+		bus.write_byte(address, value) # 5 = I/O error
+	except IOError, err:
+#		return self.errMsg()
+		return -1
+    	# bus.write_byte_data(address, 0, value)
+    	return 0
+
 
 def readNumber():
     number = bus.read_byte(address)

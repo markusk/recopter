@@ -15,10 +15,12 @@ int led = 13;
 //
 // Graupner stuff
 //
-int rcPinEyesLeftRight = 8;  //  pin from RC receiver
-int rcPinEyesUpDown    = 7;  //  pin from RC receiver
-int rcPinSpeech        = 4;  //  pin from RC receiver
-int rcPinMusic         = 2;  //  pin from RC receiver
+// pins from the RC receiver
+int rcPinTakeControl   = 12; 
+int rcPinEyesLeftRight =  8;
+int rcPinEyesUpDown    =  7;
+int rcPinSpeech        =  4;
+int rcPinMusic         =  2;
 
 int servoLeftValue  = 110;
 int servoRightValue = 140;
@@ -28,7 +30,8 @@ int ServoValue = 0;
 int value = 0;
 int newServoValue = 0;
 
-// for storing the last state of the RC switches
+// for storing the last state of the RC switches or knobs
+int controlState = 0;
 int musicState = 0;
 int speechState = 0;
 
@@ -142,8 +145,12 @@ static const unsigned char CURIOUS    = 10; // eyebrow
 static const unsigned char ANGRY      = 11; // eyebrow
 
 
+//
+// General Setup
+//
 void setup()
 {
+  // this is for debugging purpuses only
   Serial.begin(9600);
 
   // initialize the digital pin as an output.
@@ -153,6 +160,7 @@ void setup()
   // pin init
   //
   // pins which get signal from RC reciever
+  pinMode(rcPinTakeControl, INPUT);
   pinMode(rcPinEyesLeftRight, INPUT);
   pinMode(rcPinEyesUpDown, INPUT);
   pinMode(rcPinSpeech, INPUT);
@@ -187,6 +195,28 @@ void setup()
 
 void loop()
 {
+  // -----------------------------------
+  // read the overall control switch
+  // -----------------------------------
+  // read PPM signals from RC receiver
+  value = pulseIn(rcPinTakeControl, HIGH);
+
+  // map read values to servo compatible values
+  ServoValue = map(value, 1089, 1880, 0, 255);
+
+  // map read values
+  if (ServoValue < 10) // off
+  {
+    // off
+    controlState = 0;
+  }
+  else
+  {
+      // on
+    controlState = 1;
+  }
+
+
   // -----------------------------------
   // look LEFT, RIGHT
   // -----------------------------------

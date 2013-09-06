@@ -46,6 +46,16 @@ def readNumber():
 # main loop
 while True:
 
+    #-----------------------------------------
+    # wait until I2C / Arduino becomes ready
+    #-----------------------------------------
+    while writeNumber(0) == -1:
+	time.sleep(2)
+
+    # we are ready now. read the first result, but ignore it
+    number = readNumber()
+
+
     #--------
     # SPEECH
     #--------

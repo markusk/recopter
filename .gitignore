@@ -11,3 +11,15 @@ Makefile
 raspberry_pi/serial/qt/bin/test.app
 raspberry_pi/serial/qt/tmp
 test.pro.user.2.7pre1
+angle_convert_test
+calculate_xy
+find_port
+get_distance
+get_distance_intensity
+get_multiecho
+get_multiecho_intensity
+liburg_c.a
+reboot_test
+sensor_parameter
+sync_time_stamp
+timeout_test

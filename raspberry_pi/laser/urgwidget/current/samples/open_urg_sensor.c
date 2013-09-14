@@ -23,7 +23,7 @@ int open_urg_sensor(urg_t *urg, int argc, char *argv[])
     const char *device = "/dev/ttyACM0";
     //const char *device = "/dev/ttyUSB0";
 #else
-    const char *device = "/dev/tty.usbmodemfa131";
+    const char *device = "/dev/tty.usbmodemfa1411"; /// Mac OS X
 #endif
     urg_connection_type_t connection_type = URG_SERIAL;
     long baudrate_or_port = 115200;

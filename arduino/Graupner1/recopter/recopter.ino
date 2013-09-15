@@ -35,6 +35,9 @@ int controlState = 0;
 int musicState = 0;
 int speechState = 0;
 
+static int NOTCONTROLLED    = 0;
+static int REMOTECONTROLLED = 1;
+
 static int MUSICSTOPPED = 0;
 static int MUSICPLAYING = 1;
 static int MUSICPAUSED  = 2;
@@ -208,176 +211,186 @@ void loop()
   if (ServoValue < 10) // off
   {
     // off
-    controlState = 0;
+    controlState = NOTCONTROLLED;
   }
   else
   {
       // on
-    controlState = 1;
+    controlState = REMOTECONTROLLED;
   }
 
 
-  // -----------------------------------
-  // look LEFT, RIGHT
-  // -----------------------------------
-  // read PPM signals from RC receiver
-  value = pulseIn(rcPinEyesLeftRight, HIGH);
-
-  // map read values to servo compatible values
-  ServoValue = map(value, 1089, 1880, 0, 255);
-
-  // fix servo values to their indidivual maximum
-  if (ServoValue < servo1start)
+  // are we under control?
+  if (controlState == NOTCONTROLLED)
   {
-    newServoValue = servo1start;
+    look(DOWN);
   }
   else
   {
-    if (ServoValue > servo1end)
-    {
-      newServoValue = servo1end;
-    }
-    else
-    {
-      newServoValue = ServoValue;
-    }
-  }
-
-  // write to servo
-  // left eye, left/right, watched _from_ head
-  myservo1.write(newServoValue);
-
-
-  // fix servo values to their indidivual maximum
-  if (ServoValue < servo4start)
-  {
-    newServoValue = servo4start;
-  }
-  else
-  {
-    if (ServoValue > servo4end)
-    {
-      newServoValue = servo4end;
-    }
-    else
-    {
-      newServoValue = ServoValue;
-    }
-  }
-
-  // write to servo
-  // right eye, left/right, watched _from_ head
-  myservo4.write(newServoValue);
-
-
-
-  // -----------------------------------
-  // look UP, DOWN
-  // -----------------------------------
-  // read PPM signals from RC receiver
-  value = pulseIn(rcPinEyesUpDown, HIGH);
-
-  // map read values to servo compatible values
-  ServoValue = map(value, 1089, 1880, 0, 255);
-
-  // fix servo values to their indidivual maximum
-  if (ServoValue < servo2start)
-  {
-    newServoValue = servo2start;
-  }
-  else
-  {
-    if (ServoValue > servo2end)
-    {
-      newServoValue = servo2end;
-    }
-    else
-    {
-      newServoValue = ServoValue;
-    }
-  }
-
-  // write to servo
-  // left eye, up/down, watched _from_ head
-  myservo2.write(newServoValue);
+    // -----------------------------------
+    // look LEFT, RIGHT
+    // -----------------------------------
+    // read PPM signals from RC receiver
+    value = pulseIn(rcPinEyesLeftRight, HIGH);
   
-  // fix servo values to their indidivual maximum
-  if (ServoValue < servo5start)
-  {
-    newServoValue = servo5start;
-  }
-  else
-  {
-    if (ServoValue > servo5end)
+    // map read values to servo compatible values
+    ServoValue = map(value, 1089, 1880, 0, 255);
+  
+    // fix servo values to their indidivual maximum
+    if (ServoValue < servo1start)
     {
-      newServoValue = servo5end;
+      newServoValue = servo1start;
     }
     else
     {
-      newServoValue = ServoValue;
+      if (ServoValue > servo1end)
+      {
+        newServoValue = servo1end;
+      }
+      else
+      {
+        newServoValue = ServoValue;
+      }
     }
-  }
+  
+    // write to servo
+    // left eye, left/right, watched _from_ head
+    myservo1.write(newServoValue);
+  
+  
+    // fix servo values to their indidivual maximum
+    if (ServoValue < servo4start)
+    {
+      newServoValue = servo4start;
+    }
+    else
+    {
+      if (ServoValue > servo4end)
+      {
+        newServoValue = servo4end;
+      }
+      else
+      {
+        newServoValue = ServoValue;
+      }
+    }
+  
+    // write to servo
+    // right eye, left/right, watched _from_ head
+    myservo4.write(newServoValue);
+  
+  
+  
+    // -----------------------------------
+    // look UP, DOWN
+    // -----------------------------------
+    // read PPM signals from RC receiver
+    value = pulseIn(rcPinEyesUpDown, HIGH);
+  
+    // map read values to servo compatible values
+    ServoValue = map(value, 1089, 1880, 0, 255);
+  
+    // fix servo values to their indidivual maximum
+    if (ServoValue < servo2start)
+    {
+      newServoValue = servo2start;
+    }
+    else
+    {
+      if (ServoValue > servo2end)
+      {
+        newServoValue = servo2end;
+      }
+      else
+      {
+        newServoValue = ServoValue;
+      }
+    }
+  
+    // write to servo
+    // left eye, up/down, watched _from_ head
+    myservo2.write(newServoValue);
     
-  // write to servo
-  // right eye, up/down, watched _from_ head
-  myservo5.write(newServoValue);
-
-
-  // -----------------------------------
-  // read music switch
-  // -----------------------------------
-  // read PPM signals from RC receiver
-  value = pulseIn(rcPinMusic, HIGH);
-
-  // map read values to servo compatible values
-  ServoValue = map(value, 1089, 1880, 0, 255);
-
-  // map read values
-  if (ServoValue < 10) // off
-  {
-    musicState = MUSICSTOPPED;
-  }
-  else
-  {
-    if ((ServoValue > 100) && (ServoValue < 150))// middle
+    // fix servo values to their indidivual maximum
+    if (ServoValue < servo5start)
     {
-      musicState = MUSICPLAYING;
+      newServoValue = servo5start;
     }
     else
     {
-      // on
-      musicState = MUSICPAUSED;
+      if (ServoValue > servo5end)
+      {
+        newServoValue = servo5end;
+      }
+      else
+      {
+        newServoValue = ServoValue;
+      }
     }
-  }
-
-
-  // -----------------------------------
-  // read speech switch
-  // -----------------------------------
-  // read PPM signals from RC receiver
-  value = pulseIn(rcPinSpeech, HIGH);
-
-  // map read values to servo compatible values
-  ServoValue = map(value, 1089, 1880, 0, 255);
-
-  // map read values
-  if (ServoValue < 10) // off
-  {
-    speechState = 0;
-  }
-  else
-  {
-    if ((ServoValue > 100) && (ServoValue < 150))// middle
+      
+    // write to servo
+    // right eye, up/down, watched _from_ head
+    myservo5.write(newServoValue);
+  
+  
+    // -----------------------------------
+    // read music switch
+    // -----------------------------------
+    // read PPM signals from RC receiver
+    value = pulseIn(rcPinMusic, HIGH);
+  
+    // map read values to servo compatible values
+    ServoValue = map(value, 1089, 1880, 0, 255);
+  
+    // map read values
+    if (ServoValue < 10) // off
     {
-      speechState = 1;
+      musicState = MUSICSTOPPED;
     }
     else
     {
-      // on
-      speechState = 2;
+      if ((ServoValue > 100) && (ServoValue < 150))// middle
+      {
+        musicState = MUSICPLAYING;
+      }
+      else
+      {
+        // on
+        musicState = MUSICPAUSED;
+      }
     }
-  }
- }
+  
+  
+    // -----------------------------------
+    // read speech switch
+    // -----------------------------------
+    // read PPM signals from RC receiver
+    value = pulseIn(rcPinSpeech, HIGH);
+  
+    // map read values to servo compatible values
+    ServoValue = map(value, 1089, 1880, 0, 255);
+  
+    // map read values
+    if (ServoValue < 10) // off
+    {
+      speechState = 0;
+    }
+    else
+    {
+      if ((ServoValue > 100) && (ServoValue < 150))// middle
+      {
+        speechState = 1;
+      }
+      else
+      {
+        // on
+        speechState = 2;
+      }
+    }
+    
+  } // under remote control
+  
+}
 
 
 

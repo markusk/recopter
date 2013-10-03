@@ -63,18 +63,18 @@ int pause = 250;  // for delay in ms
 // servo 1
 // right eye
 // left/right (looking _from_ head head)
-static const int servo1pin      =   5;
-static const int servo1start    =  55;    // left     55 ??? left eye from head?!? wtf?
-static const int servo1default  = 120;    // neutral 120
-static const int servo1end      = 180;    // right   180
+static const int servoRightLRpin      =   5;
+static const int servoRightLRstart    =  55;    // left     55 ??? left eye from head?!? wtf?
+static const int servoRightLRdefault  = 120;    // neutral 120
+static const int servoRightLRend      = 180;    // right   180
 
 // servo 2
 // right eye
 // up/down
-static const int servo2pin      =   3;
-static const int servo2start    =  55;    // down     36
-static const int servo2default  =  80;    // neutral  80
-static const int servo2end      = 124;    // up      124
+static const int servoRightUDpin      =   3;
+static const int servoRightUDstart    =  55;    // down     36
+static const int servoRightUDdefault  =  80;    // neutral  80
+static const int servoRightUDend      = 124;    // up      124
 
 /* servo 3 >>>>>>>>>> not used
  // right eyebrow
@@ -173,8 +173,8 @@ void setup()
   //
   // servo init
   //
-  servoRightLR.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
-  servoRightUD.attach(servo2pin);  // attaches the servo on pin 9 to the servo object 
+  servoRightLR.attach(servoRightLRpin);  // attaches the servo on pin 3 to the servo object 
+  servoRightUD.attach(servoRightUDpin);  // attaches the servo on pin 9 to the servo object 
   //  myservo3.attach(servo3pin);  // attaches the servo on pin 9 to the servo object 
   servoLeftLR.attach(servo4pin);  // attaches the servo on pin 9 to the servo object 
   servoLeftUD.attach(servo5pin);  // attaches the servo on pin 9 to the servo object 
@@ -237,15 +237,15 @@ void loop()
     ServoValue = map(value, 1089, 1880, 0, 255);
   
     // fix servo values to their indidivual maximum
-    if (ServoValue < servo1start)
+    if (ServoValue < servoRightLRstart)
     {
-      newServoValue = servo1start;
+      newServoValue = servoRightLRstart;
     }
     else
     {
-      if (ServoValue > servo1end)
+      if (ServoValue > servoRightLRend)
       {
-        newServoValue = servo1end;
+        newServoValue = servoRightLRend;
       }
       else
       {
@@ -291,15 +291,15 @@ void loop()
     ServoValue = map(value, 1089, 1880, 0, 255);
   
     // fix servo values to their indidivual maximum
-    if (ServoValue < servo2start)
+    if (ServoValue < servoRightUDstart)
     {
-      newServoValue = servo2start;
+      newServoValue = servoRightUDstart;
     }
     else
     {
-      if (ServoValue > servo2end)
+      if (ServoValue > servoRightUDend)
       {
-        newServoValue = servo2end;
+        newServoValue = servoRightUDend;
       }
       else
       {
@@ -541,9 +541,9 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==LEFTEYE)
     {
       // up
-      moveServo(SERVO2, servo2end);
+      moveServo(SERVO2, servoRightUDend);
       // default
-      moveServo(SERVO1, servo1default);
+      moveServo(SERVO1, servoRightLRdefault);
       return;
     }
 
@@ -563,7 +563,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==LEFTEYE)
     {
       // up
-      moveServo(SERVO2, servo2end);
+      moveServo(SERVO2, servoRightUDend);
       //left
       moveServo(SERVO4, servo4start);
       return;
@@ -574,7 +574,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // up
       moveServo(SERVO5, servo5end);
       // left
-      moveServo(SERVO1, servo1start);
+      moveServo(SERVO1, servoRightLRstart);
       return;
     }
     return;
@@ -587,7 +587,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // right
       moveServo(SERVO4, servo4end);
       // up
-      moveServo(SERVO2, servo2end);
+      moveServo(SERVO2, servoRightUDend);
       return;
     }
 
@@ -596,7 +596,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // up
       moveServo(SERVO5, servo5end);
       // right
-      moveServo(SERVO1, servo1end);
+      moveServo(SERVO1, servoRightLRend);
       return;
     }
     return;
@@ -608,9 +608,9 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==LEFTEYE)
     {
       // down
-      moveServo(SERVO2, servo2start);
+      moveServo(SERVO2, servoRightUDstart);
       // default
-      moveServo( SERVO1, servo1default);
+      moveServo( SERVO1, servoRightLRdefault);
       return;
     }
 
@@ -630,7 +630,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==LEFTEYE)
     {
       // down
-      moveServo(SERVO2, servo2start);
+      moveServo(SERVO2, servoRightUDstart);
       // left
       moveServo(SERVO4, servo4start);
       return;
@@ -641,7 +641,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // down
       moveServo(SERVO5, servo5start);
       // left
-      moveServo(SERVO1, servo1start);
+      moveServo(SERVO1, servoRightLRstart);
       return;
     }
     return;
@@ -652,7 +652,7 @@ void eye(unsigned char whichEye, unsigned char direction)
     if (whichEye==LEFTEYE)
     {
       // down
-      moveServo(SERVO2, servo2start);
+      moveServo(SERVO2, servoRightUDstart);
       // right
       moveServo(SERVO4, servo4end);
       return;
@@ -663,7 +663,7 @@ void eye(unsigned char whichEye, unsigned char direction)
       // down
       moveServo(SERVO5, servo5start);
       // right
-      moveServo(SERVO1, servo1end);
+      moveServo(SERVO1, servoRightLRend);
       return;
     }
     return;
@@ -677,14 +677,14 @@ void eye(unsigned char whichEye, unsigned char direction)
       // left
       moveServo(SERVO4, servo4start);
       // default
-      moveServo(SERVO2, servo2default);
+      moveServo(SERVO2, servoRightUDdefault);
       return;
     }
 
     if (whichEye==RIGHTEYE)
     {
       // left
-      moveServo(SERVO1, servo1start);
+      moveServo(SERVO1, servoRightLRstart);
       // default
       moveServo(SERVO5, servo5default);
       return;
@@ -706,7 +706,7 @@ void eye(unsigned char whichEye, unsigned char direction)
    if (whichEye==RIGHTEYE)
    {
    // 
-   moveServo(SERVO1, servo1start); // min
+   moveServo(SERVO1, servoRightLRstart); // min
    return;
    }
    return;
@@ -722,14 +722,14 @@ void eye(unsigned char whichEye, unsigned char direction)
       // right
       moveServo(SERVO4, servo4end); // end
       // default
-      moveServo(SERVO2, servo2default);
+      moveServo(SERVO2, servoRightUDdefault);
       return;
     }
 
     if (whichEye==RIGHTEYE)
     {
       // right
-      moveServo(SERVO1, servo1end); // end
+      moveServo(SERVO1, servoRightLRend); // end
       // default
       moveServo(SERVO5, servo5default);
       return;
@@ -749,7 +749,7 @@ void eye(unsigned char whichEye, unsigned char direction)
    
    if (whichEye==RIGHTEYE)
    {
-   moveServo(SERVO1, servo1end); // max
+   moveServo(SERVO1, servoRightLRend); // max
    return;
    }
    return;
@@ -758,8 +758,8 @@ void eye(unsigned char whichEye, unsigned char direction)
 
   if (direction == FORWARD)
   {
-    moveServo(SERVO1, servo1default);
-    moveServo(SERVO2, servo2default);
+    moveServo(SERVO1, servoRightLRdefault);
+    moveServo(SERVO2, servoRightUDdefault);
 
     moveServo(SERVO4, servo4default);
     moveServo(SERVO5, servo5default);

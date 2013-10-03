@@ -50,11 +50,11 @@ static int GETSPEECHSWITCH = 1;
 
 // a maximum of eight servo objects can be created!
 //
-Servo myservo1;  // create servo object to control a servo 
-Servo myservo2;  // create servo object to control a servo 
+Servo servoRightLR;  // create servo object to control a servo 
+Servo servoRightUD;  // create servo object to control a servo 
 Servo myservo3;  // create servo object to control a servo > not used, eyebrow
-Servo myservo4;  // create servo object to control a servo 
-Servo myservo5;  // create servo object to control a servo 
+Servo servoLeftLR;  // create servo object to control a servo 
+Servo servoLeftUD;  // create servo object to control a servo 
 Servo myservo6;  // create servo object to control a servo > not used, eyebrow 
 
 int i = 0;    // variable to store the servo position 
@@ -173,11 +173,11 @@ void setup()
   //
   // servo init
   //
-  myservo1.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
-  myservo2.attach(servo2pin);  // attaches the servo on pin 9 to the servo object 
+  servoRightLR.attach(servo1pin);  // attaches the servo on pin 3 to the servo object 
+  servoRightUD.attach(servo2pin);  // attaches the servo on pin 9 to the servo object 
   //  myservo3.attach(servo3pin);  // attaches the servo on pin 9 to the servo object 
-  myservo4.attach(servo4pin);  // attaches the servo on pin 9 to the servo object 
-  myservo5.attach(servo5pin);  // attaches the servo on pin 9 to the servo object 
+  servoLeftLR.attach(servo4pin);  // attaches the servo on pin 9 to the servo object 
+  servoLeftUD.attach(servo5pin);  // attaches the servo on pin 9 to the servo object 
   //  myservo6.attach(servo6pin);  // attaches the servo on pin 9 to the servo object 
 
   //  digitalWrite(led, HIGH);   // turn the LED on (HIGH)
@@ -255,7 +255,7 @@ void loop()
   
     // write to servo
     // left eye, left/right, watched _from_ head
-    myservo1.write(newServoValue);
+    servoRightLR.write(newServoValue);
   
   
     // fix servo values to their indidivual maximum
@@ -277,7 +277,7 @@ void loop()
   
     // write to servo
     // right eye, left/right, watched _from_ head
-    myservo4.write(newServoValue);
+    servoLeftLR.write(newServoValue);
   
   
   
@@ -309,7 +309,7 @@ void loop()
   
     // write to servo
     // left eye, up/down, watched _from_ head
-    myservo2.write(newServoValue);
+    servoRightUD.write(newServoValue);
     
     // fix servo values to their indidivual maximum
     if (ServoValue < servo5start)
@@ -330,7 +330,7 @@ void loop()
       
     // write to servo
     // right eye, up/down, watched _from_ head
-    myservo5.write(newServoValue);
+    servoLeftUD.write(newServoValue);
   
   
     // -----------------------------------
@@ -842,19 +842,19 @@ void moveServo(unsigned char servo, unsigned char position)
   switch (servo)
   {
   case SERVO1:
-    myservo1.write(position);
+    servoRightLR.write(position);
     break; 
   case SERVO2:
-    myservo2.write(position);
+    servoRightUD.write(position);
     break; 
   case SERVO3:
     myservo3.write(position);
     break; 
   case SERVO4:
-    myservo4.write(position);
+    servoLeftLR.write(position);
     break; 
   case SERVO5:
-    myservo5.write(position);
+    servoLeftUD.write(position);
     break; 
   case SERVO6:
     myservo6.write(position);
